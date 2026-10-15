@@ -1,0 +1,45 @@
+package pages
+
+import (
+	"strconv"
+	"workshop/internal/domain/sighting"
+	"workshop/web/views/components"
+	"workshop/web/views/layout"
+)
+
+templ Gallery(sightings []sighting.Sighting) {
+	{{ items := components.Photos(sightings) }}
+	@layout.Base(layout.BaseProps{
+		Title:       "Gallery",
+		Description: "Every photo taken at a sighting, credited to the person who took it.",
+		Page:        "gallery",
+		Class:       "page-gallery",
+	}) {
+		<section class="page-head container">
+			<p class="eyebrow">The gallery</p>
+			<h1 class="display">A wall of wild&nbsp;moments</h1>
+			if len(items) > 0 {
+				<p class="lede">{ strconv.Itoa(len(items)) } photos by { strconv.Itoa(components.Photographers(items)) } photographers. Tap one to see it whole.</p>
+			}
+		</section>
+		if len(items) == 0 {
+			<p class="container empty">No photos have been ingested yet.</p>
+		} else {
+			<ul class="wall container">
+				for i, p := range items {
+					<li class={ "wall__item", components.Tones(p.Sighting), templ.KV("wall__item--big", i%7 == 0) }>
+						<a class="wall__photo" href={ templ.URL(p.Media.URL) } data-lightbox data-caption={ components.Name(p.Sighting) + components.Credit(p.Media) }>
+							<img src={ components.Sized(p.Media.URL, components.WallSize(i)) } alt={ components.PhotoAlt(p.Sighting, p.Media) } loading="lazy" decoding="async"/>
+						</a>
+						<div class="wall__cap">
+							<a href={ templ.URL(components.SightingURL(p.Sighting)) }>{ components.Name(p.Sighting) }</a>
+							if p.Media.Creator != "" {
+								<span>{ "© " + p.Media.Creator }</span>
+							}
+						</div>
+					</li>
+				}
+			</ul>
+		}
+	}
+}

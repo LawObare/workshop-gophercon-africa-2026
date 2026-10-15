@@ -1,0 +1,123 @@
+package pages
+
+import (
+	"strconv"
+	"workshop/internal/domain/sighting"
+	"workshop/web/views/components"
+	"workshop/web/views/layout"
+)
+
+templ Sighting(s sighting.Sighting) {
+	@layout.Base(layout.BaseProps{
+		Title:       components.Name(s),
+		Description: components.Name(s) + " seen in " + components.Place(s) + ", " + components.When(s) + ".",
+		Class:       "page-sighting",
+		Map:         components.HasPosition(s),
+	}) {
+		<article class={ "detail", components.Tones(s) } id={ components.Anchor(s) }>
+			<header class="detail__hero">
+				if c, ok := components.Cover(s); ok {
+					<img
+						class="detail__img"
+						style={ components.Morph(s) }
+						src={ components.Sized(c.URL, "large") }
+						srcset={ components.HeroSrcset(c.URL) }
+						sizes="100vw"
+						alt={ components.PhotoAlt(s, c) }
+						fetchpriority="high"
+						decoding="async"
+					/>
+				} else {
+					<div class="detail__noimg" aria-hidden="true"></div>
+				}
+				<div class="hero__shade"></div>
+				<div class="detail__head container">
+					<a class="back press" href="/#sightings">
+						<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+						All sightings
+					</a>
+					<p class="eyebrow">{ components.Light(s) } · { components.Place(s) }</p>
+					<h1 class="display detail__title">{ components.Name(s) }</h1>
+					if s.Species.ScientificName != "" {
+						<p class="detail__scientific">{ s.Species.ScientificName }</p>
+					}
+				</div>
+			</header>
+			<div class="detail__body container">
+				<section class="panel notes reveal" aria-labelledby="notes-title">
+					<h2 id="notes-title" class="panel__title">Field notes</h2>
+					<dl class="facts">
+						<div>
+							<dt>Seen</dt>
+							<dd>{ components.When(s) }</dd>
+						</div>
+						<div>
+							<dt>Light</dt>
+							<dd>{ components.Light(s) }</dd>
+						</div>
+						<div>
+							<dt>Where</dt>
+							<dd>{ components.Place(s) }</dd>
+						</div>
+						if components.HasPosition(s) {
+							<div>
+								<dt>Position</dt>
+								<dd>{ components.Coordinates(s) }</dd>
+							</div>
+						}
+						if s.Location.ElevationInMetres != nil {
+							<div>
+								<dt>Elevation</dt>
+								<dd>{ strconv.Itoa(int(*s.Location.ElevationInMetres)) } m</dd>
+							</div>
+						}
+						if s.IndividualCount != nil {
+							<div>
+								<dt>Count</dt>
+								<dd>{ components.Individuals(*s.IndividualCount) }</dd>
+							</div>
+						}
+						<div>
+							<dt>Recorded by</dt>
+							<dd>{ components.RecordedBy(s) }</dd>
+						</div>
+						if s.BasisOfRecord != "" {
+							<div>
+								<dt>Record</dt>
+								<dd>{ components.Basis(s.BasisOfRecord) }</dd>
+							</div>
+						}
+					</dl>
+					if s.Remarks != "" {
+						<blockquote class="notes__remarks">{ s.Remarks }</blockquote>
+					}
+					<p class="notes__links">
+						<a class="btn btn--ghost press" href={ templ.URL(components.GBIFURL(s)) } rel="noopener">View on GBIF</a>
+						if s.ReferenceURL != "" {
+							<a class="btn btn--quiet press" href={ templ.URL(s.ReferenceURL) } rel="noopener">Original record</a>
+						}
+					</p>
+				</section>
+				<section class="panel conditions reveal" aria-labelledby="conditions-title" style="--reveal-delay: 100ms">
+					<h2 id="conditions-title" class="panel__title">Conditions on the day</h2>
+					@components.Conditions(s.Weather)
+				</section>
+				if components.HasPosition(s) {
+					<section class="panel where reveal" aria-labelledby="where-title">
+						<h2 id="where-title" class="panel__title">Where it was</h2>
+						@components.Map(components.MapProps{
+							Points:  components.MapPoints([]sighting.Sighting{s}),
+							Label:   "Where the " + components.Name(s) + " was seen",
+							Class:   "map--dark",
+							MaxZoom: 7,
+						})
+					</section>
+				}
+				<section class="panel photos reveal" aria-labelledby="photos-title">
+					<h2 id="photos-title" class="panel__title">Photos</h2>
+					@components.Gallery(s)
+				</section>
+			</div>
+		</article>
+	}
+}

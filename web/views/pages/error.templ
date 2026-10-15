@@ -8,8 +8,44 @@ import (
 templ Error(message string, code int) {
 	@layout.Base(layout.BaseProps{
 		Title: "Error " + strconv.Itoa(code),
+		Class: "page-error",
 	}) {
-		<h1>{ strconv.Itoa(code) }</h1>
-		<p>{ message }</p>
+		<section class="lost container">
+			<p class="eyebrow">Error { strconv.Itoa(code) }</p>
+			<h1 class="display">Something spooked the herd</h1>
+			<p class="lede">{ message }</p>
+			<p class="lost__actions">
+				<a class="btn btn--ghost press" href="/">Back to the sightings</a>
+			</p>
+		</section>
+	}
+}
+
+templ NotFound() {
+	@layout.Base(layout.BaseProps{
+		Title: "Trail went cold",
+		Class: "page-error",
+	}) {
+		<section class="lost container">
+			<svg class="tracks" viewBox="0 0 320 120" aria-hidden="true">
+				for i := range 6 {
+					<g class="track" transform={ trackAt(i) } style={ trackStyle(i) }>
+						<ellipse cx="0" cy="6" rx="7" ry="6"></ellipse>
+						<circle cx="-7" cy="-5" r="2.6"></circle>
+						<circle cx="-2.4" cy="-8.5" r="2.6"></circle>
+						<circle cx="2.4" cy="-8.5" r="2.6"></circle>
+						<circle cx="7" cy="-5" r="2.6"></circle>
+					</g>
+				}
+				<circle class="tracks__end" cx="292" cy="58" r="3"></circle>
+			</svg>
+			<p class="eyebrow">Error 404</p>
+			<h1 class="display">The trail went cold</h1>
+			<p class="lede">Whatever left these tracks has moved on, or was never here. The page you followed doesn’t exist.</p>
+			<p class="lost__actions">
+				<a class="btn btn--ghost press" href="/">Back to the sightings</a>
+				<a class="btn btn--quiet press" href="/gallery">Browse the gallery</a>
+			</p>
+		</section>
 	}
 }

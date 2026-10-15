@@ -1,0 +1,44 @@
+package components
+
+import (
+	"strconv"
+	"workshop/internal/domain/weather"
+)
+
+templ Conditions(w weather.Weather) {
+	<div class={ "conditions__body", "sky--" + skyOrNone(w) }>
+		@Weather(w)
+		if !w.ObservedAt.IsZero() {
+			<dl class="facts facts--compact">
+				<div>
+					<dt>Felt like</dt>
+					<dd>{ degrees(w.Temperature.Apparent) }</dd>
+				</div>
+				<div>
+					<dt>Humidity</dt>
+					<dd>{ strconv.Itoa(w.Humidity) }%</dd>
+				</div>
+				<div>
+					<dt>Cloud cover</dt>
+					<dd>{ strconv.Itoa(w.CloudCover) }%</dd>
+				</div>
+				<div>
+					<dt>Gusts</dt>
+					<dd>{ kmh(w.Wind.Gusts) }</dd>
+				</div>
+				if w.Precipitation.Rain > 0 {
+					<div>
+						<dt>Rain</dt>
+						<dd>{ strconv.FormatFloat(w.Precipitation.Rain, 'f', 1, 64) } mm</dd>
+					</div>
+				}
+				if w.Precipitation.Snowfall > 0 {
+					<div>
+						<dt>Snow</dt>
+						<dd>{ strconv.FormatFloat(w.Precipitation.Snowfall, 'f', 1, 64) } cm</dd>
+					</div>
+				}
+			</dl>
+		}
+	</div>
+}

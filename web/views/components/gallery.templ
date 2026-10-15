@@ -2,31 +2,60 @@ package components
 
 import (
 	"cmp"
+	"strconv"
 	"workshop/internal/domain/sighting"
 )
 
-templ Gallery(items []sighting.Media) {
+templ Gallery(s sighting.Sighting) {
+	{{ items := s.Media }}
 	if len(items) == 0 {
-		<p class="gallery__empty">No media recorded.</p>
+		<p class="gallery__empty">No photos were taken of this sighting.</p>
 	} else {
-		<ul class="gallery">
-			for _, m := range items {
-				<!-- Items -->
-				<li class="gallery__item">
-					if m.Type == "StillImage" {
-						<img src={ m.URL } alt={ altText(m) } loading="lazy"/>
-					} else {
-						<a href={ templ.URL(m.URL) } rel="noopener">{ altText(m) }</a>
-					}
-					if m.Creator != "" {
-						<figcaption class="gallery__credit">{ m.Creator }</figcaption>
-					}
-				</li>
+		<div class="strip" data-strip>
+			<ul class="strip__track" tabindex="0" aria-label="Photos">
+				for i, m := range items {
+					<li class="strip__slide">
+						<figure>
+							if m.Type == "StillImage" {
+								<a href={ templ.URL(m.URL) } data-lightbox data-caption={ credit(m) }>
+									<img src={ sized(m.URL, "large") } alt={ photoAlt(s, m) } loading="lazy" decoding="async"/>
+								</a>
+							} else {
+								<a class="strip__file" href={ templ.URL(m.URL) } rel="noopener">{ photoAlt(s, m) }</a>
+							}
+							<figcaption class="strip__credit">
+								<span>{ strconv.Itoa(i + 1) } / { strconv.Itoa(len(items)) }</span>
+								if m.Creator != "" {
+									<span>{ "© " + m.Creator }</span>
+								}
+							</figcaption>
+						</figure>
+					</li>
+				}
+			</ul>
+			if len(items) > 1 {
+				<div class="strip__controls" hidden>
+					<button type="button" class="round press" data-strip-prev aria-label="Previous photo">
+						<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+					</button>
+					<button type="button" class="round press" data-strip-next aria-label="Next photo">
+						<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+					</button>
+				</div>
 			}
-		</ul>
+		</div>
 	}
 }
 
-func altText(m sighting.Media) string {
-	return cmp.Or(m.Title, m.Description, "Sighting media")
+// photoAlt describes a photo by its own title, or by the animal and where it was seen.
+func photoAlt(s sighting.Sighting, m sighting.Media) string {
+	return cmp.Or(m.Title, m.Description, displayName(s.Species)+" seen in "+cmp.Or(s.Location.Country, "the wild"))
+}
+
+// credit is who took a photo, for the lightbox caption.
+func credit(m sighting.Media) string {
+	if m.Creator == "" {
+		return ""
+	}
+	return "Photo © " + m.Creator
 }

@@ -11,33 +11,53 @@ import (
 )
 
 templ SightingCard(s sighting.Sighting) {
-	<article class="card">
-		<!-- Header -->
-		<header class="card__header">
-			<h2>{ displayName(s.Species) }</h2>
-			if s.Species.ScientificName != "" {
-				<p class="card__scientific">{ s.Species.ScientificName }</p>
-			}
-		</header>
-		<!-- Meta -->
-		<dl class="card__meta">
-			<dt>Seen</dt>
-			<dd>{ s.HappenedAt.Format("2 January 2006") }</dd>
-			<dt>Where</dt>
-			<dd>{ place(s.Location) }</dd>
+	<article class={ "tile", tones(s) }>
+		<a class="tile__link press" href={ templ.URL(SightingURL(s)) }>
+			<div class="tile__media">
+				if c, ok := cover(s); ok {
+					<img src={ sized(c.URL, "medium") } alt={ photoAlt(s, c) } loading="lazy" decoding="async"/>
+				} else {
+					<div class="tile__empty" aria-hidden="true">
+						<img src="/assets/images/logo.svg" alt="" width="56" height="56"/>
+					</div>
+				}
+				<span class="tile__light">{ Light(s) }</span>
+			</div>
+			<div class="tile__body">
+				<h3 class="tile__name">{ displayName(s.Species) }</h3>
+				if s.Species.ScientificName != "" {
+					<p class="tile__scientific">{ s.Species.ScientificName }</p>
+				}
+			</div>
+		</a>
+		<dl class="tile__meta">
+			<div>
+				<dt>Seen</dt>
+				<dd>{ when(s) }</dd>
+			</div>
+			<div>
+				<dt>Where</dt>
+				<dd>{ place(s.Location) }</dd>
+			</div>
+			<div>
+				<dt>Weather</dt>
+				<dd>
+					@Weather(s.Weather)
+				</dd>
+			</div>
 			if s.IndividualCount != nil {
-				<dt>Count</dt>
-				<dd>{ individuals(*s.IndividualCount) }</dd>
+				<div>
+					<dt>Count</dt>
+					<dd>{ individuals(*s.IndividualCount) }</dd>
+				</div>
 			}
 			if s.RecordedBy != "" {
-				<dt>Recorded by</dt>
-				<dd>{ s.RecordedBy }</dd>
+				<div>
+					<dt>Recorded by</dt>
+					<dd>{ s.RecordedBy }</dd>
+				</div>
 			}
 		</dl>
-		<!-- Gallery -->
-		<div class="card__gallery">
-			@Gallery(s.Media)
-		</div>
 	</article>
 }
 

@@ -1,0 +1,102 @@
+package components
+
+import (
+	"fmt"
+	"strconv"
+	"workshop/internal/domain/sighting"
+)
+
+templ Hero(banner []sighting.Sighting, sum sighting.Summary) {
+	<section class="hero" data-hero aria-label="Featured sightings">
+		<div class="hero__slides">
+			for i, s := range banner {
+				{{ c, _ := cover(s) }}
+				<figure class={ "hero__slide", tones(s), templ.KV("is-active", i == 0) } style={ Morph(s) }>
+					<img
+						class="hero__img"
+						src={ sized(c.URL, "large") }
+						srcset={ heroSrcset(c.URL) }
+						sizes="100vw"
+						alt={ photoAlt(s, c) }
+						if i == 0 {
+							fetchpriority="high"
+						} else {
+							loading="lazy"
+						}
+						decoding="async"
+					/>
+				</figure>
+			}
+			<div class="hero__shade"></div>
+		</div>
+		<div class="hero__frame" aria-hidden="true"></div>
+		<div class="hero__content">
+			<p class="eyebrow hero__eyebrow">Explore the beauty of the</p>
+			<h1 class="hero__title" aria-label="Wild">
+				for i, l := range []string{"W", "I", "L", "D"} {
+					<span aria-hidden="true" style={ letterDelay(i) }>{ l }</span>
+				}
+			</h1>
+			<p class="hero__tagline">Every sighting, caught in its golden&nbsp;hour.</p>
+			<div class="hero__actions">
+				<a class="btn btn--ghost press" href="#sightings">
+					Explore sightings
+					<svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"></path></svg>
+				</a>
+				<a class="btn btn--quiet press" href="/gallery">View the gallery</a>
+			</div>
+		</div>
+		if len(banner) > 0 {
+			<div class="hero__caption">
+				<p class="hero__count" aria-hidden="true">
+					<span class="hero__index" data-hero-index>01</span><span class="hero__total">/{ fmt.Sprintf("%02d", len(banner)) }</span>
+				</p>
+				<ol class="hero__captions">
+					for i, s := range banner {
+						<li class={ "hero__cap", templ.KV("is-active", i == 0) }>
+							<a href={ templ.URL(SightingURL(s)) }>{ displayName(s.Species) }</a>
+							<span>{ cmpPlace(s) } · { Light(s) }</span>
+						</li>
+					}
+				</ol>
+				if len(banner) > 1 {
+					<div class="hero__controls" hidden>
+						<button type="button" class="round press" data-hero-prev aria-label="Previous photo">
+							<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+						</button>
+						<button type="button" class="round press" data-hero-pause aria-label="Pause slideshow" aria-pressed="false">
+							<svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6v12M15 6v12"></path></svg>
+							<svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z"></path></svg>
+						</button>
+						<button type="button" class="round press" data-hero-next aria-label="Next photo">
+							<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+						</button>
+					</div>
+				}
+			</div>
+		}
+		<dl class="hero__stats">
+			<div>
+				<dt>Sightings</dt>
+				<dd>{ strconv.Itoa(sum.Sightings) }</dd>
+			</div>
+			<div>
+				<dt>Species</dt>
+				<dd>{ strconv.Itoa(sum.Species) }</dd>
+			</div>
+			<div>
+				<dt>Countries</dt>
+				<dd>{ strconv.Itoa(sum.Countries) }</dd>
+			</div>
+			<div>
+				<dt>Photos</dt>
+				<dd>{ strconv.Itoa(sum.Media) }</dd>
+			</div>
+		</dl>
+		<ul class="rail" aria-label="Where the data comes from">
+			<li><a href="https://www.gbif.org" rel="noopener">GBIF</a></li>
+			<li><a href="https://www.inaturalist.org" rel="noopener">iNaturalist</a></li>
+			<li><a href="https://open-meteo.com" rel="noopener">Open-Meteo</a></li>
+		</ul>
+	</section>
+}

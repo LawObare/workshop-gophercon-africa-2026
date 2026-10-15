@@ -1,0 +1,36 @@
+package components
+
+import (
+	"strconv"
+	"workshop/internal/domain/sighting"
+)
+
+templ Globe(sightings []sighting.Sighting, sum sighting.Summary, countries []sighting.Tally) {
+	<section class="globe" aria-labelledby="globe-title">
+		<div class="globe__stage">
+			@ThreeScene(ThreeSceneProps{Scene: "globe", Label: "A turning globe with a glowing point for each sighting, coloured by the time of day it was seen"})
+		</div>
+		<div class="globe__text reveal">
+			<p class="eyebrow">Where the wild was seen</p>
+			<h2 id="globe-title" class="display">{ strconv.Itoa(sum.Countries) } countries, one&nbsp;planet</h2>
+			<p class="lede">Each point is a sighting, lit in the colour of the hour it happened. Drag to turn the world.</p>
+			if len(countries) > 0 {
+				<ol class="globe__list">
+					for _, c := range countries {
+						<li><span>{ c.Name }</span><span>{ strconv.Itoa(c.Count) }</span></li>
+					}
+				</ol>
+			}
+		</div>
+		@templ.JSONScript("globe-points", GlobePoints(sightings))
+	</section>
+}
+
+templ LightLegend() {
+	<ul class="legend" aria-label="What the colours mean">
+		<li class="legend__item tone--dawn"><span class="legend__swatch"></span>First light <small>5–8am</small></li>
+		<li class="legend__item tone--day"><span class="legend__swatch"></span>Daylight <small>8am–4pm</small></li>
+		<li class="legend__item tone--dusk"><span class="legend__swatch"></span>Golden hour <small>4–8pm</small></li>
+		<li class="legend__item tone--night"><span class="legend__swatch"></span>After dark <small>8pm–5am</small></li>
+	</ul>
+}

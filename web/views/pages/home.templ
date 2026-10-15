@@ -1,27 +1,84 @@
 package pages
 
 import (
+	"strconv"
 	"workshop/internal/domain/sighting"
 	"workshop/web/views/components"
 	"workshop/web/views/layout"
 )
 
 templ Home(sightings []sighting.Sighting) {
+	{{ sum := sighting.Summarise(sightings) }}
+	{{ banner, latest := components.Showcase(sightings, 3, 8) }}
 	@layout.Base(layout.BaseProps{
-		Title: "Sightings",
+		Page:  "home",
+		Class: "page-home",
+		Three: len(sightings) > 0,
 	}) {
-		<h1>Sightings</h1>
 		if len(sightings) == 0 {
-			<p>No sightings have been ingested yet.</p>
+			<section class="page-head page-head--empty container">
+				<p class="eyebrow">Golden Hour</p>
+				<h1 class="display">The wild is quiet</h1>
+				<p class="lede">No sightings have been ingested yet.</p>
+			</section>
 		} else {
-			<p>Total: { len(sightings) }</p>
-			<ul class="sightings">
-				for _, s := range sightings {
-					<li>
-						@components.SightingCard(s)
-					</li>
-				}
-			</ul>
+			@components.Hero(banner, sum)
+			<section class="intro container" aria-labelledby="intro-title">
+				<div class="reveal">
+					<p class="eyebrow">How to read this site</p>
+					<h2 id="intro-title" class="display">Every sighting carries its own&nbsp;light</h2>
+				</div>
+				<div class="intro__text reveal" style="--reveal-delay: 120ms">
+					<p class="lede">
+						Each photo is tinted by the hour it was taken in, and cooled or hazed by the weather on the day.
+						A rainy dawn looks nothing like a clear golden hour, and neither does the record.
+					</p>
+					@components.LightLegend()
+				</div>
+			</section>
+			if len(latest) > 0 {
+				<section class="latest" aria-labelledby="latest-title">
+					<div class="container section-head reveal">
+						<div>
+							<p class="eyebrow">Fresh tracks</p>
+							<h2 id="latest-title" class="display">Latest finds</h2>
+						</div>
+						<a class="btn btn--quiet press" href="/gallery">See every photo</a>
+					</div>
+					<ul class="latest__track" tabindex="0" aria-label="Latest finds">
+						for _, s := range latest {
+							<li class="latest__item" style={ components.Morph(s) }>
+								@components.SightingCard(s)
+							</li>
+						}
+					</ul>
+				</section>
+			}
+			@components.Globe(sightings, sum, sighting.Top(sighting.CountBy(sightings, components.Country), 6))
+			<section id="sightings" class="journal container" aria-labelledby="journal-title">
+				<div class="section-head reveal">
+					<div>
+						<p class="eyebrow">The field journal</p>
+						<h2 id="journal-title" class="display">All { strconv.Itoa(len(sightings)) } sightings</h2>
+					</div>
+				</div>
+				@components.Filter(components.FilterProps{
+					Target: "sightings-list",
+					Search: true,
+					Groups: []components.FilterGroup{
+						{Key: "light", Label: "Light", Options: components.FilterOptions(sightings, 0, components.Light)},
+						{Key: "animal", Label: "Animal", Options: components.FilterOptions(sightings, 12, components.Animal)},
+						{Key: "country", Label: "Country", Options: components.FilterOptions(sightings, 12, components.Country)},
+					},
+				})
+				<ul id="sightings-list" class="journal__list">
+					for _, s := range sightings {
+						<li id={ components.Anchor(s) } { components.FilterAttrs(s)... }>
+							@components.SightingCard(s)
+						</li>
+					}
+				</ul>
+			</section>
 		}
 	}
 }
