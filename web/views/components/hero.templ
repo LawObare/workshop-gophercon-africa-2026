@@ -7,96 +7,158 @@ import (
 )
 
 templ Hero(banner []sighting.Sighting, sum sighting.Summary) {
-	<section class="hero" data-hero aria-label="Featured sightings">
-		<div class="hero__slides">
-			for i, s := range banner {
-				{{ c, _ := cover(s) }}
-				<figure class={ "hero__slide", tones(s), templ.KV("is-active", i == 0) } style={ Morph(s) }>
-					<img
-						class="hero__img"
-						src={ sized(c.URL, "large") }
-						srcset={ heroSrcset(c.URL) }
-						sizes="100vw"
-						alt={ photoAlt(s, c) }
-						if i == 0 {
-							fetchpriority="high"
-						} else {
-							loading="lazy"
-						}
-						decoding="async"
-					/>
-				</figure>
-			}
-			<div class="hero__shade"></div>
-		</div>
-		<div class="hero__frame" aria-hidden="true"></div>
-		<div class="hero__content">
-			<p class="eyebrow hero__eyebrow">Explore the beauty of the</p>
-			<h1 class="hero__title" aria-label="Wild">
-				for i, l := range []string{"W", "I", "L", "D"} {
-					<span aria-hidden="true" style={ letterDelay(i) }>{ l }</span>
-				}
-			</h1>
-			<p class="hero__tagline">Every sighting, caught in its golden&nbsp;hour.</p>
-			<div class="hero__actions">
-				<a class="btn btn--ghost press" href="#sightings">
-					Explore sightings
-					<svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"></path></svg>
-				</a>
-				<a class="btn btn--quiet press" href="/gallery">View the gallery</a>
+	<section class="monograph-hero" data-hero aria-label="Featured field encounters">
+		@FlockOfBirds()
+
+		<!-- Architectural Masthead Row: Giant Display + Live Telemetry Ledger -->
+		<div class="monograph-hero__masthead container">
+			<div class="monograph-hero__headline">
+				<p class="monograph-hero__issue">VOL. XXVI · NAIROBI &amp; SAVANNA FIELD SURVEY · ISSUE NO. 1016</p>
+				<h1 class="monograph-hero__title">
+					Notes from the <em>living bush</em>, indexed by the angle of the sun.
+				</h1>
 			</div>
-		</div>
-		if len(banner) > 0 {
-			<div class="hero__caption">
-				<p class="hero__count" aria-hidden="true">
-					<span class="hero__index" data-hero-index>01</span><span class="hero__total">/{ fmt.Sprintf("%02d", len(banner)) }</span>
+			<div class="monograph-hero__colophon">
+				<p class="monograph-hero__lede">
+					An unvarnished field log of { strconv.Itoa(sum.Sightings) } wild animal encounters across { strconv.Itoa(sum.Countries) } countries. Every photographic plate is cross-referenced with its exact GPS meridian, wind bearing, and atmospheric light.
 				</p>
-				<ol class="hero__captions">
-					for i, s := range banner {
-						<li class={ "hero__cap", templ.KV("is-active", i == 0) }>
-							<a href={ templ.URL(SightingURL(s)) }>{ displayName(s.Species) }</a>
-							<span>{ cmpPlace(s) } · { Light(s) }</span>
-						</li>
-					}
-				</ol>
-				if len(banner) > 1 {
-					<div class="hero__controls" hidden>
-						<button type="button" class="round press" data-hero-prev aria-label="Previous photo">
-							<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
-						</button>
-						<button type="button" class="round press" data-hero-pause aria-label="Pause slideshow" aria-pressed="false">
-							<svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6v12M15 6v12"></path></svg>
-							<svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z"></path></svg>
-						</button>
-						<button type="button" class="round press" data-hero-next aria-label="Next photo">
-							<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
-						</button>
+				<dl class="monograph-ledger" aria-label="Survey totals">
+					<div>
+						<dt>SPECIMENS</dt>
+						<dd>{ strconv.Itoa(sum.Sightings) }</dd>
 					</div>
+					<div>
+						<dt>TAXA</dt>
+						<dd>{ strconv.Itoa(sum.Species) }</dd>
+					</div>
+					<div>
+						<dt>TERRITORIES</dt>
+						<dd>{ strconv.Itoa(sum.Countries) }</dd>
+					</div>
+					<div>
+						<dt>NEGATIVES</dt>
+						<dd>{ strconv.Itoa(sum.Media) }</dd>
+					</div>
+				</dl>
+			</div>
+		</div>
+
+		<!-- Full-Bleed 35mm Contact Sheet & Field Plate Stage (Zero Rounded Cards) -->
+		<div class="monograph-stage container">
+			<div class="monograph-stage__viewport">
+				for i, s := range banner {
+					{{ c, _ := cover(s) }}
+					<article class={ "hero__slide", "plate-spread", tones(s), templ.KV("is-active", i == 0) } style={ Morph(s) }>
+						<div class="plate-spread__image-col">
+							<div class="plate-spread__sprocket" aria-hidden="true">
+								<span>KODAK / ILFORD FIELD STOCK · EXP-{ fmt.Sprintf("%03d", s.GBIFKey%1000) }</span>
+								<span>FRAME 0{ strconv.Itoa(i + 1) }A</span>
+							</div>
+							<a class="plate-spread__photo" href={ templ.URL(SightingURL(s)) }>
+								<img
+									src={ sized(c.URL, "large") }
+									srcset={ heroSrcset(c.URL) }
+									sizes="(max-width: 900px) 96vw, 68vw"
+									alt={ photoAlt(s, c) }
+									if i == 0 {
+										fetchpriority="high"
+									} else {
+										loading="lazy"
+									}
+									decoding="async"
+								/>
+								<div class="plate-spread__crosshair" aria-hidden="true"></div>
+								<span class="plate-spread__open">OPEN DOSSIER [↗]</span>
+							</a>
+						</div>
+
+						<div class="plate-spread__notes-col">
+							<div class="plate-spread__stamp">
+								<span class="plate-spread__stamp-country">{ Postmark(s) }</span>
+								<span class="plate-spread__stamp-coords">{ ShortCoords(s) }</span>
+							</div>
+
+							<div class="plate-spread__taxonomy">
+								<span class="plate-spread__fig">PLATE 0{ strconv.Itoa(i + 1) } / 0{ strconv.Itoa(len(banner)) }</span>
+								<h2 class="plate-spread__species">
+									<a href={ templ.URL(SightingURL(s)) }>{ displayName(s.Species) }</a>
+								</h2>
+								if s.Species.ScientificName != "" {
+									<p class="plate-spread__latin">{ s.Species.ScientificName }</p>
+								}
+							</div>
+
+							<dl class="plate-spread__specs">
+								<div>
+									<dt>SOLAR PHASE</dt>
+									<dd><span class="plate-spread__dot"></span>{ Light(s) }</dd>
+								</div>
+								<div>
+									<dt>LOCALITY</dt>
+									<dd>{ place(s.Location) }</dd>
+								</div>
+								<div>
+									<dt>RECORDED</dt>
+									<dd>{ when(s) }</dd>
+								</div>
+								if TempPill(s) != "" {
+									<div>
+										<dt>ATMOSPHERE</dt>
+										<dd>{ TempPill(s) }</dd>
+									</div>
+								}
+								<div>
+									<dt>OBSERVER</dt>
+									<dd>
+										if s.RecordedBy != "" {
+											{ s.RecordedBy }
+										} else {
+											GBIF Expedition Survey
+										}
+									</dd>
+								</div>
+							</dl>
+
+							<div class="plate-spread__cta-row">
+								<a class="editorial-link" href={ templ.URL(SightingURL(s)) }>Read full specimen sheet →</a>
+								<a class="editorial-link editorial-link--muted" href="/spot">Test in Bushcraft Lab →</a>
+							</div>
+						</div>
+					</article>
 				}
 			</div>
-		}
-		<dl class="hero__stats">
-			<div>
-				<dt>Sightings</dt>
-				<dd>{ strconv.Itoa(sum.Sightings) }</dd>
-			</div>
-			<div>
-				<dt>Species</dt>
-				<dd>{ strconv.Itoa(sum.Species) }</dd>
-			</div>
-			<div>
-				<dt>Countries</dt>
-				<dd>{ strconv.Itoa(sum.Countries) }</dd>
-			</div>
-			<div>
-				<dt>Photos</dt>
-				<dd>{ strconv.Itoa(sum.Media) }</dd>
-			</div>
-		</dl>
-		<ul class="rail" aria-label="Where the data comes from">
-			<li><a href="https://www.gbif.org" rel="noopener">GBIF</a></li>
-			<li><a href="https://www.inaturalist.org" rel="noopener">iNaturalist</a></li>
-			<li><a href="https://open-meteo.com" rel="noopener">Open-Meteo</a></li>
-		</ul>
+
+			<!-- Architectural Contact Strip Index Bar -->
+			if len(banner) > 0 {
+				<div class="contact-strip">
+					<div class="contact-strip__counter">
+						<span>ACTIVE PLATE</span>
+						<strong data-hero-index>01</strong>
+						<span>/ 0{ strconv.Itoa(len(banner)) }</span>
+					</div>
+					<ol class="hero__captions contact-strip__list">
+						for i, s := range banner {
+							<li class={ "hero__cap", templ.KV("is-active", i == 0) }>
+								<a href={ templ.URL(SightingURL(s)) }>
+									<span class="contact-strip__num">0{ strconv.Itoa(i + 1) }</span>
+									<span class="contact-strip__name">{ displayName(s.Species) }</span>
+									<small class="contact-strip__loc">{ Postmark(s) }</small>
+								</a>
+							</li>
+						}
+					</ol>
+					if len(banner) > 1 {
+						<div class="hero__controls contact-strip__controls">
+							<button type="button" class="btn-ctrl press" data-hero-prev aria-label="Previous plate">←</button>
+							<button type="button" class="btn-ctrl press" data-hero-pause aria-label="Pause reel" aria-pressed="false">
+								<span class="icon-pause">II</span>
+								<span class="icon-play">▶</span>
+							</button>
+							<button type="button" class="btn-ctrl press" data-hero-next aria-label="Next plate">→</button>
+						</div>
+					}
+				</div>
+			}
+		</div>
 	</section>
 }

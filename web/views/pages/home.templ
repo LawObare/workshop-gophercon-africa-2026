@@ -9,7 +9,8 @@ import (
 
 templ Home(sightings []sighting.Sighting) {
 	{{ sum := sighting.Summarise(sightings) }}
-	{{ banner, latest := components.Showcase(sightings, 3, 8) }}
+	{{ banner, latest := components.Showcase(sightings, 4, 8) }}
+	{{ circadian := components.CircadianBreakdown(sightings) }}
 	@layout.Base(layout.BaseProps{
 		Page:  "home",
 		Class: "page-home",
@@ -17,35 +18,59 @@ templ Home(sightings []sighting.Sighting) {
 	}) {
 		if len(sightings) == 0 {
 			<section class="page-head page-head--empty container">
-				<p class="eyebrow">Golden Hour</p>
-				<h1 class="display">The wild is quiet</h1>
-				<p class="lede">No sightings have been ingested yet.</p>
+				<h1 class="display">The savanna is quiet</h1>
+				<p class="lede">No wildlife sightings have been catalogued yet. Run <code>workshop sightings ingest</code> to populate the field archive.</p>
 			</section>
 		} else {
 			@components.Hero(banner, sum)
-			<section class="intro container" aria-labelledby="intro-title">
-				<div class="reveal">
-					<p class="eyebrow">How to read this site</p>
-					<h2 id="intro-title" class="display">Every sighting carries its own&nbsp;light</h2>
-				</div>
-				<div class="intro__text reveal" style="--reveal-delay: 120ms">
-					<p class="lede">
-						Each photo is tinted by the hour it was taken in, and cooled or hazed by the weather on the day.
-						A rainy dawn looks nothing like a clear golden hour, and neither does the record.
+
+			<!-- Architectural 24-Hour Solar Meridian Ruler (No Boxes/Cards) -->
+			<section class="solar-horizon container" aria-labelledby="circadian-title">
+				<div class="solar-horizon__header">
+					<div>
+						<p class="section-num">SECTION 01 // CIRCADIAN SOLAR HORIZON</p>
+						<h2 id="circadian-title" class="display">The 24-Hour Savanna Meridian</h2>
+					</div>
+					<p class="solar-horizon__note">
+						Click any solar quadrant along the transit rule below to shift the monograph’s daylight ink and isolate specimens recorded during that window.
 					</p>
-					@components.LightLegend()
+				</div>
+
+				<div class="solar-ruler" role="group" aria-label="24-hour solar distribution">
+					for _, b := range circadian {
+						<button
+							type="button"
+							class={ "solar-segment", "tone--" + b.Key }
+							data-circadian-pick={ b.Key }
+							data-circadian-label={ b.Label }
+						>
+							<div class="solar-segment__axis">
+								<span class="solar-segment__hours">{ b.Hours }</span>
+								<span class="solar-segment__pct">{ strconv.Itoa(b.Percent) }%</span>
+							</div>
+							<div class="solar-segment__column-wrap" aria-hidden="true">
+								<div class="solar-segment__column" style={ "height: " + strconv.Itoa(b.Percent) + "%" }></div>
+							</div>
+							<div class="solar-segment__meta">
+								<span class="solar-segment__swahili">{ b.Swahili }</span>
+								<strong class="solar-segment__label">{ b.Label }</strong>
+								<span class="solar-segment__count">{ strconv.Itoa(b.Count) } specimens →</span>
+							</div>
+						</button>
+					}
 				</div>
 			</section>
+
 			if len(latest) > 0 {
 				<section class="latest" aria-labelledby="latest-title">
-					<div class="container section-head reveal">
+					<div class="container section-head">
 						<div>
-							<p class="eyebrow">Fresh tracks</p>
-							<h2 id="latest-title" class="display">Latest finds</h2>
+							<p class="section-num">RECENT NEGATIVES // 35MM PROOF STRIP</p>
+							<h2 id="latest-title" class="display">Unprinted Field Proofs</h2>
 						</div>
-						<a class="btn btn--quiet press" href="/gallery">See every photo</a>
+						<a class="editorial-btn" href="/gallery">Full Contact Sheet [→]</a>
 					</div>
-					<ul class="latest__track" tabindex="0" aria-label="Latest finds">
+					<ul class="latest__track" tabindex="0" aria-label="Latest field plates">
 						for _, s := range latest {
 							<li class="latest__item" style={ components.Morph(s) }>
 								@components.SightingCard(s)
@@ -54,21 +79,34 @@ templ Home(sightings []sighting.Sighting) {
 					</ul>
 				</section>
 			}
+
 			@components.Globe(sightings, sum, sighting.Top(sighting.CountBy(sightings, components.Country), 6))
-			<section id="sightings" class="journal container" aria-labelledby="journal-title">
-				<div class="section-head reveal">
+
+			<section id="sightings" class="journal container" aria-labelledby="journal-title" data-view="featured">
+				<div class="section-head">
 					<div>
-						<p class="eyebrow">The field journal</p>
-						<h2 id="journal-title" class="display">All { strconv.Itoa(len(sightings)) } sightings</h2>
+						<p class="section-num">SECTION 03 // COMPLETE SPECIMEN CATALOGUE</p>
+						<h2 id="journal-title" class="display">Catalogued Field Plates ({ strconv.Itoa(len(sightings)) })</h2>
+					</div>
+					<div class="view-switch-tray" role="group" aria-label="Layout structure">
+						<button type="button" class="btn-toggle is-active" data-view-target="featured" aria-pressed="true">
+							<span>I. Broadsheet Spread</span>
+						</button>
+						<button type="button" class="btn-toggle" data-view-target="polaroid" aria-pressed="false">
+							<span>II. Contact Grid</span>
+						</button>
+						<button type="button" class="btn-toggle" data-view-target="ledger" aria-pressed="false">
+							<span>III. Tabular Index</span>
+						</button>
 					</div>
 				</div>
 				@components.Filter(components.FilterProps{
 					Target: "sightings-list",
 					Search: true,
 					Groups: []components.FilterGroup{
-						{Key: "light", Label: "Light", Options: components.FilterOptions(sightings, 0, components.Light)},
-						{Key: "animal", Label: "Animal", Options: components.FilterOptions(sightings, 12, components.Animal)},
-						{Key: "country", Label: "Country", Options: components.FilterOptions(sightings, 12, components.Country)},
+						{Key: "light", Label: "Solar Hour", Options: components.FilterOptions(sightings, 0, components.Light)},
+						{Key: "animal", Label: "Taxon", Options: components.FilterOptions(sightings, 14, components.Animal)},
+						{Key: "country", Label: "Territory", Options: components.FilterOptions(sightings, 12, components.Country)},
 					},
 				})
 				<ul id="sightings-list" class="journal__list">

@@ -32,8 +32,6 @@ func Photographers(ps []Photo) int {
 	return len(seen)
 }
 
-var lightOrder = []string{"dawn", "day", "dusk", "night", ""}
-
 var lightCode = map[string]float64{"dawn": 0, "day": 1, "dusk": 2, "night": 3, "": 4}
 
 // GlobePoints writes each sighting as [latitude, longitude, light], numbers only, for the globe.
@@ -47,28 +45,3 @@ func GlobePoints(sightings []sighting.Sighting) [][3]float64 {
 	}
 	return points
 }
-
-// LightTally counts sightings per part of the day, from first light to after dark.
-func LightTally(sightings []sighting.Sighting) []sighting.Tally {
-	counts := sighting.CountBy(sightings, Light)
-	rows := make([]sighting.Tally, 0, len(lightOrder))
-	for _, l := range lightOrder {
-		if n := counts[lightNames[l]]; n > 0 {
-			rows = append(rows, sighting.Tally{Name: lightNames[l], Count: n})
-		}
-	}
-	return rows
-}
-
-var skyNames = map[string]string{
-	"clear": "Clear skies", "cloudy": "Cloud", "fog": "Fog", "drizzle": "Drizzle",
-	"rain": "Rain", "snow": "Snow", "storm": "Storms", "dust": "Haze and dust", "none": "Not recorded",
-}
-
-// SkyTally counts sightings per kind of sky, busiest first.
-func SkyTally(sightings []sighting.Sighting) []sighting.Tally {
-	return sighting.Top(sighting.CountBy(sightings, func(s sighting.Sighting) string { return skyNames[skyOf(s)] }), 0)
-}
-
-// Recorder is who saw it, for the leaderboard.
-func Recorder(s sighting.Sighting) string { return s.RecordedBy }

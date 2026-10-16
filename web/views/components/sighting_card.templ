@@ -11,53 +11,64 @@ import (
 )
 
 templ SightingCard(s sighting.Sighting) {
-	<article class={ "tile", tones(s) }>
-		<a class="tile__link press" href={ templ.URL(SightingURL(s)) }>
-			<div class="tile__media">
+	<article class={ "specimen-plate", "polaroid", tones(s) } data-light={ Light(s) }>
+		<a class="specimen-plate__link" href={ templ.URL(SightingURL(s)) }>
+			<div class="specimen-plate__margin">
+				<span class="specimen-plate__id">REF // { fmt.Sprintf("%03d", s.GBIFKey%1000) }</span>
+				<span class="specimen-plate__coords">{ ShortCoords(s) }</span>
+				<span class="specimen-plate__country">{ Postmark(s) }</span>
+			</div>
+
+			<div class="specimen-plate__photo polaroid__photo">
 				if c, ok := cover(s); ok {
 					<img src={ sized(c.URL, "medium") } alt={ photoAlt(s, c) } loading="lazy" decoding="async"/>
 				} else {
-					<div class="tile__empty" aria-hidden="true">
-						<img src="/assets/images/logo.svg" alt="" width="56" height="56"/>
+					<div class="polaroid__empty" aria-hidden="true">
+						<span>[ NO PHOTOGRAPHIC NEGATIVE ]</span>
 					</div>
 				}
-				<span class="tile__light">{ Light(s) }</span>
+				<div class="specimen-plate__reticle" aria-hidden="true"></div>
+				<div class="specimen-plate__strip">
+					<span class="specimen-plate__solar">
+						<i class="specimen-plate__solar-mark"></i>
+						{ Light(s) }
+					</span>
+					if s.Weather.Condition.Code != 0 {
+						<span class="specimen-plate__wx">
+							@Weather(s.Weather)
+						</span>
+					}
+				</div>
 			</div>
-			<div class="tile__body">
-				<h3 class="tile__name">{ displayName(s.Species) }</h3>
+
+			<div class="specimen-plate__caption polaroid__chin">
+				<div class="specimen-plate__title-line">
+					<h3 class="specimen-plate__title polaroid__title">{ displayName(s.Species) }</h3>
+					if s.IndividualCount != nil {
+						<span class="specimen-plate__count">[{ individuals(*s.IndividualCount) }]</span>
+					}
+				</div>
 				if s.Species.ScientificName != "" {
-					<p class="tile__scientific">{ s.Species.ScientificName }</p>
+					<p class="specimen-plate__latin polaroid__latin">{ s.Species.ScientificName }</p>
 				}
+				<div class="specimen-plate__foot polaroid__notes">
+					<span class="polaroid__place">{ place(s.Location) }</span>
+					<span class="polaroid__dot">—</span>
+					<span class="polaroid__date">{ when(s) }</span>
+				</div>
+				<div class="specimen-plate__credit polaroid__footer">
+					if s.RecordedBy != "" {
+						<span class="polaroid__observer">OBS. { s.RecordedBy }</span>
+					} else {
+						<span class="polaroid__observer">OBS. GBIF SURVEY</span>
+					}
+					<span class="specimen-plate__inspect">DOSSIER ↗</span>
+				</div>
 			</div>
 		</a>
-		<dl class="tile__meta">
-			<div>
-				<dt>Seen</dt>
-				<dd>{ when(s) }</dd>
-			</div>
-			<div>
-				<dt>Where</dt>
-				<dd>{ place(s.Location) }</dd>
-			</div>
-			<div>
-				<dt>Weather</dt>
-				<dd>
-					@Weather(s.Weather)
-				</dd>
-			</div>
-			if s.IndividualCount != nil {
-				<div>
-					<dt>Count</dt>
-					<dd>{ individuals(*s.IndividualCount) }</dd>
-				</div>
-			}
-			if s.RecordedBy != "" {
-				<div>
-					<dt>Recorded by</dt>
-					<dd>{ s.RecordedBy }</dd>
-				</div>
-			}
-		</dl>
+		if s.GBIFKey%11 == 0 || s.Species.VernacularName == "cheetah" {
+			@Meerkat()
+		}
 	</article>
 }
 
@@ -79,7 +90,7 @@ func place(l sighting.Location) string {
 // individuals renders how many animals were seen in a single sighting.
 func individuals(n int) string {
 	if n == 1 {
-		return "1 individual"
+		return "1 IND."
 	}
-	return fmt.Sprintf("%d individuals", n)
+	return fmt.Sprintf("%d IND.", n)
 }

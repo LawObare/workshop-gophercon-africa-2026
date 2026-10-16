@@ -1,0 +1,215 @@
+package pages
+
+import (
+	"strconv"
+	"strings"
+	"workshop/internal/domain/sighting"
+	"workshop/internal/domain/species"
+	"workshop/web/views/components"
+	"workshop/web/views/layout"
+)
+
+type SpotProps struct {
+	Chosen        species.Animal
+	Sightings     []sighting.Sighting
+	QuizSightings []sighting.Sighting
+	All           []species.Animal
+}
+
+templ Spot(props SpotProps) {
+	{{ quizPool := components.QuizItems(props.QuizSightings, 30) }}
+	@layout.Base(layout.BaseProps{
+		Title:       "Bushcraft & Track · " + formatAnimal(props.Chosen),
+		Description: "Identify savanna silhouettes from field clues, sample pigment swatches on the darkroom table, and plot 89 wild taxa.",
+		Page:        "spot",
+		Class:       "page-spot",
+		Map:         len(props.Sightings) > 0,
+	}) {
+		<div class="spot-page container">
+			<header class="spot-masthead">
+				<div class="spot-masthead__left">
+					<p class="section-num">SECTION IV // FIELD TAXONOMY &amp; OPTICAL DARKROOM</p>
+					<h1 class="display">Bushcraft, Silhouette &amp; Pigment Table</h1>
+				</div>
+				<p class="spot-masthead__right lede">
+					Test your field recognition against unlabelled negatives from the archive, or place any wildlife plate on the optical light-table to sample its 5 primary biome pigments.
+				</p>
+			</header>
+
+			<div class="spot-workbench">
+				<!-- 1. Interactive Safari Silhouette Challenge -->
+				if len(quizPool) >= 4 {
+					<section class="silhouette-game" data-silhouette-game aria-labelledby="quiz-title">
+						<header class="silhouette-game__head">
+							<div>
+								<span class="silhouette-game__kicker">STATION A // FIELD RECOGNITION TRIAL</span>
+								<h2 id="quiz-title" class="silhouette-game__title">Whose Outline in the Tall Grass?</h2>
+							</div>
+							<div class="silhouette-game__score">
+								<span>CONSECUTIVE ID</span>
+								<strong data-quiz-streak>0</strong>
+							</div>
+						</header>
+
+						<div class="silhouette-game__stage">
+							<div class="silhouette-frame is-masked" data-quiz-frame>
+								<img data-quiz-img src={ quizPool[0].PhotoURL } alt="Mystery wildlife silhouette" crossorigin="anonymous"/>
+								<div class="silhouette-frame__overlay">
+									<span class="silhouette-frame__badge" data-quiz-badge>UNCLASSIFIED NEGATIVE</span>
+								</div>
+							</div>
+
+							<div class="silhouette-game__panel">
+								<div class="silhouette-clues" aria-label="Field clues">
+									<div class="silhouette-clue">
+										<small>TERRITORY</small>
+										<strong data-quiz-country>{ quizPool[0].Country }</strong>
+									</div>
+									<div class="silhouette-clue">
+										<small>SOLAR PHASE</small>
+										<strong data-quiz-light>{ quizPool[0].Light }</strong>
+									</div>
+									<div class="silhouette-clue">
+										<small>METEOROLOGY</small>
+										<strong data-quiz-weather>{ quizPool[0].Weather }</strong>
+									</div>
+								</div>
+
+								<p class="silhouette-prompt" data-quiz-prompt>Cross-reference the contour and telemetry above to classify this specimen:</p>
+
+								<div class="silhouette-choices" data-quiz-choices role="group" aria-label="Species choices"></div>
+
+								<div class="silhouette-actions">
+									<button type="button" class="editorial-btn" data-quiz-reveal>Expose Negative</button>
+									<button type="button" class="editorial-btn editorial-btn--solid" data-quiz-next>Next Negative →</button>
+									<a class="btn-link" data-quiz-record href={ templ.URL(quizPool[0].URL) } hidden>Open Dossier [↗]</a>
+								</div>
+							</div>
+						</div>
+						@templ.JSONScript("safari-quiz-data", quizPool)
+					</section>
+				}
+
+				<!-- 2. Real HTML5 Canvas Biome & Light Color Analyzer -->
+				<section class="spot-scanner" data-spot-scanner data-spot-dropzone aria-labelledby="lab-title">
+					<header class="spot-scanner__head">
+						<div>
+							<span class="silhouette-game__kicker">STATION B // CHROMATIC LIGHT TABLE</span>
+							<h2 id="lab-title" class="silhouette-game__title">Biome Pigment &amp; Solar Spectrum Sampler</h2>
+						</div>
+					</header>
+
+					<div class="spot-viewport" data-spot-viewport>
+						<div class="spot-reticle spot-reticle--tl"></div>
+						<div class="spot-reticle spot-reticle--tr"></div>
+						<div class="spot-reticle spot-reticle--bl"></div>
+						<div class="spot-reticle spot-reticle--br"></div>
+
+						<img data-spot-preview alt="Uploaded animal preview" crossorigin="anonymous"/>
+
+						<div class="spot-drop-prompt">
+							<p><strong>[ DROP PHOTOGRAPHIC PLATE HERE ]</strong><br/>Samples 5 regional biome pigments &amp; computes solar colour temperature</p>
+						</div>
+					</div>
+
+					<div class="spot-palette" data-spot-palette hidden>
+						<div class="spot-palette__swatches" data-spot-swatches></div>
+						<div class="spot-palette__reading" data-spot-reading></div>
+					</div>
+
+					<div class="spot-controls">
+						<input type="file" accept="image/*" capture="environment" data-spot-file id="spot-file-input" hidden/>
+						<label for="spot-file-input" class="editorial-btn editorial-btn--solid" tabindex="0">
+							Mount Local Plate
+						</label>
+						<button type="button" class="editorial-btn" data-spot-sample>
+							Sample Archive Negative
+						</button>
+						<p class="spot-status-text" data-spot-status aria-live="polite">Ready. Mount a local image or sample an archive negative.</p>
+					</div>
+				</section>
+			</div>
+
+			<!-- 3. 89-Species Habitat Explorer & Map -->
+			<div id="results">
+				<section class="spot-index-section">
+					<div class="spot-index-section__head">
+						<div>
+							<p class="section-num">TAXONOMIC REGISTER // 89 WILD SPECIES</p>
+							<h2 class="display">{ formatAnimal(props.Chosen) } — { strconv.Itoa(len(props.Sightings)) } Occurrences</h2>
+						</div>
+						<div class="spot-search-wrap">
+							<label for="species-search" class="visually-hidden">Filter species</label>
+							<input
+								id="species-search"
+								type="search"
+								class="spot-search-input"
+								placeholder="Type taxon name (e.g. Lion, Cheetah, Pangolin)…"
+								data-spot-search
+								autocomplete="off"
+							/>
+						</div>
+					</div>
+
+					<div class="spot-species-cloud" role="navigation" aria-label="Species register">
+						for _, a := range props.All {
+							<a
+								href={ templ.URL("/spot?animal=" + string(a) + "#results") }
+								class={ "spot-chip", templ.KV("is-active", a == props.Chosen) }
+								data-species-chip
+							>
+								{ formatAnimal(a) }
+							</a>
+						}
+					</div>
+				</section>
+
+				if len(props.Sightings) > 0 {
+					<section class="spot-map-section" aria-labelledby="spot-map-title">
+						<div class="section-head">
+							<div>
+								<p class="section-num">CARTOGRAPHIC PLOT // { strings.ToUpper(formatAnimal(props.Chosen)) }</p>
+								<h2 id="spot-map-title" class="display">Recorded Range of the { formatAnimal(props.Chosen) }</h2>
+							</div>
+						</div>
+						@components.Map(components.MapProps{
+							Points:  components.MapPoints(props.Sightings),
+							Cluster: true,
+							Label:   "Locations where " + formatAnimal(props.Chosen) + " was sighted",
+						})
+					</section>
+
+					<section class="spot-sightings-section" aria-labelledby="sightings-grid-title">
+						<div class="section-head">
+							<div>
+								<p class="section-num">SPECIMEN LOG // { strings.ToUpper(formatAnimal(props.Chosen)) }</p>
+								<h2 id="sightings-grid-title" class="display">Field Plates ({ strconv.Itoa(len(props.Sightings)) })</h2>
+							</div>
+						</div>
+						<ul class="journal__list">
+							for _, s := range props.Sightings {
+								<li id={ components.Anchor(s) }>
+									@components.SightingCard(s)
+								</li>
+							}
+						</ul>
+					</section>
+				} else {
+					<div class="panel">
+						<p class="lede">No sightings for <strong>{ formatAnimal(props.Chosen) }</strong> are in your local SQLite database yet. Pick another species from the register above.</p>
+					</div>
+				}
+			</div>
+		</div>
+	}
+}
+
+func formatAnimal(a species.Animal) string {
+	parts := strings.Split(string(a), "_")
+	for i, p := range parts {
+		if len(p) > 0 {
+			parts[i] = strings.ToUpper(p[:1]) + p[1:]
+		}
+	}
+	return strings.Join(parts, " ")
+}

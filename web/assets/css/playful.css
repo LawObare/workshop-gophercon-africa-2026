@@ -1,0 +1,711 @@
+/* ==========================================================================
+   JAMBO FIELD BUSHCRAFT, STAMP LEDGER & OPTICAL DARKROOM TABLE
+   Sharp architectural geometry, rubber-ink stamps, zero rounded SaaS boxes.
+   ========================================================================== */
+
+/* ---------- Migratory Storks Over Masthead ---------- */
+.hero__birds {
+	position: absolute;
+	top: 1.25rem;
+	right: 4%;
+	width: clamp(150px, 22vw, 260px);
+	height: 85px;
+	cursor: pointer;
+	z-index: 3;
+	opacity: 0.8;
+}
+
+.bird {
+	position: absolute;
+	fill: var(--accent);
+	animation: bird-glide 18s linear infinite;
+}
+
+.bird-1 { width: 28px; height: 15px; top: 12%; right: 15%; }
+.bird-2 { width: 22px; height: 12px; top: 40%; right: 42%; animation-delay: -3s; opacity: 0.8; }
+.bird-3 { width: 18px; height: 10px; top: 24%; right: 66%; animation-delay: -6s; opacity: 0.7; }
+.bird-4 { width: 15px; height: 8px;  top: 60%; right: 28%; animation-delay: -9s; opacity: 0.6; }
+.bird-5 { width: 12px; height: 7px;  top: 72%; right: 52%; animation-delay: -12s; opacity: 0.5; }
+
+.bird__wing-left,
+.bird__wing-right {
+	transform-origin: center bottom;
+	animation: bird-wing-flap 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes bird-wing-flap {
+	0%   { transform: scaleY(1); }
+	100% { transform: scaleY(0.4); }
+}
+
+@keyframes bird-glide {
+	0%   { transform: translate3d(40px, 0, 0); }
+	100% { transform: translate3d(-200px, 8px, 0); opacity: 0; }
+}
+
+.birds__tooltip {
+	position: absolute;
+	bottom: -18px;
+	right: 0;
+	background: var(--text);
+	color: var(--bg);
+	padding: 2px 8px;
+	font: 600 0.65rem var(--font-mono);
+	white-space: nowrap;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.hero__birds:hover .birds__tooltip {
+	opacity: 1;
+}
+
+/* ---------- Ranger Field Scout Corner Stamp ---------- */
+.safari-scout {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 90;
+	cursor: pointer;
+}
+
+.safari-scout__avatar {
+	display: grid;
+	place-items: center;
+	width: 48px;
+	height: 48px;
+	background: var(--surface);
+	border: 2px solid var(--text);
+	box-shadow: 4px 4px 0 var(--text);
+	transition: transform 140ms ease;
+}
+
+.safari-scout:hover .safari-scout__avatar {
+	transform: translate(-2px, -2px);
+}
+
+.monkey__bubble {
+	position: absolute;
+	bottom: 60px;
+	right: 0;
+	width: max-content;
+	max-width: 260px;
+	padding: 0.85rem 1rem;
+	background: var(--surface);
+	color: var(--text);
+	border: 2px solid var(--text);
+	box-shadow: 4px 4px 0 var(--text);
+	font-size: 0.8rem;
+	line-height: 1.45;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.monkey__bubble-tag {
+	margin: 0 0 0.25rem;
+	font: 700 0.65rem var(--font-mono);
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--accent);
+}
+
+.safari-scout.is-talking .monkey__bubble,
+.safari-scout:focus-visible .monkey__bubble {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+/* ---------- Chameleon, Meerkat & Hippo Field Stamps ---------- */
+.chameleon-spot {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45rem;
+	margin-left: auto;
+	padding: 0.25rem 0.65rem;
+	background: transparent;
+	border: 1px solid var(--line-strong);
+	cursor: pointer;
+	font: 600 0.72rem var(--font-mono);
+	color: var(--text);
+}
+
+.chameleon-svg {
+	width: 24px;
+	height: 18px;
+	fill: var(--chameleon-color, #1e462c);
+	transition: fill 300ms ease;
+}
+
+.meerkat-peeker {
+	position: absolute;
+	bottom: 40px;
+	right: 12px;
+	width: 30px;
+	height: 38px;
+	padding: 0;
+	border: none;
+	background: transparent;
+	z-index: 4;
+	cursor: pointer;
+}
+
+.hippo-footer-peeker {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.4rem 0.8rem;
+	background: transparent;
+	border: 1px solid var(--line-strong);
+	cursor: pointer;
+	font: 600 0.74rem var(--font-mono);
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+}
+
+.hippo-svg {
+	width: 28px;
+	height: 18px;
+}
+
+/* ---------- Rubber Stamp Notification Toast ---------- */
+.wildlife-tracker {
+	position: fixed;
+	bottom: 20px;
+	left: 20px;
+	z-index: 120;
+	background: var(--surface);
+	border: 2px solid var(--text);
+	box-shadow: 4px 4px 0 var(--text);
+	padding: 0.65rem 1rem;
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	color: var(--text);
+	transform: translateY(140%);
+	opacity: 0;
+	pointer-events: none;
+	transition: transform 220ms var(--ease-out), opacity 180ms ease;
+}
+
+.wildlife-tracker.is-visible {
+	transform: translateY(0);
+	opacity: 1;
+}
+
+.wildlife-tracker__badge {
+	padding: 0.35rem 0.55rem;
+	background: var(--accent);
+	color: var(--accent-ink);
+	font: 700 0.78rem var(--font-mono);
+}
+
+.wildlife-tracker__title {
+	font: 700 0.65rem var(--font-mono);
+	letter-spacing: 0.1em;
+	color: var(--accent);
+	margin: 0;
+}
+
+.wildlife-tracker__desc {
+	margin: 2px 0 0;
+	font-size: 0.82rem;
+	font-weight: 600;
+}
+
+/* ---------- Jambo Field Stamp Book Modal ---------- */
+.passport-modal {
+	width: min(94vw, 44rem);
+	padding: 0;
+	border: 2px solid var(--text);
+	border-radius: 0;
+	background: var(--surface);
+	color: var(--text);
+	box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.35);
+}
+
+.passport-modal::backdrop {
+	background: rgba(15, 12, 9, 0.75);
+}
+
+.passport-book {
+	padding: clamp(1.25rem, 3.5vw, 2rem);
+}
+
+.passport-book__head {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 1rem;
+	padding-bottom: 1rem;
+	border-bottom: 2px solid var(--text);
+}
+
+.passport-book__kicker {
+	margin: 0 0 0.3rem;
+	font: 700 0.68rem var(--font-mono);
+	letter-spacing: 0.12em;
+	color: var(--accent);
+}
+
+.passport-book__title {
+	font-family: var(--display);
+	font-size: 1.75rem;
+	margin: 0 0 0.25rem;
+}
+
+.passport-book__sub {
+	margin: 0;
+	font-size: 0.86rem;
+	color: var(--muted);
+}
+
+.passport-book__close {
+	width: 32px;
+	height: 32px;
+	border: 1px solid var(--text);
+	background: transparent;
+	font: 700 1.1rem var(--font-mono);
+	cursor: pointer;
+}
+
+.passport-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr));
+	gap: 0;
+	margin-block: 1.5rem;
+	border-top: 1px solid var(--line-strong);
+	border-left: 1px solid var(--line-strong);
+}
+
+.passport-slot {
+	padding: 1.15rem 0.85rem;
+	border-right: 1px solid var(--line-strong);
+	border-bottom: 1px solid var(--line-strong);
+	background: var(--bg);
+	text-align: center;
+	opacity: 0.45;
+}
+
+.passport-slot.is-stamped {
+	opacity: 1;
+	background: var(--surface);
+}
+
+.passport-stamp {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+
+.passport-slot.is-stamped .passport-stamp {
+	transform: rotate(-3deg);
+}
+
+.passport-stamp__ring {
+	display: inline-block;
+	align-self: center;
+	padding: 0.12rem 0.45rem;
+	border: 1.5px solid var(--accent);
+	font: 700 0.6rem var(--font-mono);
+	color: var(--accent);
+	letter-spacing: 0.1em;
+}
+
+.passport-stamp strong {
+	font-family: var(--display);
+	font-size: 1.05rem;
+}
+
+.passport-stamp small {
+	font-size: 0.72rem;
+	color: var(--muted);
+}
+
+.passport-book__foot {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-top: 1rem;
+	border-top: 1px solid var(--line-strong);
+	font: 600 0.75rem var(--font-mono);
+}
+
+/* ---------- Bushcraft & Optical Darkroom Workbench (/spot) ---------- */
+
+.spot-page {
+	padding-bottom: 5rem;
+}
+
+.spot-masthead {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1.5rem;
+	padding-block: clamp(2rem, 4.5vw, 3.5rem);
+	border-bottom: 2px solid var(--rule-heavy);
+}
+
+@media (min-width: 960px) {
+	.spot-masthead {
+		grid-template-columns: 7fr 5fr;
+		align-items: end;
+	}
+}
+
+.spot-workbench {
+	display: grid;
+	grid-template-columns: 1fr;
+	border-bottom: 2px solid var(--rule-heavy);
+}
+
+@media (min-width: 1024px) {
+	.spot-workbench {
+		grid-template-columns: 1.15fr 0.85fr;
+	}
+}
+
+.silhouette-game {
+	padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1rem, 2.5vw, 2rem) clamp(1.5rem, 3vw, 2.5rem) 0;
+	border-bottom: 1px solid var(--line-strong);
+}
+
+@media (min-width: 1024px) {
+	.silhouette-game {
+		border-bottom: none;
+		border-right: 1px solid var(--rule-heavy);
+		padding-right: 2.5rem;
+	}
+	.spot-scanner {
+		padding-left: 2.5rem;
+	}
+}
+
+.spot-scanner {
+	padding-block: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.silhouette-game__head,
+.spot-scanner__head {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 1rem;
+	padding-bottom: 1rem;
+	margin-bottom: 1.25rem;
+	border-bottom: 1px solid var(--line-strong);
+}
+
+.silhouette-game__kicker {
+	display: block;
+	font: 700 0.68rem var(--font-mono);
+	letter-spacing: 0.12em;
+	color: var(--accent);
+	margin-bottom: 0.25rem;
+}
+
+.silhouette-game__title {
+	font-family: var(--display);
+	font-size: clamp(1.5rem, 2.4vw, 2rem);
+	font-weight: 400;
+}
+
+.silhouette-game__score {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	font-family: var(--font-mono);
+}
+
+.silhouette-game__score span {
+	font-size: 0.62rem;
+	color: var(--muted);
+}
+
+.silhouette-game__score strong {
+	font-size: 1.5rem;
+	color: var(--accent);
+}
+
+.silhouette-game__stage {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+	.silhouette-game__stage {
+		grid-template-columns: 1fr 1fr;
+		align-items: start;
+	}
+}
+
+.silhouette-frame {
+	position: relative;
+	aspect-ratio: 4 / 3;
+	overflow: hidden;
+	background: linear-gradient(180deg, #c85219 0%, #e0901b 60%, #1c140d 100%);
+	border: 1px solid var(--rule-heavy);
+}
+
+.silhouette-frame img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: filter 400ms var(--ease-out);
+}
+
+.silhouette-frame.is-masked img {
+	filter: contrast(280%) brightness(0.14) sepia(65%) saturate(220%);
+	mix-blend-mode: multiply;
+}
+
+.silhouette-frame__overlay {
+	position: absolute;
+	inset: auto 0 0 0;
+	padding: 0.35rem 0.65rem;
+	background: #14110e;
+	color: #f2be49;
+	font: 600 0.66rem var(--font-mono);
+	letter-spacing: 0.08em;
+}
+
+.silhouette-clues {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	border: 1px solid var(--line-strong);
+	margin-bottom: 1rem;
+}
+
+.silhouette-clue {
+	padding: 0.45rem 0.55rem;
+	border-right: 1px solid var(--line);
+}
+
+.silhouette-clue:last-child {
+	border-right: none;
+}
+
+.silhouette-clue small {
+	display: block;
+	font: 600 0.6rem var(--font-mono);
+	color: var(--muted);
+}
+
+.silhouette-clue strong {
+	font-size: 0.78rem;
+}
+
+.silhouette-prompt {
+	margin: 0 0 0.75rem;
+	font-size: 0.86rem;
+	color: var(--text-soft);
+}
+
+.silhouette-choices {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 0.5rem;
+	margin-bottom: 1.1rem;
+}
+
+.silhouette-choice {
+	padding: 0.6rem 0.75rem;
+	border: 1px solid var(--rule-heavy);
+	background: transparent;
+	color: var(--text);
+	font: 600 0.78rem var(--font-mono);
+	text-transform: uppercase;
+	text-align: left;
+	cursor: pointer;
+}
+
+.silhouette-choice:hover {
+	background: var(--surface-2);
+}
+
+.silhouette-choice.is-correct {
+	background: var(--accent-acacia);
+	color: #fff;
+	border-color: var(--accent-acacia);
+}
+
+.silhouette-choice.is-wrong {
+	background: #96291e;
+	color: #fff;
+	border-color: #96291e;
+}
+
+.silhouette-actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.6rem;
+}
+
+/* ---------- Station B: Chromatic Light Table ---------- */
+.spot-viewport {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 16 / 10;
+	background: var(--surface);
+	border: 1px solid var(--rule-heavy);
+	display: grid;
+	place-items: center;
+	overflow: hidden;
+	margin-bottom: 1rem;
+}
+
+.spot-viewport img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: none;
+}
+
+.spot-viewport.has-photo img {
+	display: block;
+}
+
+.spot-viewport.has-photo .spot-drop-prompt {
+	display: none;
+}
+
+.spot-reticle {
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	border-color: var(--accent);
+	border-style: solid;
+	pointer-events: none;
+	z-index: 4;
+}
+
+.spot-reticle--tl { top: 10px; left: 10px; border-width: 1.5px 0 0 1.5px; }
+.spot-reticle--tr { top: 10px; right: 10px; border-width: 1.5px 1.5px 0 0; }
+.spot-reticle--bl { bottom: 10px; left: 10px; border-width: 0 0 1.5px 1.5px; }
+.spot-reticle--br { bottom: 10px; right: 10px; border-width: 0 1.5px 1.5px 0; }
+
+.spot-drop-prompt {
+	padding: 1.5rem;
+	text-align: center;
+	font: 500 0.8rem var(--font-mono);
+	color: var(--muted);
+}
+
+.spot-palette {
+	padding: 0.85rem;
+	margin-bottom: 1rem;
+	border: 1px solid var(--line-strong);
+	background: var(--surface);
+}
+
+.spot-palette__swatches {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	gap: 0;
+	border: 1px solid var(--rule-heavy);
+	margin-bottom: 0.65rem;
+}
+
+.swatch-pill {
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+	border: none;
+	border-right: 1px solid var(--rule-heavy);
+	background: var(--surface);
+	font: 600 0.66rem var(--font-mono);
+	cursor: pointer;
+}
+
+.swatch-pill:last-child {
+	border-right: none;
+}
+
+.swatch-pill__color {
+	width: 100%;
+	height: 28px;
+	background: var(--swatch, #bf4315);
+}
+
+.swatch-pill code {
+	padding: 0.25rem 0.2rem;
+	text-align: center;
+	width: 100%;
+}
+
+.spot-palette__reading {
+	display: grid;
+	gap: 0.2rem;
+	font: 500 0.76rem var(--font-mono);
+	color: var(--text-soft);
+}
+
+.spot-controls {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.6rem;
+	align-items: center;
+}
+
+.spot-status-text {
+	width: 100%;
+	margin: 0.25rem 0 0;
+	font: 500 0.74rem var(--font-mono);
+	color: var(--muted);
+}
+
+/* ---------- Taxonomic Register (89 Species) ---------- */
+.spot-index-section {
+	padding-block: 2.5rem;
+	border-bottom: 2px solid var(--rule-heavy);
+}
+
+.spot-index-section__head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 1rem;
+	margin-bottom: 1.5rem;
+}
+
+.spot-search-input {
+	background: var(--surface);
+	border: 1px solid var(--rule-heavy);
+	border-radius: 0;
+	color: var(--text);
+	padding: 0.55rem 0.85rem;
+	font: 500 0.82rem var(--font-mono);
+	min-width: min(88vw, 22rem);
+}
+
+.spot-species-cloud {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0;
+	max-height: 185px;
+	overflow-y: auto;
+	border-top: 1px solid var(--line-strong);
+	border-left: 1px solid var(--line-strong);
+}
+
+.spot-chip {
+	padding: 0.35rem 0.7rem;
+	border-right: 1px solid var(--line-strong);
+	border-bottom: 1px solid var(--line-strong);
+	background: transparent;
+	color: var(--text);
+	font: 500 0.76rem var(--font-mono);
+	text-decoration: none;
+}
+
+.spot-chip:hover,
+.spot-chip.is-active {
+	background: var(--text);
+	color: var(--bg);
+}
+
+.spot-map-section,
+.spot-sightings-section {
+	padding-top: 2.5rem;
+}

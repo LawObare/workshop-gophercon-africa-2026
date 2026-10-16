@@ -3,9 +3,9 @@ package layout
 // title puts the site's name after the page's.
 func title(page string) string {
 	if page == "" {
-		return "Golden Hour"
+		return "Jambo"
 	}
-	return page + " · Golden Hour"
+	return page + " · Jambo"
 }
 
 // description falls back to what the site is.

@@ -6,31 +6,47 @@ import (
 )
 
 templ Globe(sightings []sighting.Sighting, sum sighting.Summary, countries []sighting.Tally) {
-	<section class="globe" aria-labelledby="globe-title">
-		<div class="globe__stage">
-			@ThreeScene(ThreeSceneProps{Scene: "globe", Label: "A turning globe with a glowing point for each sighting, coloured by the time of day it was seen"})
+	<section class="cartography-section container" aria-labelledby="globe-title">
+		<div class="cartography-grid" data-stamp-trigger="globe_explorer">
+			<div class="cartography-grid__map">
+				<div class="globe__stage">
+					@ThreeScene(ThreeSceneProps{Scene: "globe", Label: "A turning 3D globe with glowing points for each wildlife sighting, coloured by the time of day it was seen"})
+				</div>
+				<p class="cartography-grid__caption">FIG. II — ORTHOGRAPHIC PROJECTION OF { strconv.Itoa(sum.Sightings) } SIGHTINGS · DRAG TO ROTATE MERIDIAN</p>
+			</div>
+
+			<div class="cartography-grid__index reveal">
+				<p class="section-num">SECTION 02 // CARTOGRAPHIC DISTRIBUTION</p>
+				<h2 id="globe-title" class="display">{ strconv.Itoa(sum.Countries) } territories plotted across the meridian</h2>
+				<p class="lede">
+					Every coordinate on the sphere is illuminated by the solar hour of the sighting. Select any territory in the surveyor’s table below to isolate its field plates.
+				</p>
+				@LightLegend()
+				if len(countries) > 0 {
+					<ol class="cartography-table" aria-label="Top territories by sighting count">
+						for i, c := range countries {
+							<li>
+								<button type="button" class="cartography-table__row" data-country-jump={ c.Name }>
+									<span class="cartography-table__idx">0{ strconv.Itoa(i + 1) }</span>
+									<span class="cartography-table__name">{ c.Name }</span>
+									<span class="cartography-table__dots" aria-hidden="true"></span>
+									<strong class="cartography-table__count">{ strconv.Itoa(c.Count) } PLATES ↗</strong>
+								</button>
+							</li>
+						}
+					</ol>
+				}
+			</div>
+			@templ.JSONScript("globe-points", GlobePoints(sightings))
 		</div>
-		<div class="globe__text reveal">
-			<p class="eyebrow">Where the wild was seen</p>
-			<h2 id="globe-title" class="display">{ strconv.Itoa(sum.Countries) } countries, one&nbsp;planet</h2>
-			<p class="lede">Each point is a sighting, lit in the colour of the hour it happened. Drag to turn the world.</p>
-			if len(countries) > 0 {
-				<ol class="globe__list">
-					for _, c := range countries {
-						<li><span>{ c.Name }</span><span>{ strconv.Itoa(c.Count) }</span></li>
-					}
-				</ol>
-			}
-		</div>
-		@templ.JSONScript("globe-points", GlobePoints(sightings))
 	</section>
 }
 
 templ LightLegend() {
-	<ul class="legend" aria-label="What the colours mean">
-		<li class="legend__item tone--dawn"><span class="legend__swatch"></span>First light <small>5–8am</small></li>
-		<li class="legend__item tone--day"><span class="legend__swatch"></span>Daylight <small>8am–4pm</small></li>
-		<li class="legend__item tone--dusk"><span class="legend__swatch"></span>Golden hour <small>4–8pm</small></li>
-		<li class="legend__item tone--night"><span class="legend__swatch"></span>After dark <small>8pm–5am</small></li>
+	<ul class="legend" aria-label="Solar phase colour key">
+		<li class="legend__item tone--dawn"><span class="legend__swatch"></span>05–08h Alfajiri (Dawn)</li>
+		<li class="legend__item tone--day"><span class="legend__swatch"></span>08–16h Mchana (Day)</li>
+		<li class="legend__item tone--dusk"><span class="legend__swatch"></span>16–20h Machweo (Dusk)</li>
+		<li class="legend__item tone--night"><span class="legend__swatch"></span>20–05h Usiku (Night)</li>
 	</ul>
 }

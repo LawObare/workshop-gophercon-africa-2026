@@ -13,7 +13,7 @@ import "workshop/web/views/components"
 type BaseProps struct {
 	Title       string
 	Description string
-	Page        string // Which nav link is the current page: "home", "gallery" or "stats".
+	Page        string // Which nav link is the current page: "home", "gallery" or "spot".
 	Class       string // Classes on <body>, such as the tint of the sighting shown.
 	Map         bool   // Load Leaflet for a components.Map.
 	Three       bool   // Load three.js for a components.ThreeScene.
@@ -40,14 +40,14 @@ func Base(props BaseProps) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><html lang=\"en-GB\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\"><link rel=\"icon\" href=\"/assets/images/logo.svg\" type=\"image/svg+xml\"><link rel=\"manifest\" href=\"/assets/manifest.json\"><meta name=\"theme-color\" content=\"#1C1110\"><meta name=\"color-scheme\" content=\"dark\"><title>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><html lang=\"en-GB\" data-sky=\"day\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\"><link rel=\"icon\" href=\"/assets/images/logo.svg\" type=\"image/svg+xml\"><link rel=\"manifest\" href=\"/assets/manifest.json\"><meta name=\"theme-color\" content=\"#F3ead8\"><title>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(title(props.Title))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/views/layout/layout.templ`, Line: 24, Col: 30}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/views/layout/layout.templ`, Line: 23, Col: 30}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
@@ -60,13 +60,13 @@ func Base(props BaseProps) templ.Component {
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.ResolveAttributeValue(description(props.Description))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/views/layout/layout.templ`, Line: 25, Col: 68}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/views/layout/layout.templ`, Line: 24, Col: 68}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var3)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\"><script>document.documentElement.classList.add('js')</script><link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin><link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Marcellus&family=Nunito+Sans:ital,opsz,wght@0,6..12,300..800;1,6..12,400&display=swap\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\"><script>\n\t\t\t\tdocument.documentElement.classList.add('js');\n\t\t\t\ttry {\n\t\t\t\t\tvar savedSky = localStorage.getItem('jambo_sky_mode');\n\t\t\t\t\tif (savedSky) document.documentElement.setAttribute('data-sky', savedSky);\n\t\t\t\t} catch (e) {}\n\t\t\t</script><link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin><link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,SOFT,wght@0,9..144,50,300..800;1,9..144,50,300..600&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -82,7 +82,7 @@ func Base(props BaseProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<link rel=\"stylesheet\" href=\"/assets/css/weather.css\"><link rel=\"stylesheet\" href=\"/assets/css/charts.css\"><link rel=\"stylesheet\" href=\"/assets/css/filter.css\"><link rel=\"stylesheet\" href=\"/assets/css/lightbox.css\"><link rel=\"stylesheet\" href=\"/assets/css/reveal.css\"><link rel=\"stylesheet\" href=\"/assets/css/app.css\"><link rel=\"stylesheet\" href=\"/assets/css/transitions.css\"><script src=\"/assets/js/reveal.js\" defer></script></head>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<link rel=\"stylesheet\" href=\"/assets/css/weather.css\"><link rel=\"stylesheet\" href=\"/assets/css/filter.css\"><link rel=\"stylesheet\" href=\"/assets/css/lightbox.css\"><link rel=\"stylesheet\" href=\"/assets/css/reveal.css\"><link rel=\"stylesheet\" href=\"/assets/css/app.css\"><link rel=\"stylesheet\" href=\"/assets/css/playful.css\"><link rel=\"stylesheet\" href=\"/assets/css/transitions.css\"><script src=\"https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js\" defer></script><script src=\"/assets/js/reveal.js\" defer></script></head>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -112,7 +112,11 @@ func Base(props BaseProps) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "<a class=\"skip\" href=\"#main\">Skip to content</a><div class=\"scroll-sentinel\" data-sentinel aria-hidden=\"true\"></div><header class=\"site-header\" data-header><a class=\"logo press\" href=\"/\"><img src=\"/assets/images/logo.svg\" alt=\"\" width=\"36\" height=\"36\"> <span class=\"logo__name\">Golden Hour</span></a><nav class=\"site-nav\" aria-label=\"Main\"><ul><li><a href=\"/\"")
+		templ_7745c5c3_Err = components.MonkeyVine().Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "<a class=\"skip\" href=\"#main\">Skip to content</a><div class=\"scroll-sentinel\" data-sentinel aria-hidden=\"true\"></div><!-- Topographic Meridian Ticker --><div class=\"meridian-bar\" role=\"region\" aria-label=\"Expedition coordinates and sky atmosphere\"><div class=\"meridian-bar__left\"><span class=\"meridian-bar__coord\">01°17′S 36°49′E · NAIROBI MERIDIAN</span> <span class=\"meridian-bar__sep\">/</span> <span class=\"meridian-bar__bday\">16 OCT · HAPPY BIRTHDAY CHIEF RANGER EXPEDITION EDITION</span></div><div class=\"meridian-bar__right\"><div class=\"sky-dial\" role=\"group\" aria-label=\"Savanna sky hour\"><span class=\"sky-dial__label\">SOLAR HOUR:</span> <button type=\"button\" class=\"sky-dial__btn\" data-sky-set=\"dawn\">06:00 ALFAJIRI</button> <button type=\"button\" class=\"sky-dial__btn is-active\" data-sky-set=\"day\">12:00 MCHANA</button> <button type=\"button\" class=\"sky-dial__btn\" data-sky-set=\"dusk\">18:00 MACHWEO</button> <button type=\"button\" class=\"sky-dial__btn\" data-sky-set=\"night\">22:00 USIKU</button></div><button type=\"button\" class=\"camp-radio\" data-sound-toggle aria-pressed=\"false\"><span class=\"camp-radio__bars\" aria-hidden=\"true\"><span></span><span></span><span></span></span> <span data-sound-label>HZ RADIO</span></button></div></div><header class=\"site-header\" data-header><a class=\"logo\" href=\"/\"><span class=\"logo__mark\" aria-hidden=\"true\"><svg viewBox=\"0 0 44 28\" width=\"44\" height=\"28\"><circle cx=\"29\" cy=\"15\" r=\"10\" fill=\"var(--accent)\"></circle> <path d=\"M2 24 L42 24\" stroke=\"currentColor\" stroke-width=\"1.5\"></path> <path d=\"M18 24 L19 13 L10 8 L13 8 L19.5 11.5 L20.5 7 L22.5 7 L21.5 11.5 L28 7.5 L31 7.5 L21 13.5 L21.5 24 Z\" fill=\"currentColor\"></path> <ellipse cx=\"20\" cy=\"6.5\" rx=\"14\" ry=\"2.2\" fill=\"currentColor\"></ellipse> <ellipse cx=\"13\" cy=\"4.2\" rx=\"7\" ry=\"1.6\" fill=\"currentColor\"></ellipse> <ellipse cx=\"27\" cy=\"4.5\" rx=\"6.5\" ry=\"1.5\" fill=\"currentColor\"></ellipse></svg></span><div class=\"logo__text\"><span class=\"logo__name\">JAMBO</span> <span class=\"logo__sub\">East African Field Monograph</span></div></a><nav class=\"site-nav\" aria-label=\"Main\"><ul><li><a href=\"/\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -122,7 +126,7 @@ func Base(props BaseProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, ">Home</a></li><li><a href=\"/#sightings\">Sightings</a></li><li><a href=\"/gallery\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, "><span>I.</span> Field Index</a></li><li><a href=\"/#sightings\"><span>II.</span> Specimen Plates</a></li><li><a href=\"/gallery\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -132,17 +136,17 @@ func Base(props BaseProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 13, ">Gallery</a></li><li><a href=\"/stats\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 13, "><span>III.</span> Contact Sheet</a></li><li><a href=\"/spot\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		if props.Page == "stats" {
+		if props.Page == "spot" {
 			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 14, " aria-current")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 15, ">Stats</a></li></ul></nav></header><main id=\"main\" tabindex=\"-1\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 15, "><span>IV.</span> Bushcraft &amp; Track</a></li></ul></nav><button type=\"button\" class=\"passport-trigger press\" data-passport-open title=\"Open Field Stamp Book\"><span class=\"passport-trigger__stamp\">STAMP BOOK</span> <strong class=\"passport-trigger__count\" data-passport-badge>0/6</strong></button></header><main id=\"main\" tabindex=\"-1\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -150,7 +154,19 @@ func Base(props BaseProps) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 16, "</main><footer class=\"site-footer\"><div class=\"site-footer__inner\"><a class=\"logo\" href=\"/\"><img src=\"/assets/images/logo.svg\" alt=\"\" width=\"32\" height=\"32\"> <span class=\"logo__name\">Golden Hour</span></a><p class=\"site-footer__note\">Sightings from <a href=\"https://www.gbif.org\" rel=\"noopener\">GBIF</a>, weather from <a href=\"https://open-meteo.com\" rel=\"noopener\">Open-Meteo</a>. Every photo belongs to the person who took it.</p><nav aria-label=\"Footer\"><ul><li><a href=\"/\">Home</a></li><li><a href=\"/gallery\">Gallery</a></li><li><a href=\"/stats\">Stats</a></li></ul></nav></div></footer>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 16, "</main><footer class=\"site-footer\"><div class=\"savanna-horizon\" aria-hidden=\"true\"><svg viewBox=\"0 0 1440 84\" preserveAspectRatio=\"none\"><path d=\"M0 84 L0 64 L180 54 L390 66 L640 48 L920 62 L1190 52 L1440 64 L1440 84 Z\" fill=\"currentColor\" opacity=\"0.14\"></path> <path d=\"M0 84 L0 74 L320 64 L780 72 L1140 62 L1440 72 L1440 84 Z\" fill=\"currentColor\"></path> <g transform=\"translate(220, 22)\"><path d=\"M28 50 L29 30 L18 22 L22 22 L29 28 L31 20 L33 20 L31 28 L40 21 L44 21 L32 30 L33 50 Z\" fill=\"currentColor\"></path> <ellipse cx=\"31\" cy=\"19\" rx=\"24\" ry=\"3.5\" fill=\"currentColor\"></ellipse> <ellipse cx=\"20\" cy=\"15.5\" rx=\"12\" ry=\"2.6\" fill=\"currentColor\"></ellipse> <ellipse cx=\"42\" cy=\"16\" rx=\"11\" ry=\"2.4\" fill=\"currentColor\"></ellipse></g> <g transform=\"translate(1120, 26)\"><path d=\"M12 46 L14 28 L18 28 L26 8 L30 7 L29 10 L22 28 L28 31 L27 46 L25 46 L25 34 L16 33 L14 46 Z\" fill=\"currentColor\"></path></g></svg></div><div class=\"site-footer__inner\"><div class=\"site-footer__col\"><p class=\"site-footer__title\">JAMBO · FIELD ARCHIVE</p><p class=\"site-footer__note\">Compiled from <a href=\"https://www.gbif.org\" rel=\"noopener\">GBIF</a> biological occurrences and <a href=\"https://open-meteo.com\" rel=\"noopener\">Open-Meteo</a> atmospheric archives. All photographic plates remain the property of the observing naturalists.</p></div><div class=\"site-footer__col\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = components.SnorkellingHippo().Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 17, "</div><nav aria-label=\"Footer\"><ul><li><a href=\"/\">Field Index</a></li><li><a href=\"/#sightings\">Specimens</a></li><li><a href=\"/gallery\">Contact Sheet</a></li><li><a href=\"/spot\">Bushcraft</a></li></ul></nav></div></footer>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = components.SafariPassport().Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -159,12 +175,12 @@ func Base(props BaseProps) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		if props.Map {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 17, "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js\" integrity=\"sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==\" crossorigin=\"anonymous\" referrerpolicy=\"no-referrer\" defer></script> <script src=\"/assets/js/map.js\" defer></script>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 18, "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js\" integrity=\"sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==\" crossorigin=\"anonymous\" referrerpolicy=\"no-referrer\" defer></script> <script src=\"/assets/js/map.js\" defer></script>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 18, "<script src=\"/assets/js/filter.js\" defer></script><script src=\"/assets/js/lightbox.js\" defer></script><script src=\"/assets/js/app.js\" defer></script></body></html>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 19, "<script src=\"/assets/js/filter.js\" defer></script><script src=\"/assets/js/lightbox.js\" defer></script><script src=\"/assets/js/playful.js\" defer></script><script src=\"/assets/js/app.js\" defer></script></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -1,4 +1,4 @@
-// Golden Hour: the header's frost, the banner slideshow and the photo strips.
+// Jambo: the header's frost, the banner slideshow and the photo strips.
 // Everything here is an extra: without it the page still reads top to bottom.
 
 (function () {
@@ -65,6 +65,15 @@
 		if (pause) pause.addEventListener('click', function () {
 			setPaused(!paused);
 		});
+		caps.forEach(function (cap, idx) {
+			cap.addEventListener('click', function (e) {
+				if (idx !== current) {
+					e.preventDefault();
+					show(idx);
+					schedule();
+				}
+			});
+		});
 
 		// Hovering or tabbing into the banner holds the slide still while it's read.
 		hero.addEventListener('pointerenter', function () {
@@ -113,5 +122,23 @@
 			step(1);
 		});
 		controls.hidden = false;
+	});
+
+	// View switcher: Polaroid Board vs Field Ledger
+	document.querySelectorAll('.view-switch-tray').forEach(function (tray) {
+		const journal = document.getElementById('sightings');
+		if (!journal) return;
+		const buttons = tray.querySelectorAll('[data-view-target]');
+		buttons.forEach(function (btn) {
+			btn.addEventListener('click', function () {
+				const mode = btn.getAttribute('data-view-target');
+				journal.setAttribute('data-view', mode);
+				buttons.forEach(function (b) {
+					const active = b === btn;
+					b.classList.toggle('is-active', active);
+					b.setAttribute('aria-pressed', String(active));
+				});
+			});
+		});
 	});
 })();

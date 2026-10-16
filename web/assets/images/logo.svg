@@ -1,12 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-	<clipPath id="tile"><rect width="64" height="64" rx="16"/></clipPath>
-	<g clip-path="url(#tile)">
-		<rect width="64" height="64" fill="#2A1715"/>
-		<circle cx="32" cy="45" r="19" fill="#F07A4A"/>
-		<rect y="45" width="64" height="19" fill="#120B0A"/>
-		<path fill="#120B0A" d="M30.6 45.5 31.4 33.5 24.5 27.6h3l4.6 3.6 1.4-3.4h2.2l-1.6 4.4 4.9-4.6h3l-7.2 6.4.4 11.5z"/>
-		<ellipse cx="33" cy="26.2" rx="22" ry="4.2" fill="#120B0A"/>
-		<ellipse cx="26.5" cy="22.6" rx="11" ry="3.4" fill="#120B0A"/>
-		<ellipse cx="41" cy="23.4" rx="9" ry="3" fill="#120B0A"/>
+	<defs>
+		<clipPath id="jambo-badge">
+			<rect width="64" height="64" rx="16"/>
+		</clipPath>
+	</defs>
+	<g clip-path="url(#jambo-badge)">
+		<!-- Warm Savanna Sky & Sun -->
+		<rect width="64" height="64" fill="#1F3B2C"/>
+		<circle cx="34" cy="36" r="20" fill="#E89923"/>
+		<circle cx="34" cy="36" r="14" fill="#F6C453"/>
+		<!-- Terracotta Horizon & Savanna Hills -->
+		<path d="M0 44 Q18 39 36 44 T64 43 L64 64 L0 64 Z" fill="#C85219"/>
+		<rect y="50" width="64" height="14" fill="#18130E"/>
+		<!-- Iconic East African Flat-Top Acacia Silhouette -->
+		<path fill="#18130E" d="M29 51 L30.5 34 L21 26.5 L24.5 26.5 L30.8 31.2 L32.2 26 L34.8 26 L33.2 31.8 L40.5 25.5 L44 25.5 L33.5 34.2 L34.5 51 Z"/>
+		<ellipse cx="32" cy="24.5" rx="22" ry="3.8" fill="#18130E"/>
+		<ellipse cx="23" cy="21" rx="11" ry="3" fill="#18130E"/>
+		<ellipse cx="42" cy="21.5" rx="10" ry="2.8" fill="#18130E"/>
 	</g>
 </svg>
