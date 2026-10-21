@@ -27,6 +27,69 @@ templ FlockOfBirds() {
 	</div>
 }
 
+templ SavannaSky() {
+	<div class="savanna-sky" data-savanna-sky aria-hidden="true">
+		<!-- 4 Atmospheric Savanna Sky Dome Layers (Crossfaded by the built-in solar cycle) -->
+		<div class="savanna-sky__layer savanna-sky__layer--dawn"></div>
+		<div class="savanna-sky__layer savanna-sky__layer--day"></div>
+		<div class="savanna-sky__layer savanna-sky__layer--dusk"></div>
+		<div class="savanna-sky__layer savanna-sky__layer--night"></div>
+
+		<!-- Celestial Cosmos: Milky Way Band, CSS Starfield Fallback & Interactive Twinkling Star Canvas -->
+		<div class="savanna-sky__cosmos">
+			<div class="savanna-sky__milkyway"></div>
+			<div class="savanna-sky__stars-css"></div>
+			<canvas class="savanna-sky__canvas" data-sky-canvas></canvas>
+		</div>
+
+		<!-- Celestial Bodies: Equatorial Sun Corona & Savanna Crescent Moon -->
+		<div class="savanna-sky__celestial">
+			<div class="savanna-sky__sun" data-sky-sun></div>
+			<div class="savanna-sky__moon" data-sky-moon>
+				<svg viewBox="0 0 64 64" width="44" height="44">
+					<defs>
+						<radialGradient id="moon-glow" cx="50%" cy="50%" r="50%">
+							<stop offset="0%" stop-color="#FFFDF5" stop-opacity="0.95"></stop>
+							<stop offset="55%" stop-color="#DCEBFF" stop-opacity="0.35"></stop>
+							<stop offset="100%" stop-color="#8AB4F8" stop-opacity="0"></stop>
+						</radialGradient>
+					</defs>
+					<circle cx="32" cy="32" r="30" fill="url(#moon-glow)"></circle>
+					<path d="M36 16 A16 16 0 1 0 48 42 A13.5 13.5 0 1 1 36 16 Z" fill="#FFFDF6"></path>
+				</svg>
+			</div>
+		</div>
+
+		<!-- Slight Hints of Savanna Clouds (Zero-filter composite-only SVG cloud wisps) -->
+		<div class="savanna-sky__clouds">
+			<div class="savanna-sky__cloud-track savanna-sky__cloud-track--high">
+				<svg class="savanna-sky__cloud-svg" viewBox="0 0 1600 320" preserveAspectRatio="none">
+					<path class="cloud-fill-top" d="M80 95 Q190 62 340 82 T620 76 T890 92 Q740 112 520 106 T180 108 Z"></path>
+					<path class="cloud-fill-under" d="M130 104 Q280 92 470 100 T840 98 Q680 118 420 114 T130 104 Z"></path>
+					<path class="cloud-fill-top" d="M980 68 Q1120 42 1290 60 T1540 72 Q1410 92 1220 86 T980 68 Z"></path>
+					<path class="cloud-fill-under" d="M1020 78 Q1180 68 1360 76 T1520 82 Q1350 96 1160 92 Z"></path>
+				</svg>
+			</div>
+
+			<div class="savanna-sky__cloud-track savanna-sky__cloud-track--mid">
+				<svg class="savanna-sky__cloud-svg" viewBox="0 0 1600 360" preserveAspectRatio="none">
+					<path class="cloud-fill-top" d="M220 168 C265 138, 340 132, 410 152 C460 128, 550 130, 610 156 C665 146, 730 154, 770 174 C640 186, 380 186, 220 168 Z"></path>
+					<path class="cloud-fill-under" d="M250 172 C370 164, 560 164, 750 176 C610 192, 390 190, 250 172 Z"></path>
+					<path class="cloud-fill-top" d="M1060 142 C1110 116, 1195 114, 1265 134 C1320 118, 1395 124, 1450 148 C1340 162, 1180 160, 1060 142 Z"></path>
+					<path class="cloud-fill-under" d="M1085 146 C1190 140, 1330 142, 1435 152 C1320 166, 1185 164, 1085 146 Z"></path>
+				</svg>
+			</div>
+
+			<div class="savanna-sky__cloud-track savanna-sky__cloud-track--low">
+				<svg class="savanna-sky__cloud-svg" viewBox="0 0 1600 400" preserveAspectRatio="none">
+					<path class="cloud-fill-top" d="M40 245 Q210 218 420 236 T820 232 Q640 256 380 254 T40 245 Z"></path>
+					<path class="cloud-fill-under" d="M850 262 Q1060 234 1280 252 T1580 248 Q1380 272 1120 270 T850 262 Z"></path>
+				</svg>
+			</div>
+		</div>
+	</div>
+}
+
 templ MonkeyVine() {
 	<div class="safari-scout" data-monkey tabindex="0" role="button" aria-label="Jambo Field Scout. Click for a real East African wildlife field tip.">
 		<div class="safari-scout__avatar">
@@ -46,7 +109,7 @@ templ MonkeyVine() {
 		</div>
 		<div class="monkey__bubble">
 			<p class="monkey__bubble-tag">Ranger Field Note</p>
-			<span data-monkey-text>Jambo! Try switching the Savanna Sky Dial in the top bar from Daylight to Night Patrol.</span>
+			<span data-monkey-text>Jambo! Watch the savanna sky overhead cycle naturally through crimson dawn, sunlit day, fiery dusk, and starry night.</span>
 		</div>
 	</div>
 }
@@ -105,7 +168,7 @@ templ SafariPassport() {
 				<div>
 					<p class="passport-book__kicker">REPUBLIC OF KENYA &amp; EAST AFRICAN BIOMES</p>
 					<h2 id="passport-title" class="passport-book__title">Jambo Ranger Field Passport</h2>
-					<p class="passport-book__sub">Collect official ink stamps as you explore wildlife sightings, test the sky dial, and identify silhouettes in the tall grass.</p>
+					<p class="passport-book__sub">Collect official ink stamps as you explore wildlife sightings, witness the living savanna sky, and identify silhouettes in the tall grass.</p>
 				</div>
 				<button type="button" class="passport-book__close press" data-passport-close aria-label="Close passport">×</button>
 			</header>
@@ -114,14 +177,14 @@ templ SafariPassport() {
 					<div class="passport-stamp">
 						<span class="passport-stamp__ring">CIRCADIAN SKY</span>
 						<strong>Sky Watcher</strong>
-						<small>Shift the Savanna Sky Dial</small>
+						<small>Witness the Savanna Sky &amp; Storks</small>
 					</div>
 				</div>
 				<div class="passport-slot" data-stamp-slot="meerkat">
 					<div class="passport-stamp">
 						<span class="passport-stamp__ring">SAVANNA SENTRY</span>
 						<strong>Keen Binoculars</strong>
-						<small>Spot a hidden creature on the board</small>
+						<small>Consult the Ranger Field Scout</small>
 					</div>
 				</div>
 				<div class="passport-slot" data-stamp-slot="chameleon">

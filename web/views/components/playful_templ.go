@@ -37,7 +37,7 @@ func FlockOfBirds() templ.Component {
 	})
 }
 
-func MonkeyVine() templ.Component {
+func SavannaSky() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -58,7 +58,36 @@ func MonkeyVine() templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<div class=\"safari-scout\" data-monkey tabindex=\"0\" role=\"button\" aria-label=\"Jambo Field Scout. Click for a real East African wildlife field tip.\"><div class=\"safari-scout__avatar\"><svg viewBox=\"0 0 48 48\" width=\"38\" height=\"38\" aria-hidden=\"true\"><!-- Ranger Hat & Binoculars Emblem --><circle cx=\"24\" cy=\"24\" r=\"22\" fill=\"var(--surface-elevated)\" stroke=\"var(--accent)\" stroke-width=\"2\"></circle> <path d=\"M10 22 C14 13, 34 13, 38 22 Z\" fill=\"#C88A4B\"></path> <ellipse cx=\"24\" cy=\"22\" rx=\"18\" ry=\"3.5\" fill=\"#A66C32\"></ellipse> <rect x=\"15\" y=\"19.5\" width=\"18\" height=\"2.2\" rx=\"1\" fill=\"#C85219\"></rect><!-- Binocular lenses with tracking pupils --><circle cx=\"18.5\" cy=\"30\" r=\"6\" fill=\"#233229\" stroke=\"#D99316\" stroke-width=\"1.8\"></circle> <circle cx=\"29.5\" cy=\"30\" r=\"6\" fill=\"#233229\" stroke=\"#D99316\" stroke-width=\"1.8\"></circle> <path d=\"M23.5 29 L24.5 29\" stroke=\"#D99316\" stroke-width=\"2.5\"></path> <circle class=\"monkey__eye\" cx=\"18.5\" cy=\"30\" r=\"2.2\" fill=\"#F6C453\"></circle> <circle class=\"monkey__eye\" cx=\"29.5\" cy=\"30\" r=\"2.2\" fill=\"#F6C453\"></circle></svg></div><div class=\"monkey__bubble\"><p class=\"monkey__bubble-tag\">Ranger Field Note</p><span data-monkey-text>Jambo! Try switching the Savanna Sky Dial in the top bar from Daylight to Night Patrol.</span></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<div class=\"savanna-sky\" data-savanna-sky aria-hidden=\"true\"><!-- 4 Atmospheric Savanna Sky Dome Layers (Crossfaded by the built-in solar cycle) --><div class=\"savanna-sky__layer savanna-sky__layer--dawn\"></div><div class=\"savanna-sky__layer savanna-sky__layer--day\"></div><div class=\"savanna-sky__layer savanna-sky__layer--dusk\"></div><div class=\"savanna-sky__layer savanna-sky__layer--night\"></div><!-- Celestial Cosmos: Milky Way Band, CSS Starfield Fallback & Interactive Twinkling Star Canvas --><div class=\"savanna-sky__cosmos\"><div class=\"savanna-sky__milkyway\"></div><div class=\"savanna-sky__stars-css\"></div><canvas class=\"savanna-sky__canvas\" data-sky-canvas></canvas></div><!-- Celestial Bodies: Equatorial Sun Corona & Savanna Crescent Moon --><div class=\"savanna-sky__celestial\"><div class=\"savanna-sky__sun\" data-sky-sun></div><div class=\"savanna-sky__moon\" data-sky-moon><svg viewBox=\"0 0 64 64\" width=\"44\" height=\"44\"><defs><radialGradient id=\"moon-glow\" cx=\"50%\" cy=\"50%\" r=\"50%\"><stop offset=\"0%\" stop-color=\"#FFFDF5\" stop-opacity=\"0.95\"></stop> <stop offset=\"55%\" stop-color=\"#DCEBFF\" stop-opacity=\"0.35\"></stop> <stop offset=\"100%\" stop-color=\"#8AB4F8\" stop-opacity=\"0\"></stop></radialGradient></defs> <circle cx=\"32\" cy=\"32\" r=\"30\" fill=\"url(#moon-glow)\"></circle> <path d=\"M36 16 A16 16 0 1 0 48 42 A13.5 13.5 0 1 1 36 16 Z\" fill=\"#FFFDF6\"></path></svg></div></div><!-- Slight Hints of Savanna Clouds (Zero-filter composite-only SVG cloud wisps) --><div class=\"savanna-sky__clouds\"><div class=\"savanna-sky__cloud-track savanna-sky__cloud-track--high\"><svg class=\"savanna-sky__cloud-svg\" viewBox=\"0 0 1600 320\" preserveAspectRatio=\"none\"><path class=\"cloud-fill-top\" d=\"M80 95 Q190 62 340 82 T620 76 T890 92 Q740 112 520 106 T180 108 Z\"></path> <path class=\"cloud-fill-under\" d=\"M130 104 Q280 92 470 100 T840 98 Q680 118 420 114 T130 104 Z\"></path> <path class=\"cloud-fill-top\" d=\"M980 68 Q1120 42 1290 60 T1540 72 Q1410 92 1220 86 T980 68 Z\"></path> <path class=\"cloud-fill-under\" d=\"M1020 78 Q1180 68 1360 76 T1520 82 Q1350 96 1160 92 Z\"></path></svg></div><div class=\"savanna-sky__cloud-track savanna-sky__cloud-track--mid\"><svg class=\"savanna-sky__cloud-svg\" viewBox=\"0 0 1600 360\" preserveAspectRatio=\"none\"><path class=\"cloud-fill-top\" d=\"M220 168 C265 138, 340 132, 410 152 C460 128, 550 130, 610 156 C665 146, 730 154, 770 174 C640 186, 380 186, 220 168 Z\"></path> <path class=\"cloud-fill-under\" d=\"M250 172 C370 164, 560 164, 750 176 C610 192, 390 190, 250 172 Z\"></path> <path class=\"cloud-fill-top\" d=\"M1060 142 C1110 116, 1195 114, 1265 134 C1320 118, 1395 124, 1450 148 C1340 162, 1180 160, 1060 142 Z\"></path> <path class=\"cloud-fill-under\" d=\"M1085 146 C1190 140, 1330 142, 1435 152 C1320 166, 1185 164, 1085 146 Z\"></path></svg></div><div class=\"savanna-sky__cloud-track savanna-sky__cloud-track--low\"><svg class=\"savanna-sky__cloud-svg\" viewBox=\"0 0 1600 400\" preserveAspectRatio=\"none\"><path class=\"cloud-fill-top\" d=\"M40 245 Q210 218 420 236 T820 232 Q640 256 380 254 T40 245 Z\"></path> <path class=\"cloud-fill-under\" d=\"M850 262 Q1060 234 1280 252 T1580 248 Q1380 272 1120 270 T850 262 Z\"></path></svg></div></div></div>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		return nil
+	})
+}
+
+func MonkeyVine() templ.Component {
+	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
+			return templ_7745c5c3_CtxErr
+		}
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+		if !templ_7745c5c3_IsBuffer {
+			defer func() {
+				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err == nil {
+					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+				}
+			}()
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var3 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var3 == nil {
+			templ_7745c5c3_Var3 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<div class=\"safari-scout\" data-monkey tabindex=\"0\" role=\"button\" aria-label=\"Jambo Field Scout. Click for a real East African wildlife field tip.\"><div class=\"safari-scout__avatar\"><svg viewBox=\"0 0 48 48\" width=\"38\" height=\"38\" aria-hidden=\"true\"><!-- Ranger Hat & Binoculars Emblem --><circle cx=\"24\" cy=\"24\" r=\"22\" fill=\"var(--surface-elevated)\" stroke=\"var(--accent)\" stroke-width=\"2\"></circle> <path d=\"M10 22 C14 13, 34 13, 38 22 Z\" fill=\"#C88A4B\"></path> <ellipse cx=\"24\" cy=\"22\" rx=\"18\" ry=\"3.5\" fill=\"#A66C32\"></ellipse> <rect x=\"15\" y=\"19.5\" width=\"18\" height=\"2.2\" rx=\"1\" fill=\"#C85219\"></rect><!-- Binocular lenses with tracking pupils --><circle cx=\"18.5\" cy=\"30\" r=\"6\" fill=\"#233229\" stroke=\"#D99316\" stroke-width=\"1.8\"></circle> <circle cx=\"29.5\" cy=\"30\" r=\"6\" fill=\"#233229\" stroke=\"#D99316\" stroke-width=\"1.8\"></circle> <path d=\"M23.5 29 L24.5 29\" stroke=\"#D99316\" stroke-width=\"2.5\"></path> <circle class=\"monkey__eye\" cx=\"18.5\" cy=\"30\" r=\"2.2\" fill=\"#F6C453\"></circle> <circle class=\"monkey__eye\" cx=\"29.5\" cy=\"30\" r=\"2.2\" fill=\"#F6C453\"></circle></svg></div><div class=\"monkey__bubble\"><p class=\"monkey__bubble-tag\">Ranger Field Note</p><span data-monkey-text>Jambo! Watch the savanna sky overhead cycle naturally through crimson dawn, sunlit day, fiery dusk, and starry night.</span></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -82,12 +111,12 @@ func Chameleon() templ.Component {
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var3 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var3 == nil {
-			templ_7745c5c3_Var3 = templ.NopComponent
+		templ_7745c5c3_Var4 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var4 == nil {
+			templ_7745c5c3_Var4 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<button type=\"button\" class=\"chameleon-spot press\" data-chameleon title=\"Click to shift camouflage and collect the Chameleon stamp\"><svg class=\"chameleon-svg\" viewBox=\"0 0 32 24\" aria-hidden=\"true\"><path d=\"M4 16 C2 12, 6 6, 14 6 C22 6, 26 10, 28 14 C30 18, 26 22, 20 20 C18 19, 16 18, 14 18 C10 18, 8 20, 5 21 C3 21, 2 18, 4 16 Z\"></path> <path d=\"M26 13 C27 12, 29 13, 29 15\" stroke=\"currentColor\" stroke-width=\"1.5\" fill=\"none\"></path> <circle cx=\"23\" cy=\"10\" r=\"2.5\" fill=\"#1C1110\"></circle> <circle cx=\"23.5\" cy=\"9.5\" r=\"1\" fill=\"#FFF\"></circle> <path d=\"M6 17 C2 19, 0 16, 2 13 C4 11, 7 12, 6 15\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"></path></svg> <span>Jackson’s Chameleon</span></button>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<button type=\"button\" class=\"chameleon-spot press\" data-chameleon title=\"Click to shift camouflage and collect the Chameleon stamp\"><svg class=\"chameleon-svg\" viewBox=\"0 0 32 24\" aria-hidden=\"true\"><path d=\"M4 16 C2 12, 6 6, 14 6 C22 6, 26 10, 28 14 C30 18, 26 22, 20 20 C18 19, 16 18, 14 18 C10 18, 8 20, 5 21 C3 21, 2 18, 4 16 Z\"></path> <path d=\"M26 13 C27 12, 29 13, 29 15\" stroke=\"currentColor\" stroke-width=\"1.5\" fill=\"none\"></path> <circle cx=\"23\" cy=\"10\" r=\"2.5\" fill=\"#1C1110\"></circle> <circle cx=\"23.5\" cy=\"9.5\" r=\"1\" fill=\"#FFF\"></circle> <path d=\"M6 17 C2 19, 0 16, 2 13 C4 11, 7 12, 6 15\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"></path></svg> <span>Jackson’s Chameleon</span></button>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -111,12 +140,12 @@ func Meerkat() templ.Component {
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var4 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var4 == nil {
-			templ_7745c5c3_Var4 = templ.NopComponent
+		templ_7745c5c3_Var5 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var5 == nil {
+			templ_7745c5c3_Var5 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<button type=\"button\" class=\"meerkat-peeker\" data-meerkat title=\"Curious Meerkat Sentry! Click to stamp your Safari Passport\" aria-label=\"Spot the curious meerkat sentry\"><svg viewBox=\"0 0 32 40\" aria-hidden=\"true\"><ellipse cx=\"16\" cy=\"30\" rx=\"8\" ry=\"14\" fill=\"#C49A6C\"></ellipse> <ellipse cx=\"16\" cy=\"32\" rx=\"5\" ry=\"9\" fill=\"#E8D1B5\"></ellipse> <circle cx=\"16\" cy=\"14\" r=\"8\" fill=\"#C49A6C\"></circle> <ellipse cx=\"12.5\" cy=\"13\" rx=\"3\" ry=\"2\" fill=\"#4A3425\"></ellipse> <ellipse cx=\"19.5\" cy=\"13\" rx=\"3\" ry=\"2\" fill=\"#4A3425\"></ellipse> <circle cx=\"12.5\" cy=\"13\" r=\"1.2\" fill=\"#FFF\"></circle> <circle cx=\"19.5\" cy=\"13\" r=\"1.2\" fill=\"#FFF\"></circle> <ellipse cx=\"16\" cy=\"16.5\" rx=\"2.5\" ry=\"1.8\" fill=\"#E8D1B5\"></ellipse> <circle cx=\"16\" cy=\"16\" r=\"1\" fill=\"#1C1110\"></circle> <circle cx=\"8.5\" cy=\"11\" r=\"2\" fill=\"#4A3425\"></circle> <circle cx=\"23.5\" cy=\"11\" r=\"2\" fill=\"#4A3425\"></circle></svg></button>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<button type=\"button\" class=\"meerkat-peeker\" data-meerkat title=\"Curious Meerkat Sentry! Click to stamp your Safari Passport\" aria-label=\"Spot the curious meerkat sentry\"><svg viewBox=\"0 0 32 40\" aria-hidden=\"true\"><ellipse cx=\"16\" cy=\"30\" rx=\"8\" ry=\"14\" fill=\"#C49A6C\"></ellipse> <ellipse cx=\"16\" cy=\"32\" rx=\"5\" ry=\"9\" fill=\"#E8D1B5\"></ellipse> <circle cx=\"16\" cy=\"14\" r=\"8\" fill=\"#C49A6C\"></circle> <ellipse cx=\"12.5\" cy=\"13\" rx=\"3\" ry=\"2\" fill=\"#4A3425\"></ellipse> <ellipse cx=\"19.5\" cy=\"13\" rx=\"3\" ry=\"2\" fill=\"#4A3425\"></ellipse> <circle cx=\"12.5\" cy=\"13\" r=\"1.2\" fill=\"#FFF\"></circle> <circle cx=\"19.5\" cy=\"13\" r=\"1.2\" fill=\"#FFF\"></circle> <ellipse cx=\"16\" cy=\"16.5\" rx=\"2.5\" ry=\"1.8\" fill=\"#E8D1B5\"></ellipse> <circle cx=\"16\" cy=\"16\" r=\"1\" fill=\"#1C1110\"></circle> <circle cx=\"8.5\" cy=\"11\" r=\"2\" fill=\"#4A3425\"></circle> <circle cx=\"23.5\" cy=\"11\" r=\"2\" fill=\"#4A3425\"></circle></svg></button>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -140,12 +169,12 @@ func SnorkellingHippo() templ.Component {
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var5 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var5 == nil {
-			templ_7745c5c3_Var5 = templ.NopComponent
+		templ_7745c5c3_Var6 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var6 == nil {
+			templ_7745c5c3_Var6 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<button type=\"button\" class=\"hippo-footer-peeker press\" data-hippo title=\"Spot the Nile Hippo at the waterhole!\"><svg class=\"hippo-svg\" viewBox=\"0 0 36 24\" aria-hidden=\"true\"><path d=\"M0 18 Q9 15, 18 18 T36 18\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"></path> <ellipse cx=\"18\" cy=\"16\" rx=\"12\" ry=\"8\" fill=\"#6B7C8C\"></ellipse> <circle cx=\"11\" cy=\"9\" r=\"3.5\" fill=\"#6B7C8C\"></circle> <circle cx=\"25\" cy=\"9\" r=\"3.5\" fill=\"#6B7C8C\"></circle> <circle cx=\"11\" cy=\"8.5\" r=\"1.5\" fill=\"#1C1110\"></circle> <circle cx=\"25\" cy=\"8.5\" r=\"1.5\" fill=\"#1C1110\"></circle> <circle cx=\"14\" cy=\"16\" r=\"1.5\" fill=\"#424F5C\"></circle> <circle cx=\"22\" cy=\"16\" r=\"1.5\" fill=\"#424F5C\"></circle></svg> <span>Nile Hippo Waterhole</span></button>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<button type=\"button\" class=\"hippo-footer-peeker press\" data-hippo title=\"Spot the Nile Hippo at the waterhole!\"><svg class=\"hippo-svg\" viewBox=\"0 0 36 24\" aria-hidden=\"true\"><path d=\"M0 18 Q9 15, 18 18 T36 18\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"></path> <ellipse cx=\"18\" cy=\"16\" rx=\"12\" ry=\"8\" fill=\"#6B7C8C\"></ellipse> <circle cx=\"11\" cy=\"9\" r=\"3.5\" fill=\"#6B7C8C\"></circle> <circle cx=\"25\" cy=\"9\" r=\"3.5\" fill=\"#6B7C8C\"></circle> <circle cx=\"11\" cy=\"8.5\" r=\"1.5\" fill=\"#1C1110\"></circle> <circle cx=\"25\" cy=\"8.5\" r=\"1.5\" fill=\"#1C1110\"></circle> <circle cx=\"14\" cy=\"16\" r=\"1.5\" fill=\"#424F5C\"></circle> <circle cx=\"22\" cy=\"16\" r=\"1.5\" fill=\"#424F5C\"></circle></svg> <span>Nile Hippo Waterhole</span></button>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -169,12 +198,12 @@ func SafariPassport() templ.Component {
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var6 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var6 == nil {
-			templ_7745c5c3_Var6 = templ.NopComponent
+		templ_7745c5c3_Var7 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var7 == nil {
+			templ_7745c5c3_Var7 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<dialog id=\"safari-passport\" class=\"passport-modal\" aria-labelledby=\"passport-title\"><div class=\"passport-book\"><header class=\"passport-book__head\"><div><p class=\"passport-book__kicker\">REPUBLIC OF KENYA &amp; EAST AFRICAN BIOMES</p><h2 id=\"passport-title\" class=\"passport-book__title\">Jambo Ranger Field Passport</h2><p class=\"passport-book__sub\">Collect official ink stamps as you explore wildlife sightings, test the sky dial, and identify silhouettes in the tall grass.</p></div><button type=\"button\" class=\"passport-book__close press\" data-passport-close aria-label=\"Close passport\">×</button></header><div class=\"passport-grid\" data-passport-grid><div class=\"passport-slot\" data-stamp-slot=\"sky_watcher\"><div class=\"passport-stamp\"><span class=\"passport-stamp__ring\">CIRCADIAN SKY</span> <strong>Sky Watcher</strong> <small>Shift the Savanna Sky Dial</small></div></div><div class=\"passport-slot\" data-stamp-slot=\"meerkat\"><div class=\"passport-stamp\"><span class=\"passport-stamp__ring\">SAVANNA SENTRY</span> <strong>Keen Binoculars</strong> <small>Spot a hidden creature on the board</small></div></div><div class=\"passport-slot\" data-stamp-slot=\"chameleon\"><div class=\"passport-stamp\"><span class=\"passport-stamp__ring\">CANOPY MASTER</span> <strong>Jackson’s Chameleon</strong> <small>Trigger camouflage in the filter bar</small></div></div><div class=\"passport-slot\" data-stamp-slot=\"hippo\"><div class=\"passport-stamp\"><span class=\"passport-stamp__ring\">MARA RIVER</span> <strong>Waterhole Tracker</strong> <small>Visit the Nile Hippo at the waterhole</small></div></div><div class=\"passport-slot\" data-stamp-slot=\"silhouette_ranger\"><div class=\"passport-stamp\"><span class=\"passport-stamp__ring\">BUSH TRACKER</span> <strong>Silhouette Ranger</strong> <small>Identify a mystery animal on Spot</small></div></div><div class=\"passport-slot\" data-stamp-slot=\"field_biologist\"><div class=\"passport-stamp\"><span class=\"passport-stamp__ring\">OPTICAL LAB</span> <strong>Field Biologist</strong> <small>Extract habitat colors from a photo</small></div></div></div><footer class=\"passport-book__foot\"><span data-passport-summary>0 of 6 expedition stamps collected</span> <button type=\"button\" class=\"btn-link\" data-passport-reset>Reset stamps</button></footer></div></dialog>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "<dialog id=\"safari-passport\" class=\"passport-modal\" aria-labelledby=\"passport-title\"><div class=\"passport-book\"><header class=\"passport-book__head\"><div><p class=\"passport-book__kicker\">REPUBLIC OF KENYA &amp; EAST AFRICAN BIOMES</p><h2 id=\"passport-title\" class=\"passport-book__title\">Jambo Ranger Field Passport</h2><p class=\"passport-book__sub\">Collect official ink stamps as you explore wildlife sightings, witness the living savanna sky, and identify silhouettes in the tall grass.</p></div><button type=\"button\" class=\"passport-book__close press\" data-passport-close aria-label=\"Close passport\">×</button></header><div class=\"passport-grid\" data-passport-grid><div class=\"passport-slot\" data-stamp-slot=\"sky_watcher\"><div class=\"passport-stamp\"><span class=\"passport-stamp__ring\">CIRCADIAN SKY</span> <strong>Sky Watcher</strong> <small>Witness the Savanna Sky &amp; Storks</small></div></div><div class=\"passport-slot\" data-stamp-slot=\"meerkat\"><div class=\"passport-stamp\"><span class=\"passport-stamp__ring\">SAVANNA SENTRY</span> <strong>Keen Binoculars</strong> <small>Consult the Ranger Field Scout</small></div></div><div class=\"passport-slot\" data-stamp-slot=\"chameleon\"><div class=\"passport-stamp\"><span class=\"passport-stamp__ring\">CANOPY MASTER</span> <strong>Jackson’s Chameleon</strong> <small>Trigger camouflage in the filter bar</small></div></div><div class=\"passport-slot\" data-stamp-slot=\"hippo\"><div class=\"passport-stamp\"><span class=\"passport-stamp__ring\">MARA RIVER</span> <strong>Waterhole Tracker</strong> <small>Visit the Nile Hippo at the waterhole</small></div></div><div class=\"passport-slot\" data-stamp-slot=\"silhouette_ranger\"><div class=\"passport-stamp\"><span class=\"passport-stamp__ring\">BUSH TRACKER</span> <strong>Silhouette Ranger</strong> <small>Identify a mystery animal on Spot</small></div></div><div class=\"passport-slot\" data-stamp-slot=\"field_biologist\"><div class=\"passport-stamp\"><span class=\"passport-stamp__ring\">OPTICAL LAB</span> <strong>Field Biologist</strong> <small>Extract habitat colors from a photo</small></div></div></div><footer class=\"passport-book__foot\"><span data-passport-summary>0 of 6 expedition stamps collected</span> <button type=\"button\" class=\"btn-link\" data-passport-reset>Reset stamps</button></footer></div></dialog>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -24,11 +24,28 @@ window.addEventListener(
 
 export function mount(name, setup) {
 	document.querySelectorAll('canvas.three-scene[data-scene="' + name + '"]').forEach(function (canvas) {
-		try {
-			start(canvas, setup);
-		} catch (err) {
-			// No WebGL, or the scene threw: the parent's CSS background stays.
-			console.warn('threejs: ' + name + ' not shown', err);
+		function init() {
+			try {
+				start(canvas, setup);
+			} catch (err) {
+				// No WebGL, or the scene threw: the parent's CSS background stays.
+				console.warn('threejs: ' + name + ' not shown', err);
+			}
+		}
+
+		if ('IntersectionObserver' in window) {
+			const io = new IntersectionObserver(
+				function (entries) {
+					if (entries[0].isIntersecting) {
+						io.disconnect();
+						init();
+					}
+				},
+				{ rootMargin: '400px 0px' }
+			);
+			io.observe(canvas);
+		} else {
+			init();
 		}
 	});
 }
