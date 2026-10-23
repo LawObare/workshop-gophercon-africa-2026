@@ -125,45 +125,372 @@
 	syncPassportUI();
 
 	/* ==========================================================================
-	   2. Savanna Sky Dial & Circadian Sun Filter
+	   2. Automated 4-Minute Savanna Sky Cycle & Starry Savanna Night Engine
 	   ========================================================================== */
-	function applySkyMode(mode, userInitiated) {
-		if (!['dawn', 'day', 'dusk', 'night'].includes(mode)) mode = 'day';
-		document.documentElement.setAttribute('data-sky', mode);
+	const CYCLE_MS = 240000; // 4 minutes (240,000ms) for a full 24-hour savanna cycle
+	const PHASE_LABELS = {
+		dawn:  'ALFAJIRI // CRIMSON DAWN',
+		day:   'MCHANA // SAVANNA BLUE SKY',
+		dusk:  'MACHWEO // BLOOD-RED DUSK',
+		night: 'USIKU // STARRY SAVANNA NIGHT'
+	};
+	const PHASE_CENTERS = {
+		dawn: 0.125,
+		day: 0.375,
+		dusk: 0.625,
+		night: 0.875
+	};
+
+	// Ensure .savanna-sky has the full upgraded structure (including star canvas,
+	// SVG clouds, and acacia horizon) even if the server binary wasn't restarted.
+	let skyStage = document.querySelector('[data-savanna-sky]');
+	if (!skyStage) {
+		skyStage = document.createElement('div');
+		skyStage.className = 'savanna-sky';
+		skyStage.setAttribute('aria-hidden', 'true');
+		skyStage.setAttribute('data-savanna-sky', '');
+		document.body.prepend(skyStage);
+	}
+	if (!skyStage.querySelector('[data-star-canvas]')) {
+		skyStage.innerHTML = `
+			<div class="savanna-sky__layer savanna-sky__layer--dawn" data-sky-layer="dawn">
+				<div class="savanna-sky__sun savanna-sky__sun--dawn"></div>
+			</div>
+			<div class="savanna-sky__layer savanna-sky__layer--day" data-sky-layer="day">
+				<div class="savanna-sky__sun savanna-sky__sun--day"></div>
+				<div class="savanna-sky__clouds savanna-sky__clouds--near">
+					<svg viewBox="0 0 1600 320" preserveAspectRatio="none">
+						<g fill="rgba(255,255,255,0.72)">
+							<path d="M120 150 Q145 110 190 118 Q225 85 275 108 Q320 98 345 132 Q380 135 375 162 L105 162 Z"/>
+							<path d="M620 115 Q655 75 710 88 Q755 55 820 82 Q870 75 895 112 Q930 118 922 142 L600 142 Z" opacity="0.85"/>
+							<path d="M1180 165 Q1210 128 1260 136 Q1300 105 1355 128 Q1395 122 1418 156 L1165 156 Z" opacity="0.75"/>
+						</g>
+					</svg>
+				</div>
+				<div class="savanna-sky__clouds savanna-sky__clouds--far">
+					<svg viewBox="0 0 1600 320" preserveAspectRatio="none">
+						<g fill="rgba(255,255,255,0.48)">
+							<path d="M340 205 Q375 172 425 182 Q465 158 515 178 Q550 175 568 205 Z"/>
+							<path d="M910 190 Q950 155 1005 168 Q1050 142 1105 166 Q1140 162 1160 190 Z"/>
+						</g>
+					</svg>
+				</div>
+			</div>
+			<div class="savanna-sky__layer savanna-sky__layer--dusk" data-sky-layer="dusk">
+				<div class="savanna-sky__sun savanna-sky__sun--dusk"></div>
+			</div>
+			<div class="savanna-sky__layer savanna-sky__layer--night" data-sky-layer="night">
+				<canvas class="savanna-sky__starcanvas" data-star-canvas></canvas>
+			</div>
+			<div class="savanna-sky__horizon">
+				<svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+					<path d="M0 120 L0 88 L140 76 L310 86 L520 68 L740 84 L980 66 L1230 82 L1440 72 L1440 120 Z" fill="currentColor" opacity="0.28"/>
+					<path d="M0 120 L0 98 L260 90 L620 98 L1040 88 L1440 96 L1440 120 Z" fill="currentColor" opacity="0.65"/>
+					<g transform="translate(110, 32)" fill="currentColor" opacity="0.72">
+						<path d="M36 66 L38 38 L20 26 L25 26 L38 35 L40 23 L43 23 L41 35 L54 25 L59 25 L42 38 L44 66 Z"/>
+						<ellipse cx="40" cy="21" rx="34" ry="4.5"/>
+						<ellipse cx="24" cy="16" rx="18" ry="3.2"/>
+						<ellipse cx="56" cy="17" rx="16" ry="3"/>
+					</g>
+					<g transform="translate(1240, 40)" fill="currentColor" opacity="0.72">
+						<path d="M28 58 L29 34 L16 24 L20 24 L29 31 L31 21 L33 21 L31 31 L42 23 L46 23 L32 34 L33 58 Z"/>
+						<ellipse cx="31" cy="19" rx="26" ry="3.8"/>
+						<ellipse cx="19" cy="15" rx="13" ry="2.6"/>
+						<ellipse cx="43" cy="15.5" rx="12" ry="2.5"/>
+					</g>
+				</svg>
+			</div>
+		`;
+	}
+
+	// Ensure .sky-cycle-hud has the quick-jump preview buttons if not already present
+	const hudEl = document.querySelector('.sky-cycle-hud');
+	if (hudEl && !hudEl.querySelector('.sky-cycle-hud__jumps')) {
+		const jumps = document.createElement('div');
+		jumps.className = 'sky-cycle-hud__jumps';
+		jumps.setAttribute('role', 'group');
+		jumps.innerHTML = `
+			<button type="button" class="sky-cycle-hud__jump" data-sky-jump="dawn">Dawn</button>
+			<button type="button" class="sky-cycle-hud__jump" data-sky-jump="day">Day</button>
+			<button type="button" class="sky-cycle-hud__jump" data-sky-jump="dusk">Dusk</button>
+			<button type="button" class="sky-cycle-hud__jump" data-sky-jump="night">Night</button>
+		`;
+		hudEl.appendChild(jumps);
+	}
+
+	const layerDawn = skyStage.querySelector('.savanna-sky__layer--dawn');
+	const layerDay = skyStage.querySelector('.savanna-sky__layer--day');
+	const layerDusk = skyStage.querySelector('.savanna-sky__layer--dusk');
+	const layerNight = skyStage.querySelector('.savanna-sky__layer--night');
+	const clockEl = document.querySelector('[data-sky-clock]');
+	const phaseEl = document.querySelector('[data-sky-phase]');
+	const progressEl = document.querySelector('[data-sky-progress]');
+
+	// Persistent cycle offset so jumping to a phase or navigating keeps the 4-minute clock smooth
+	let cycleOffsetMs = 0;
+	try {
+		const savedOffset = sessionStorage.getItem('jambo_cycle_offset_ms');
+		if (savedOffset !== null) {
+			cycleOffsetMs = Number(savedOffset) || 0;
+		}
+	} catch (e) {}
+
+	function setSkyPhaseOffset(targetMode) {
+		const center = PHASE_CENTERS[targetMode] ?? 0.125;
+		const currentBase = (Date.now() % CYCLE_MS) / CYCLE_MS;
+		let delta = center - currentBase;
+		if (delta < 0) delta += 1;
+		cycleOffsetMs = Math.round(delta * CYCLE_MS);
 		try {
-			localStorage.setItem('jambo_sky_mode', mode);
+			sessionStorage.setItem('jambo_cycle_offset_ms', String(cycleOffsetMs));
 		} catch (e) {}
+		updateSkyFrame(performance.now());
+	}
 
-		document.querySelectorAll('[data-sky-set]').forEach(function (btn) {
-			const active = btn.getAttribute('data-sky-set') === mode;
-			btn.classList.toggle('is-active', active);
-		});
+	// Smooth circular cosine weight for each of the 4 quadrants around `center` (width = 0.5 of cycle)
+	function phaseWeight(progress, center) {
+		let dist = Math.abs(progress - center);
+		if (dist > 0.5) dist = 1 - dist;
+		if (dist >= 0.28) return 0;
+		return 0.5 * (1 + Math.cos((dist / 0.28) * Math.PI));
+	}
 
-		document.querySelectorAll('[data-circadian-pick]').forEach(function (card) {
-			card.classList.toggle('is-selected', card.getAttribute('data-circadian-pick') === mode);
-		});
+	let lastMode = '';
+	let currentNightOpacity = 0;
 
-		if (userInitiated) {
-			awardStamp('sky_watcher');
+	function updateSkyFrame() {
+		const progress = ((Date.now() + cycleOffsetMs) % CYCLE_MS) / CYCLE_MS; // 0.0 -> 1.0 over 4 minutes
+
+		// Compute smooth continuous weights for all 4 layers (zero dead plateaus!)
+		let wDawn = phaseWeight(progress, 0.125);
+		let wDay = phaseWeight(progress, 0.375);
+		let wDusk = phaseWeight(progress, 0.625);
+		let wNight = phaseWeight(progress, 0.875);
+		const sum = wDawn + wDay + wDusk + wNight || 1;
+		wDawn /= sum;
+		wDay /= sum;
+		wDusk /= sum;
+		wNight /= sum;
+
+		if (layerDawn) layerDawn.style.opacity = wDawn.toFixed(3);
+		if (layerDay) layerDay.style.opacity = wDay.toFixed(3);
+		if (layerDusk) layerDusk.style.opacity = wDusk.toFixed(3);
+		if (layerNight) layerNight.style.opacity = wNight.toFixed(3);
+		currentNightOpacity = wNight;
+
+		const mode = progress < 0.25 ? 'dawn' : progress < 0.5 ? 'day' : progress < 0.75 ? 'dusk' : 'night';
+
+		if (mode !== lastMode) {
+			lastMode = mode;
+			document.documentElement.setAttribute('data-sky', mode);
+			if (phaseEl) {
+				phaseEl.textContent = PHASE_LABELS[mode] || PHASE_LABELS.day;
+			}
+			document.querySelectorAll('[data-sky-jump]').forEach(function (btn) {
+				btn.classList.toggle('is-active', btn.getAttribute('data-sky-jump') === mode);
+			});
+			document.querySelectorAll('[data-circadian-pick]').forEach(function (card) {
+				card.classList.toggle('is-selected', card.getAttribute('data-circadian-pick') === mode);
+			});
+		}
+
+		// Map 0..1 cycle progress to 24h East African Time starting at 05:00 (Alfajiri Dawn)
+		if (clockEl) {
+			const totalMinutes = Math.floor(((progress * 24 + 5) % 24) * 60);
+			const hh = String(Math.floor(totalMinutes / 60)).padStart(2, '0');
+			const mm = String(totalMinutes % 60).padStart(2, '0');
+			clockEl.textContent = hh + ':' + mm + ' EAT';
+		}
+
+		if (progressEl) {
+			progressEl.style.transform = 'scaleX(' + Math.max(0.03, progress).toFixed(3) + ')';
 		}
 	}
 
-	// Initialize active button from current html[data-sky]
-	const initialSky = document.documentElement.getAttribute('data-sky') || 'day';
-	applySkyMode(initialSky, false);
+	// Starry Savanna Night Canvas Engine (260 stars, Milky Way band, Crescent Moon, Shooting Stars)
+	const starCanvas = skyStage.querySelector('[data-star-canvas]');
+	if (starCanvas) {
+		const sctx = starCanvas.getContext('2d');
+		let sw = window.innerWidth;
+		let sh = window.innerHeight;
 
-	document.querySelectorAll('[data-sky-set]').forEach(function (btn) {
+		function resizeStars() {
+			sw = window.innerWidth || 1280;
+			sh = window.innerHeight || 800;
+			starCanvas.width = sw;
+			starCanvas.height = sh;
+		}
+		resizeStars();
+		window.addEventListener('resize', resizeStars, { passive: true });
+
+		const STAR_PALETTE = ['#ffffff', '#fff4dc', '#cfe2ff', '#ffd9a6', '#e8f1ff'];
+		const stars = [];
+		for (let i = 0; i < 260; i++) {
+			// Concentrate extra stars along the diagonal Milky Way band
+			const inMilkyWay = i < 95;
+			const u = Math.random();
+			const v = inMilkyWay
+				? Math.max(0.02, Math.min(0.88, u * 0.72 + (Math.random() - 0.5) * 0.24))
+				: Math.random() * 0.88;
+			stars.push({
+				u: u,
+				v: v,
+				r: i % 19 === 0 ? 2.1 : i % 7 === 0 ? 1.45 : 0.75 + Math.random() * 0.55,
+				color: STAR_PALETTE[i % STAR_PALETTE.length],
+				twinkleSpeed: 1.2 + Math.random() * 2.8,
+				phase: Math.random() * Math.PI * 2,
+				bright: i % 19 === 0
+			});
+		}
+
+		// Pre-render crisp Crescent Moon onto an offscreen sprite so destination-out
+		// carves a pure crescent without punching a dark hole into the sky glow.
+		const moonSprite = document.createElement('canvas');
+		moonSprite.width = moonSprite.height = 120;
+		const mctx = moonSprite.getContext('2d');
+		if (mctx) {
+			mctx.beginPath();
+			mctx.arc(60, 60, 32, 0, Math.PI * 2);
+			mctx.fillStyle = '#fff6de';
+			mctx.fill();
+			mctx.globalCompositeOperation = 'destination-out';
+			mctx.beginPath();
+			mctx.arc(46, 52, 29, 0, Math.PI * 2);
+			mctx.fill();
+		}
+
+		let meteor = { active: false, x: 0, y: 0, vx: 0, vy: 0, life: 0 };
+
+		function drawStarryNight(now) {
+			if (!sctx || currentNightOpacity <= 0.01) return;
+			const t = now * 0.001;
+			sctx.clearRect(0, 0, sw, sh);
+
+			// 1. Diagonal Equatorial Milky Way Glow Band
+			sctx.save();
+			sctx.translate(sw * 0.5, sh * 0.36);
+			sctx.rotate(-0.38);
+			const mwGrad = sctx.createRadialGradient(0, 0, 10, 0, 0, sw * 0.55);
+			mwGrad.addColorStop(0, 'rgba(130, 168, 235, 0.16)');
+			mwGrad.addColorStop(0.5, 'rgba(88, 124, 196, 0.07)');
+			mwGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+			sctx.scale(1.6, 0.32);
+			sctx.fillStyle = mwGrad;
+			sctx.beginPath();
+			sctx.arc(0, 0, sw * 0.55, 0, Math.PI * 2);
+			sctx.fill();
+			sctx.restore();
+
+			// 2. Equatorial Crescent Moon in upper-right savanna sky
+			const mx = sw * 0.82;
+			const my = sh * 0.16;
+			const mr = Math.min(sw, sh) * 0.028;
+			const moonGlow = sctx.createRadialGradient(mx, my, mr * 0.3, mx, my, mr * 3.8);
+			moonGlow.addColorStop(0, 'rgba(255, 244, 214, 0.24)');
+			moonGlow.addColorStop(1, 'rgba(255, 244, 214, 0)');
+			sctx.fillStyle = moonGlow;
+			sctx.beginPath();
+			sctx.arc(mx, my, mr * 3.8, 0, Math.PI * 2);
+			sctx.fill();
+
+			const spriteSize = mr * 3.6;
+			sctx.drawImage(moonSprite, mx - spriteSize / 2, my - spriteSize / 2, spriteSize, spriteSize);
+
+			// 3. 260 Twinkling Stars & Navigation Constellations
+			for (let i = 0; i < stars.length; i++) {
+				const st = stars[i];
+				const sx = st.u * sw;
+				const sy = st.v * sh;
+				const alpha = 0.45 + 0.55 * (0.5 + 0.5 * Math.sin(t * st.twinkleSpeed + st.phase));
+				sctx.globalAlpha = alpha;
+				sctx.fillStyle = st.color;
+				sctx.beginPath();
+				sctx.arc(sx, sy, st.r, 0, Math.PI * 2);
+				sctx.fill();
+
+				if (st.bright) {
+					sctx.globalAlpha = alpha * 0.35;
+					sctx.strokeStyle = st.color;
+					sctx.lineWidth = 0.8;
+					sctx.beginPath();
+					sctx.moveTo(sx - st.r * 3.2, sy);
+					sctx.lineTo(sx + st.r * 3.2, sy);
+					sctx.moveTo(sx, sy - st.r * 3.2);
+					sctx.lineTo(sx, sy + st.r * 3.2);
+					sctx.stroke();
+				}
+			}
+			sctx.globalAlpha = 1;
+
+			// 4. Occasional Savanna Shooting Star
+			if (!meteor.active && Math.random() < 0.015) {
+				meteor.active = true;
+				meteor.x = sw * (0.2 + Math.random() * 0.6);
+				meteor.y = sh * (0.06 + Math.random() * 0.25);
+				meteor.vx = -9 - Math.random() * 6;
+				meteor.vy = 4 + Math.random() * 3;
+				meteor.life = 1.0;
+			}
+			if (meteor.active) {
+				meteor.x += meteor.vx;
+				meteor.y += meteor.vy;
+				meteor.life -= 0.045;
+				if (meteor.life <= 0) {
+					meteor.active = false;
+				} else {
+					const tailGrad = sctx.createLinearGradient(
+						meteor.x, meteor.y,
+						meteor.x - meteor.vx * 6, meteor.y - meteor.vy * 6
+					);
+					tailGrad.addColorStop(0, 'rgba(255, 250, 235, ' + meteor.life.toFixed(2) + ')');
+					tailGrad.addColorStop(1, 'rgba(255, 250, 235, 0)');
+					sctx.strokeStyle = tailGrad;
+					sctx.lineWidth = 1.6;
+					sctx.beginPath();
+					sctx.moveTo(meteor.x, meteor.y);
+					sctx.lineTo(meteor.x - meteor.vx * 6, meteor.y - meteor.vy * 6);
+					sctx.stroke();
+				}
+			}
+		}
+
+		// Initial draw so stars are ready immediately
+		currentNightOpacity = 1;
+		drawStarryNight(performance.now());
+		updateSkyFrame();
+
+		// Throttled 12.5fps (80ms) loop for sky opacity blending & night star twinkle
+		setInterval(function () {
+			const now = performance.now();
+			updateSkyFrame();
+			drawStarryNight(now);
+		}, 80);
+	} else {
+		updateSkyFrame();
+		setInterval(updateSkyFrame, 100);
+	}
+
+	// Quick-jump buttons in the Meridian HUD let the user preview any period immediately
+	// while the 4-minute cycle continues smoothly from that point.
+	document.querySelectorAll('[data-sky-jump]').forEach(function (btn) {
 		btn.addEventListener('click', function () {
-			applySkyMode(btn.getAttribute('data-sky-set'), true);
+			const targetMode = btn.getAttribute('data-sky-jump');
+			setSkyPhaseOffset(targetMode);
+			awardStamp('sky_watcher');
 		});
 	});
 
-	// Clicking a 24-Hour Circadian Card shifts sky mode AND filters #sightings by that light
+	// Clicking a 24-Hour Circadian Segment shifts to that sky period AND filters #sightings
 	document.querySelectorAll('[data-circadian-pick]').forEach(function (card) {
 		card.addEventListener('click', function () {
 			const skyKey = card.getAttribute('data-circadian-pick');
 			const lightLabel = card.getAttribute('data-circadian-label');
-			applySkyMode(skyKey, true);
+			setSkyPhaseOffset(skyKey);
+			awardStamp('sky_watcher');
+
+			document.querySelectorAll('[data-circadian-pick]').forEach(function (c) {
+				c.classList.toggle('is-selected', c.getAttribute('data-circadian-pick') === skyKey);
+			});
 
 			const filterForm = document.querySelector('form[data-filter="sightings-list"]');
 			if (filterForm && lightLabel) {

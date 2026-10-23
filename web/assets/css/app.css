@@ -6,92 +6,94 @@
 
 :root,
 html[data-sky="day"] {
-	--bg: #f3ead8;
-	--bg-deep: #e6d9c0;
-	--surface: #faf5ea;
-	--surface-2: #e9dec8;
-	--surface-elevated: #fffdf7;
-	--text: #17130f;
-	--text-soft: #362e25;
-	--muted: #665847;
-	--accent: #bf4315;
+	--bg: rgba(235, 245, 255, 0.32);
+	--bg-deep: rgba(212, 232, 250, 0.58);
+	--surface: rgba(248, 252, 255, 0.68);
+	--surface-2: rgba(224, 240, 252, 0.72);
+	--surface-elevated: rgba(255, 255, 255, 0.88);
+	--text: #0d1621;
+	--text-soft: #1d2c3d;
+	--muted: #395068;
+	--accent: #c43810;
 	--accent-ink: #faf5ea;
 	--accent-gold: #c9820e;
 	--accent-acacia: #1e462c;
-	--line: rgb(23 19 15 / 0.15);
-	--line-strong: rgb(23 19 15 / 0.34);
-	--rule-heavy: #17130f;
-	--three-primary: #1a281f;
-	--three-accent: #d98218;
-	--three-grid: #496653;
+	--line: rgb(13 22 33 / 0.18);
+	--line-strong: rgb(13 22 33 / 0.38);
+	--rule-heavy: #0d1621;
+	--sky-orb: #2484e0;
+	--horizon-color: #16261d;
 	color-scheme: light;
 }
 
 html[data-sky="dawn"] {
-	--bg: #f4e6dc;
-	--bg-deep: #e7d3c5;
-	--surface: #fbf3ed;
-	--surface-2: #ecd9cc;
-	--surface-elevated: #fffaf7;
-	--text: #1d1312;
-	--text-soft: #422e2b;
-	--muted: #6e524d;
-	--accent: #b83b2a;
-	--accent-ink: #fbf3ed;
-	--accent-gold: #d46f3e;
-	--accent-acacia: #264f3b;
-	--line: rgb(29 19 18 / 0.15);
-	--line-strong: rgb(29 19 18 / 0.34);
-	--rule-heavy: #1d1312;
-	color-scheme: light;
+	--bg: rgba(34, 8, 7, 0.24);
+	--bg-deep: rgba(42, 9, 8, 0.56);
+	--surface: rgba(44, 11, 10, 0.54);
+	--surface-2: rgba(62, 15, 13, 0.62);
+	--surface-elevated: rgba(54, 13, 11, 0.88);
+	--text: #fff3eb;
+	--text-soft: #fcdbd0;
+	--muted: #ebafa0;
+	--accent: #ff5938;
+	--accent-ink: #1a0605;
+	--accent-gold: #ff9c40;
+	--accent-acacia: #356e4b;
+	--line: rgb(255 243 235 / 0.18);
+	--line-strong: rgb(255 243 235 / 0.38);
+	--rule-heavy: #fff3eb;
+	--sky-orb: #ff2a19;
+	--horizon-color: #1c0706;
+	color-scheme: dark;
 }
 
 html[data-sky="dusk"] {
-	--bg: #ecdaB9;
-	--bg-deep: #dec69c;
-	--surface: #f6ead2;
-	--surface-2: #e3cea8;
-	--surface-elevated: #fbf3e2;
-	--text: #1a120b;
-	--text-soft: #3d2c1d;
-	--muted: #664e38;
-	--accent: #a8330b;
-	--accent-ink: #fbf3e2;
-	--accent-gold: #c46e09;
-	--accent-acacia: #214229;
-	--line: rgb(26 18 11 / 0.16);
-	--line-strong: rgb(26 18 11 / 0.36);
-	--rule-heavy: #1a120b;
-	color-scheme: light;
+	--bg: rgba(30, 6, 6, 0.26);
+	--bg-deep: rgba(38, 7, 7, 0.58);
+	--surface: rgba(42, 9, 9, 0.56);
+	--surface-2: rgba(58, 13, 12, 0.64);
+	--surface-elevated: rgba(48, 10, 10, 0.88);
+	--text: #fff2e8;
+	--text-soft: #fad6c5;
+	--muted: #e3a38d;
+	--accent: #ff4824;
+	--accent-ink: #1a0504;
+	--accent-gold: #ffa438;
+	--accent-acacia: #356e4b;
+	--line: rgb(255 242 232 / 0.18);
+	--line-strong: rgb(255 242 232 / 0.38);
+	--rule-heavy: #fff2e8;
+	--sky-orb: #e61910;
+	--horizon-color: #160505;
+	color-scheme: dark;
 }
 
 html[data-sky="night"] {
-	--bg: #11151c;
-	--bg-deep: #0b0e13;
-	--surface: #171d26;
-	--surface-2: #1f2733;
-	--surface-elevated: #242e3d;
-	--text: #efe9dc;
-	--text-soft: #cfc5b3;
-	--muted: #8f8676;
-	--accent: #e59422;
-	--accent-ink: #120f0b;
-	--accent-gold: #f2be49;
+	--bg: rgba(5, 9, 18, 0.22);
+	--bg-deep: rgba(6, 11, 22, 0.58);
+	--surface: rgba(11, 18, 34, 0.54);
+	--surface-2: rgba(16, 26, 48, 0.62);
+	--surface-elevated: rgba(18, 29, 52, 0.88);
+	--text: #f2eee4;
+	--text-soft: #d4cdbf;
+	--muted: #9c9689;
+	--accent: #f29d2c;
+	--accent-ink: #0e0b08;
+	--accent-gold: #ffd059;
 	--accent-acacia: #3d7a52;
-	--line: rgb(239 233 220 / 0.14);
-	--line-strong: rgb(239 233 220 / 0.3);
-	--rule-heavy: #efe9dc;
-	--three-primary: #141d26;
-	--three-accent: #e59422;
-	--three-grid: #384d63;
+	--line: rgb(242 238 228 / 0.16);
+	--line-strong: rgb(242 238 228 / 0.34);
+	--rule-heavy: #f2eee4;
+	--sky-orb: #ffd059;
+	--horizon-color: #03060d;
 	color-scheme: dark;
 }
 
 :root {
-	--dawn: #d96b4f;
-	--day: #d48911;
-	--dusk: #bf4315;
-	--night: #5271a3;
+	--dawn: #ff4429;
+	--day: #2484e0;
+	--dusk: #e02414;
+	--night: #6898d9;
 	--unknown: #827566;
 
 	--display: "Fraunces", Georgia, serif;
@@ -129,24 +131,204 @@ html[data-sky="night"] {
 }
 
 html {
-	background: var(--bg);
+	background: #060911;
 	-webkit-text-size-adjust: 100%;
 	scroll-behavior: smooth;
 	scroll-padding-top: calc(var(--header) + 2rem);
-	transition: background-color 300ms ease, color 300ms ease;
 }
 
 body {
+	position: relative;
 	margin: 0;
 	min-height: 100vh;
 	overflow-x: clip;
-	background: var(--bg);
+	background: transparent;
 	/* Subtle surveyor paper grain via single-axis ruled ledger lines */
-	background-image: linear-gradient(to right, rgb(23 19 15 / 0.03) 1px, transparent 1px);
+	background-image: linear-gradient(to right, var(--line) 1px, transparent 1px);
 	background-size: 6rem 100%;
 	color: var(--text);
 	font: 400 1rem/1.6 var(--body);
 	-webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   GPU-COMPOSITED 4-MINUTE SAVANNA SKY CYCLE
+   Driven continuously over 240s (4 minutes) with composite-only opacity and
+   transform: translate3d so the sky smoothly shifts through:
+   1. Bright Red Dawn (Alfajiri)
+   2. Savanna Blue Sky with Drifting Clouds (Mchana)
+   3. Bright Red Dusk (Machweo)
+   4. Starry Savanna Night (Usiku)
+   ========================================================================== */
+
+.savanna-sky {
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
+	overflow: hidden;
+	contain: strict;
+	background: #050811;
+}
+
+.savanna-sky__layer {
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	will-change: opacity;
+	backface-visibility: hidden;
+	transform: translateZ(0);
+}
+
+/* 1. BRIGHT RED DAWN (Alfajiri) */
+.savanna-sky__layer--dawn {
+	opacity: 1;
+	background:
+		radial-gradient(95% 58% at 28% 82%, rgba(255, 94, 36, 0.88) 0%, rgba(230, 26, 18, 0.72) 45%, transparent 82%),
+		linear-gradient(180deg,
+			#4a060a 0%,
+			#991014 22%,
+			#d91e18 48%,
+			#f24e1e 74%,
+			#ff943d 92%,
+			#ffd180 100%
+		);
+}
+
+/* 2. SAVANNA BLUE SKY + HINTS OF CLOUD (Mchana) */
+.savanna-sky__layer--day {
+	background:
+		radial-gradient(75% 48% at 72% 14%, rgba(255, 253, 232, 0.65) 0%, transparent 65%),
+		linear-gradient(180deg,
+			#0d569e 0%,
+			#2178c9 26%,
+			#52a2eb 54%,
+			#96ccf7 80%,
+			#d6ecfc 100%
+		);
+}
+
+/* 3. BRIGHT RED DUSK (Machweo) */
+.savanna-sky__layer--dusk {
+	background:
+		radial-gradient(105% 60% at 72% 84%, rgba(255, 72, 20, 0.92) 0%, rgba(209, 15, 15, 0.78) 48%, transparent 84%),
+		linear-gradient(180deg,
+			#290307 0%,
+			#780910 22%,
+			#c41414 48%,
+			#eb3817 72%,
+			#f77925 90%,
+			#ffc266 100%
+		);
+}
+
+/* 4. STARRY SAVANNA NIGHT (Usiku) */
+.savanna-sky__layer--night {
+	background:
+		radial-gradient(110% 75% at 50% 15%, #0d1b38 0%, #060d1f 52%, #02050c 100%);
+}
+
+.savanna-sky__starcanvas {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+/* Solar Discs for Dawn, Day, and Dusk */
+.savanna-sky__sun {
+	position: absolute;
+	border-radius: 50%;
+	pointer-events: none;
+}
+
+.savanna-sky__sun--dawn {
+	width: 11rem;
+	height: 11rem;
+	left: 18%;
+	bottom: 12%;
+	background: radial-gradient(circle, #fff2c2 0%, #ff6224 42%, rgba(217, 22, 15, 0) 72%);
+	opacity: 0.85;
+}
+
+.savanna-sky__sun--day {
+	width: 14rem;
+	height: 14rem;
+	right: 18%;
+	top: 6%;
+	background: radial-gradient(circle, #ffffff 0%, rgba(255, 248, 214, 0.65) 35%, rgba(255, 255, 255, 0) 70%);
+	opacity: 0.9;
+}
+
+.savanna-sky__sun--dusk {
+	width: 13rem;
+	height: 13rem;
+	right: 20%;
+	bottom: 10%;
+	background: radial-gradient(circle, #ffd280 0%, #ff3314 45%, rgba(180, 10, 10, 0) 74%);
+	opacity: 0.9;
+}
+
+/* Soft drifting savanna cumulus & cirrus cloud wisps (transform: translate3d only) */
+.savanna-sky__clouds {
+	position: absolute;
+	top: 2%;
+	left: -20%;
+	width: 140%;
+	height: 52%;
+	will-change: transform;
+	backface-visibility: hidden;
+}
+
+.savanna-sky__clouds svg {
+	display: none;
+}
+
+.savanna-sky__clouds--near {
+	background-image:
+		radial-gradient(240px 58px at 14% 22%, rgba(255, 255, 255, 0.68) 0%, rgba(255, 255, 255, 0.28) 52%, transparent 100%),
+		radial-gradient(170px 48px at 19% 19%, rgba(255, 255, 255, 0.62) 0%, transparent 92%),
+		radial-gradient(310px 64px at 48% 15%, rgba(255, 255, 255, 0.64) 0%, rgba(255, 255, 255, 0.22) 55%, transparent 100%),
+		radial-gradient(210px 54px at 54% 13%, rgba(255, 255, 255, 0.56) 0%, transparent 94%),
+		radial-gradient(280px 58px at 82% 24%, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0.24) 55%, transparent 100%);
+	animation: savanna-cloud-drift 95s linear infinite alternate;
+}
+
+.savanna-sky__clouds--far {
+	top: 8%;
+	background-image:
+		radial-gradient(360px 44px at 31% 32%, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.14) 58%, transparent 100%),
+		radial-gradient(320px 40px at 67% 28%, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0.12) 58%, transparent 100%);
+	animation: savanna-cloud-drift-slow 140s linear infinite alternate;
+}
+
+@keyframes savanna-cloud-drift {
+	0%   { transform: translate3d(-5%, 0, 0); }
+	100% { transform: translate3d(7%, 0, 0); }
+}
+
+@keyframes savanna-cloud-drift-slow {
+	0%   { transform: translate3d(6%, 0, 0); }
+	100% { transform: translate3d(-6%, 0, 0); }
+}
+
+/* Savanna Acacia & Kopje Horizon Silhouette along bottom of sky stage */
+.savanna-sky__horizon {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 110px;
+	color: var(--horizon-color, #0c120e);
+	transition: color 2s ease;
+	z-index: 2;
+}
+
+.savanna-sky__horizon svg {
+	width: 100%;
+	height: 100%;
+	display: block;
 }
 
 img {
@@ -341,40 +523,85 @@ button {
 	margin-left: auto;
 }
 
-.sky-dial {
-	display: none;
+.sky-cycle-hud {
+	display: inline-flex;
 	align-items: center;
-	gap: 0.25rem;
+	gap: 0.5rem;
+	padding: 0.2rem 0.65rem;
+	border: 1px solid var(--line-strong);
+	background: var(--surface);
+	font: 600 0.65rem var(--font-mono);
+	letter-spacing: 0.08em;
+	font-variant-numeric: tabular-nums;
 }
 
-@media (min-width: 900px) {
-	.sky-dial {
-		display: inline-flex;
+.sky-cycle-hud__orb {
+	width: 7px;
+	height: 7px;
+	background: var(--sky-orb, var(--accent));
+	box-shadow: 0 0 8px var(--sky-orb, var(--accent));
+}
+
+.sky-cycle-hud__clock {
+	color: var(--text);
+	font-weight: 700;
+}
+
+.sky-cycle-hud__phase {
+	color: var(--accent);
+}
+
+@media (max-width: 820px) {
+	.sky-cycle-hud__phase {
+		display: none;
 	}
 }
 
-.sky-dial__label {
-	color: var(--muted);
-	margin-right: 0.25rem;
+.sky-cycle-hud__track {
+	width: 3rem;
+	height: 3px;
+	background: var(--line-strong);
+	overflow: hidden;
 }
 
-.sky-dial__btn {
-	padding: 0.18rem 0.5rem;
+.sky-cycle-hud__fill {
+	display: block;
+	width: 100%;
+	height: 100%;
+	background: var(--accent);
+	transform-origin: left center;
+	transform: scaleX(0.25);
+	will-change: transform;
+}
+
+.sky-cycle-hud__jumps {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.15rem;
+	margin-left: 0.25rem;
+	padding-left: 0.45rem;
+	border-left: 1px solid var(--line-strong);
+}
+
+.sky-cycle-hud__jump {
+	padding: 0.12rem 0.38rem;
 	border: 1px solid transparent;
 	background: transparent;
 	color: var(--muted);
-	font: 600 0.66rem var(--font-mono);
+	font: 600 0.62rem var(--font-mono);
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
 	cursor: pointer;
 }
 
-.sky-dial__btn:hover {
+.sky-cycle-hud__jump:hover {
 	color: var(--text);
 	border-color: var(--line-strong);
 }
 
-.sky-dial__btn.is-active {
+.sky-cycle-hud__jump.is-active {
 	background: var(--text);
-	color: var(--bg);
+	color: var(--surface-elevated);
 }
 
 .camp-radio {
@@ -1288,18 +1515,74 @@ button {
 	}
 }
 
-.globe__stage {
+.globe__instrument {
 	position: relative;
 	width: 100%;
-	max-width: 32rem;
-	aspect-ratio: 1;
-	border-radius: 50%;
-	background: radial-gradient(circle at 50% 50%, #16241c 0 52%, transparent 68%);
+	max-width: 34rem;
+	padding: 1.75rem;
+	border: 1px solid var(--rule-heavy);
+	background:
+		radial-gradient(circle at 50% 50%, rgba(46, 30, 18, 0.55) 0%, rgba(16, 12, 9, 0.96) 68%),
+		linear-gradient(to right, rgba(217, 179, 124, 0.1) 1px, transparent 1px),
+		linear-gradient(to bottom, rgba(217, 179, 124, 0.1) 1px, transparent 1px),
+		#110d0a;
+	background-size: 100% 100%, 2.5rem 2.5rem, 2.5rem 2.5rem, 100% 100%;
+	box-shadow: inset 0 0 0 1px rgba(224, 168, 92, 0.24);
+}
+
+.globe__corner {
+	position: absolute;
+	font: 600 0.62rem var(--font-mono);
+	letter-spacing: 0.1em;
+	color: rgba(235, 198, 142, 0.78);
+	pointer-events: none;
+}
+
+.globe__corner--tl { top: 0.65rem; left: 0.85rem; }
+.globe__corner--tr { top: 0.65rem; right: 0.85rem; }
+.globe__corner--bl { bottom: 0.65rem; left: 0.85rem; }
+.globe__corner--br { bottom: 0.65rem; right: 0.85rem; }
+
+.globe__stage {
+	position: relative;
+	display: block;
+	width: 100%;
+	max-width: 29rem;
+	aspect-ratio: 1 / 1;
+	margin-inline: auto;
+	overflow: hidden;
+}
+
+.globe__astrolabe {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	color: #e6be82;
+	pointer-events: none;
+	z-index: 2;
+}
+
+.globe__astrolabe-text {
+	font: 600 6.5px var(--font-mono);
+	letter-spacing: 0.16em;
+	fill: #e6be82;
+	opacity: 0.82;
 }
 
 .globe__stage canvas {
+	position: absolute;
+	inset: 0;
+	width: 100% !important;
+	height: 100% !important;
+	display: block;
+	z-index: 1;
 	cursor: grab;
 	touch-action: pan-y;
+}
+
+.globe__stage canvas:active {
+	cursor: grabbing;
 }
 
 .cartography-grid__caption {

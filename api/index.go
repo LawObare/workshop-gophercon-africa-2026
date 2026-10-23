@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 	"sync"
 
 	"workshop/internal/clients/gbif"
@@ -101,7 +102,11 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 
 	// Normalize URL path when Vercel rewrites wildcard routes
 	if matched := r.Header.Get("x-matched-path"); matched != "" {
-		r.URL.Path = matched
+		if idx := strings.IndexByte(matched, '?'); idx != -1 {
+			r.URL.Path = matched[:idx]
+		} else {
+			r.URL.Path = matched
+		}
 	} else if r.URL.Path == "/api" || r.URL.Path == "/api/index.go" || r.URL.Path == "" {
 		r.URL.Path = "/"
 	}

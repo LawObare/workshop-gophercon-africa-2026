@@ -24,10 +24,6 @@ templ Base(props BaseProps) {
 			<meta name="description" content={ description(props.Description) }/>
 			<script>
 				document.documentElement.classList.add('js');
-				try {
-					var savedSky = localStorage.getItem('jambo_sky_mode');
-					if (savedSky) document.documentElement.setAttribute('data-sky', savedSky);
-				} catch (e) {}
 			</script>
 			<link rel="preconnect" href="https://fonts.googleapis.com"/>
 			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -37,14 +33,6 @@ templ Base(props BaseProps) {
 				<link rel="stylesheet" href="/assets/css/map.css"/>
 			}
 			if props.Three {
-				<script type="importmap">
-					{
-						"imports": {
-							"three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js",
-							"three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"
-						}
-					}
-				</script>
 				<link rel="stylesheet" href="/assets/css/threejs.css"/>
 			}
 			<link rel="stylesheet" href="/assets/css/weather.css"/>
@@ -58,25 +46,94 @@ templ Base(props BaseProps) {
 			<script src="/assets/js/reveal.js" defer></script>
 		</head>
 		<body class={ props.Class }>
+			<!-- GPU-Composited 4-Minute Automated Savanna Sky Backdrop -->
+			<div class="savanna-sky" aria-hidden="true" data-savanna-sky>
+				<!-- 1. Bright Red Dawn -->
+				<div class="savanna-sky__layer savanna-sky__layer--dawn" data-sky-layer="dawn">
+					<div class="savanna-sky__sun savanna-sky__sun--dawn"></div>
+				</div>
+
+				<!-- 2. Blue Savanna Day Sky + Drifting Cloud Formations -->
+				<div class="savanna-sky__layer savanna-sky__layer--day" data-sky-layer="day">
+					<div class="savanna-sky__sun savanna-sky__sun--day"></div>
+					<div class="savanna-sky__clouds savanna-sky__clouds--near">
+						<svg viewBox="0 0 1600 320" preserveAspectRatio="none">
+							<g fill="rgba(255,255,255,0.72)">
+								<path d="M120 150 Q145 110 190 118 Q225 85 275 108 Q320 98 345 132 Q380 135 375 162 L105 162 Z"/>
+								<path d="M620 115 Q655 75 710 88 Q755 55 820 82 Q870 75 895 112 Q930 118 922 142 L600 142 Z" opacity="0.85"/>
+								<path d="M1180 165 Q1210 128 1260 136 Q1300 105 1355 128 Q1395 122 1418 156 L1165 156 Z" opacity="0.75"/>
+							</g>
+						</svg>
+					</div>
+					<div class="savanna-sky__clouds savanna-sky__clouds--far">
+						<svg viewBox="0 0 1600 320" preserveAspectRatio="none">
+							<g fill="rgba(255,255,255,0.48)">
+								<path d="M340 205 Q375 172 425 182 Q465 158 515 178 Q550 175 568 205 Z"/>
+								<path d="M910 190 Q950 155 1005 168 Q1050 142 1105 166 Q1140 162 1160 190 Z"/>
+							</g>
+						</svg>
+					</div>
+				</div>
+
+				<!-- 3. Bright Red Dusk -->
+				<div class="savanna-sky__layer savanna-sky__layer--dusk" data-sky-layer="dusk">
+					<div class="savanna-sky__sun savanna-sky__sun--dusk"></div>
+				</div>
+
+				<!-- 4. Starry Savanna Night (with dedicated starfield & Milky Way canvas) -->
+				<div class="savanna-sky__layer savanna-sky__layer--night" data-sky-layer="night">
+					<canvas class="savanna-sky__starcanvas" data-star-canvas></canvas>
+				</div>
+
+				<!-- Persistent Savanna Acacia & Kopje Horizon Silhouette -->
+				<div class="savanna-sky__horizon">
+					<svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+						<path d="M0 120 L0 88 L140 76 L310 86 L520 68 L740 84 L980 66 L1230 82 L1440 72 L1440 120 Z" fill="currentColor" opacity="0.28"/>
+						<path d="M0 120 L0 98 L260 90 L620 98 L1040 88 L1440 96 L1440 120 Z" fill="currentColor" opacity="0.65"/>
+						<!-- Umbrella Thorn Acacia (Left) -->
+						<g transform="translate(110, 32)" fill="currentColor" opacity="0.72">
+							<path d="M36 66 L38 38 L20 26 L25 26 L38 35 L40 23 L43 23 L41 35 L54 25 L59 25 L42 38 L44 66 Z"/>
+							<ellipse cx="40" cy="21" rx="34" ry="4.5"/>
+							<ellipse cx="24" cy="16" rx="18" ry="3.2"/>
+							<ellipse cx="56" cy="17" rx="16" ry="3"/>
+						</g>
+						<!-- Umbrella Thorn Acacia (Right) -->
+						<g transform="translate(1240, 40)" fill="currentColor" opacity="0.72">
+							<path d="M28 58 L29 34 L16 24 L20 24 L29 31 L31 21 L33 21 L31 31 L42 23 L46 23 L32 34 L33 58 Z"/>
+							<ellipse cx="31" cy="19" rx="26" ry="3.8"/>
+							<ellipse cx="19" cy="15" rx="13" ry="2.6"/>
+							<ellipse cx="43" cy="15.5" rx="12" ry="2.5"/>
+						</g>
+					</svg>
+				</div>
+			</div>
+
 			@components.WeatherIcons()
 			@components.MonkeyVine()
 			<a class="skip" href="#main">Skip to content</a>
 			<div class="scroll-sentinel" data-sentinel aria-hidden="true"></div>
 
 			<!-- Topographic Meridian Ticker -->
-			<div class="meridian-bar" role="region" aria-label="Expedition coordinates and sky atmosphere">
+			<div class="meridian-bar" role="region" aria-label="Expedition coordinates and automated 4-minute savanna sky cycle">
 				<div class="meridian-bar__left">
 					<span class="meridian-bar__coord">01°17′S 36°49′E · NAIROBI MERIDIAN</span>
 					<span class="meridian-bar__sep">/</span>
 					<span class="meridian-bar__bday">16 OCT · HAPPY BIRTHDAY CHIEF RANGER EXPEDITION EDITION</span>
 				</div>
 				<div class="meridian-bar__right">
-					<div class="sky-dial" role="group" aria-label="Savanna sky hour">
-						<span class="sky-dial__label">SOLAR HOUR:</span>
-						<button type="button" class="sky-dial__btn" data-sky-set="dawn">06:00 ALFAJIRI</button>
-						<button type="button" class="sky-dial__btn is-active" data-sky-set="day">12:00 MCHANA</button>
-						<button type="button" class="sky-dial__btn" data-sky-set="dusk">18:00 MACHWEO</button>
-						<button type="button" class="sky-dial__btn" data-sky-set="night">22:00 USIKU</button>
+					<div class="sky-cycle-hud" title="Automated 4-minute savanna sky cycle (click any phase to preview)">
+						<span class="sky-cycle-hud__orb" data-sky-orb></span>
+						<span class="sky-cycle-hud__clock" data-sky-clock>06:00 EAT</span>
+						<span class="sky-cycle-hud__phase" data-sky-phase>ALFAJIRI // CRIMSON DAWN</span>
+						<span class="sky-cycle-hud__track" aria-hidden="true">
+							<span class="sky-cycle-hud__fill" data-sky-progress></span>
+						</span>
+						<div class="sky-cycle-hud__jumps" role="group" aria-label="Preview savanna sky period">
+							<button type="button" class="sky-cycle-hud__jump" data-sky-jump="dawn">Dawn</button>
+							<button type="button" class="sky-cycle-hud__jump" data-sky-jump="day">Day</button>
+							<button type="button" class="sky-cycle-hud__jump" data-sky-jump="dusk">Dusk</button>
+							<button type="button" class="sky-cycle-hud__jump" data-sky-jump="night">Night</button>
+						</div>
 					</div>
 					<button type="button" class="camp-radio" data-sound-toggle aria-pressed="false">
 						<span class="camp-radio__bars" aria-hidden="true">
