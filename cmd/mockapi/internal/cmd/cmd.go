@@ -5,7 +5,7 @@ import (
 	"errors"
 	"log/slog"
 	"os"
-	"workshop/internal/common/logs"
+	"workshop/pkg/common/logs"
 
 	"github.com/urfave/cli/v3"
 )

@@ -11,7 +11,7 @@ import templruntime "github.com/a-h/templ/runtime"
 import (
 	"workshop/cmd/themes/internal/layout"
 	"workshop/cmd/themes/internal/themeutil"
-	"workshop/internal/domain/sighting"
+	"workshop/pkg/domain/sighting"
 )
 
 func Page(p Props) templ.Component {

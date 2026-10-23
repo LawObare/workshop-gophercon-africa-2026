@@ -13,8 +13,8 @@ import (
 	"strconv"
 	"sync"
 	"time"
-	"workshop/internal/clients/gbif"
-	"workshop/internal/domain/species"
+	"workshop/pkg/clients/gbif"
+	"workshop/pkg/domain/species"
 )
 
 // perBand and perCountry cap the occurrences fetched per seed search, for

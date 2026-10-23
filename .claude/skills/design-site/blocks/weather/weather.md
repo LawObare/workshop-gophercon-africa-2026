@@ -18,7 +18,7 @@ zero, and the component says so rather than hiding the sighting.
 ```templ
 package components
 
-import "workshop/internal/domain/weather"
+import "workshop/pkg/domain/weather"
 
 templ Weather(w weather.Weather) {
 	if w.ObservedAt.IsZero() {
@@ -61,7 +61,7 @@ package components
 import (
 	"fmt"
 
-	"workshop/internal/domain/weather"
+	"workshop/pkg/domain/weather"
 )
 
 var winds = [...]struct{ class, name string }{

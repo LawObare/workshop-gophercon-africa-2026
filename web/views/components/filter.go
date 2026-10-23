@@ -6,7 +6,7 @@ import (
 
 	"github.com/a-h/templ"
 
-	"workshop/internal/domain/sighting"
+	"workshop/pkg/domain/sighting"
 )
 
 // Animal names the animal seen, as the card does.

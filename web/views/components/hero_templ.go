@@ -11,7 +11,7 @@ import templruntime "github.com/a-h/templ/runtime"
 import (
 	"fmt"
 	"strconv"
-	"workshop/internal/domain/sighting"
+	"workshop/pkg/domain/sighting"
 )
 
 func Hero(banner []sighting.Sighting, sum sighting.Summary) templ.Component {

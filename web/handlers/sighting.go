@@ -6,7 +6,7 @@ import (
 	"log/slog"
 	"net/http"
 	"uuid"
-	"workshop/internal/domain/sighting"
+	"workshop/pkg/domain/sighting"
 	"workshop/web/views/pages"
 )
 

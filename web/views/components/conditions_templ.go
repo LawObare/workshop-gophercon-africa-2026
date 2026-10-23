@@ -10,7 +10,7 @@ import templruntime "github.com/a-h/templ/runtime"
 
 import (
 	"strconv"
-	"workshop/internal/domain/weather"
+	"workshop/pkg/domain/weather"
 )
 
 func Conditions(w weather.Weather) templ.Component {

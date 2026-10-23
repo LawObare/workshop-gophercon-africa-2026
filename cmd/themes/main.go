@@ -10,16 +10,16 @@ import (
 	"os/signal"
 	"syscall"
 	"workshop/cmd/themes/internal/site"
-	"workshop/internal/common/logs"
-	"workshop/internal/common/server"
-	"workshop/internal/domain/sighting/stores/sightingsqlite"
-	"workshop/internal/infra/config"
-	"workshop/internal/infra/db/sqlite"
+	"workshop/pkg/common/logs"
+	"workshop/pkg/common/server"
+	"workshop/pkg/domain/sighting/stores/sightingsqlite"
+	"workshop/pkg/infra/config"
+	"workshop/pkg/infra/db/sqlite"
 	"workshop/migrations"
 
 	"github.com/urfave/cli/v3"
 
-	db "workshop/internal/infra/db/sqlc"
+	db "workshop/pkg/infra/db/sqlc"
 )
 
 func main() {

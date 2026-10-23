@@ -4,7 +4,7 @@ import (
 	"cmp"
 	"fmt"
 	"strings"
-	"workshop/internal/domain/sighting"
+	"workshop/pkg/domain/sighting"
 )
 
 // CircadianBucket holds the real count and percentage of sightings for a time-of-day window.

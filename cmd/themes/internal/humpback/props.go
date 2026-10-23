@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"time"
 	"workshop/cmd/themes/internal/themeutil"
-	"workshop/internal/domain/sighting"
+	"workshop/pkg/domain/sighting"
 )
 
 // galleryLimit caps the picture grid. The ledger below it still lists

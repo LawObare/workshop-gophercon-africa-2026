@@ -9,9 +9,9 @@ import (
 	"testing"
 	"time"
 	"uuid"
-	"workshop/internal/domain/sighting"
-	"workshop/internal/domain/sighting/country"
-	"workshop/internal/domain/species"
+	"workshop/pkg/domain/sighting"
+	"workshop/pkg/domain/sighting/country"
+	"workshop/pkg/domain/species"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

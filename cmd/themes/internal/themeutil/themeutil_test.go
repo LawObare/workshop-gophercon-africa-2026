@@ -3,8 +3,8 @@ package themeutil
 import (
 	"testing"
 	"time"
-	"workshop/internal/domain/sighting"
-	"workshop/internal/domain/species"
+	"workshop/pkg/domain/sighting"
+	"workshop/pkg/domain/species"
 
 	"github.com/stretchr/testify/assert"
 )

@@ -14,8 +14,8 @@ import (
 	"slices"
 	"strings"
 
-	"workshop/internal/domain/sighting"
-	"workshop/internal/domain/species"
+	"workshop/pkg/domain/sighting"
+	"workshop/pkg/domain/species"
 )
 
 func SightingCard(s sighting.Sighting) templ.Component {

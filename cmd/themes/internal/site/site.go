@@ -9,9 +9,9 @@ import (
 	"workshop/cmd/themes/internal/antarctica"
 	"workshop/cmd/themes/internal/humpback"
 	"workshop/cmd/themes/internal/kenya"
-	"workshop/internal/domain/sighting"
-	"workshop/internal/domain/sighting/country"
-	"workshop/internal/domain/species"
+	"workshop/pkg/domain/sighting"
+	"workshop/pkg/domain/sighting/country"
+	"workshop/pkg/domain/species"
 
 	"github.com/a-h/templ"
 )

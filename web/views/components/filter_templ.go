@@ -8,7 +8,7 @@ package components
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "workshop/internal/domain/sighting"
+import "workshop/pkg/domain/sighting"
 
 type FilterProps struct {
 	Target string        // The id of the list whose items are filtered.

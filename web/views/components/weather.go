@@ -3,7 +3,7 @@ package components
 import (
 	"fmt"
 
-	"workshop/internal/domain/weather"
+	"workshop/pkg/domain/weather"
 )
 
 var winds = [...]struct{ class, name string }{

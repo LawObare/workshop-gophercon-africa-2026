@@ -4,7 +4,7 @@ import (
 	"cmp"
 	"strconv"
 
-	"workshop/internal/domain/sighting"
+	"workshop/pkg/domain/sighting"
 )
 
 // heroSrcset offers iNaturalist's large copy to small screens and the original to wide ones.

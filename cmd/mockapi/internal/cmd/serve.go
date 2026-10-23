@@ -10,8 +10,8 @@ import (
 	"time"
 	"workshop/cmd/mockapi/internal/gbif"
 	"workshop/cmd/mockapi/internal/weather"
-	"workshop/internal/common/logs"
-	"workshop/internal/common/server"
+	"workshop/pkg/common/logs"
+	"workshop/pkg/common/server"
 
 	"github.com/urfave/cli/v3"
 )

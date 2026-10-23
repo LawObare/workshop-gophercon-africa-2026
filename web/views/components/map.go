@@ -1,6 +1,6 @@
 package components
 
-import "workshop/internal/domain/sighting"
+import "workshop/pkg/domain/sighting"
 
 // MapPoint is one marker, handed to map.js as JSON.
 type MapPoint struct {

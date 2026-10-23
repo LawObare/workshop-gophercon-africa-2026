@@ -3,7 +3,7 @@ package gbif
 import (
 	"net/http"
 	"time"
-	"workshop/internal/common/httputil"
+	"workshop/pkg/common/httputil"
 )
 
 // writeError writes an error in the shape GBIF uses.

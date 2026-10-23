@@ -6,7 +6,7 @@ import (
 	"errors"
 	"net/http"
 	"strconv"
-	"workshop/internal/common/httputil"
+	"workshop/pkg/common/httputil"
 )
 
 // Handler serves the mocked endpoints under /gbif/v1.

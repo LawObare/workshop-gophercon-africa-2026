@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"time"
 	"workshop/cmd/themes/internal/themeutil"
-	"workshop/internal/domain/sighting"
+	"workshop/pkg/domain/sighting"
 )
 
 // Props is everything the station page renders. It is built once in

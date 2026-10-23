@@ -15,7 +15,7 @@ are plain markup, so they take the site's colours and they print.
 ```templ
 package components
 
-import "workshop/internal/domain/sighting"
+import "workshop/pkg/domain/sighting"
 
 templ Sparkline(byYear map[int]int, sum sighting.Summary) {
 	if sum.Sightings > 0 {
@@ -50,7 +50,7 @@ import (
 	"strconv"
 	"strings"
 
-	"workshop/internal/domain/sighting"
+	"workshop/pkg/domain/sighting"
 )
 
 // The sparkline's drawing box, matching the viewBox in the templ.

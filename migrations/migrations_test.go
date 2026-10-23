@@ -5,7 +5,7 @@ import (
 	"database/sql"
 	"path/filepath"
 	"testing"
-	"workshop/internal/infra/db/sqlite"
+	"workshop/pkg/infra/db/sqlite"
 	"workshop/migrations"
 
 	"github.com/stretchr/testify/assert"

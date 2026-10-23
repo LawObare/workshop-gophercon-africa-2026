@@ -3,7 +3,7 @@ package handlers
 import (
 	"log/slog"
 	"net/http"
-	"workshop/internal/domain/sighting"
+	"workshop/pkg/domain/sighting"
 	"workshop/web/views/pages"
 )
 

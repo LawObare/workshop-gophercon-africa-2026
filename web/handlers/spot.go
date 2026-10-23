@@ -4,8 +4,8 @@ import (
 	"log/slog"
 	"net/http"
 	"strings"
-	"workshop/internal/domain/sighting"
-	"workshop/internal/domain/species"
+	"workshop/pkg/domain/sighting"
+	"workshop/pkg/domain/species"
 	"workshop/web/views/pages"
 )
 

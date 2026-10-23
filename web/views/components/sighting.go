@@ -5,8 +5,8 @@ import (
 	"strings"
 	"time"
 
-	"workshop/internal/domain/sighting"
-	"workshop/internal/domain/weather"
+	"workshop/pkg/domain/sighting"
+	"workshop/pkg/domain/weather"
 )
 
 var lightNames = map[string]string{

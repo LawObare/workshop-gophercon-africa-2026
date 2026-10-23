@@ -7,8 +7,8 @@ import (
 	"slices"
 	"strings"
 	"time"
-	"workshop/internal/domain/sighting"
-	"workshop/internal/domain/species"
+	"workshop/pkg/domain/sighting"
+	"workshop/pkg/domain/species"
 )
 
 // MapPoint is one marker handed to Leaflet as JSON.

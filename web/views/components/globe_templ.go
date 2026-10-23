@@ -10,7 +10,7 @@ import templruntime "github.com/a-h/templ/runtime"
 
 import (
 	"strconv"
-	"workshop/internal/domain/sighting"
+	"workshop/pkg/domain/sighting"
 )
 
 func Globe(sightings []sighting.Sighting, sum sighting.Summary, countries []sighting.Tally) templ.Component {

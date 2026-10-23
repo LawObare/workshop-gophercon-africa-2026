@@ -2,7 +2,7 @@ package weather
 
 import (
 	"net/http"
-	"workshop/internal/common/httputil"
+	"workshop/pkg/common/httputil"
 )
 
 // hourlyResponse mirrors the archive endpoint's real response shape, field

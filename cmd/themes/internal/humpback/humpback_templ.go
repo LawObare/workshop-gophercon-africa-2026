@@ -11,7 +11,7 @@ import templruntime "github.com/a-h/templ/runtime"
 import (
 	"workshop/cmd/themes/internal/layout"
 	"workshop/cmd/themes/internal/themeutil"
-	"workshop/internal/domain/sighting"
+	"workshop/pkg/domain/sighting"
 )
 
 // Page is the console: a metric strip, a grid of panels, a picture wall

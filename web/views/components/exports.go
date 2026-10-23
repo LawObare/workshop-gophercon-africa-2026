@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"workshop/internal/domain/sighting"
+	"workshop/pkg/domain/sighting"
 )
 
 // Name is the animal's name as a reader would know it.

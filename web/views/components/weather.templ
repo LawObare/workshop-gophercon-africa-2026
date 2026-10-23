@@ -1,6 +1,6 @@
 package components
 
-import "workshop/internal/domain/weather"
+import "workshop/pkg/domain/weather"
 
 templ Weather(w weather.Weather) {
 	if w.ObservedAt.IsZero() {

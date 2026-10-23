@@ -6,9 +6,9 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
-	"workshop/internal/common/logs"
-	"workshop/internal/domain/sighting"
-	"workshop/internal/domain/species"
+	"workshop/pkg/common/logs"
+	"workshop/pkg/domain/sighting"
+	"workshop/pkg/domain/species"
 	"workshop/web/handlers"
 
 	"github.com/stretchr/testify/assert"

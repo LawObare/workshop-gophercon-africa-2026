@@ -1,7 +1,7 @@
 package components
 
 import (
-	"workshop/internal/domain/sighting"
+	"workshop/pkg/domain/sighting"
 )
 
 // Photo is one picture on the photo wall, with the sighting it belongs to.

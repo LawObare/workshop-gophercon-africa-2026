@@ -6,8 +6,8 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
-	"workshop/internal/domain/sighting"
-	"workshop/internal/infra/config"
+	"workshop/pkg/domain/sighting"
+	"workshop/pkg/infra/config"
 	"workshop/web/handlers"
 )
 

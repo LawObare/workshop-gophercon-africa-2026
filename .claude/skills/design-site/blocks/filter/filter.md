@@ -17,7 +17,7 @@ Plain JavaScript, no library.
 ```templ
 package components
 
-import "workshop/internal/domain/sighting"
+import "workshop/pkg/domain/sighting"
 
 type FilterProps struct {
 	Target string        // The id of the list whose items are filtered.
@@ -72,7 +72,7 @@ import (
 
 	"github.com/a-h/templ"
 
-	"workshop/internal/domain/sighting"
+	"workshop/pkg/domain/sighting"
 )
 
 // Animal names the animal seen, as the card does.

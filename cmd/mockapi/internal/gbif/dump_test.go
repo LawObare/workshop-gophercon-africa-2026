@@ -12,7 +12,7 @@ import (
 	"strconv"
 	"strings"
 	"testing"
-	"workshop/internal/domain/species"
+	"workshop/pkg/domain/species"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

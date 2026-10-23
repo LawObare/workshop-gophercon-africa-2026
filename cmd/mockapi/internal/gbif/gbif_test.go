@@ -16,7 +16,7 @@ import (
 )
 
 // testdata holds real GBIF responses recorded for the starter's client.
-const testdata = "../../../../internal/clients/gbif/testdata"
+const testdata = "../../../../pkg/clients/gbif/testdata"
 
 // fixtureDataset builds a dataset from the GBIF client's recorded
 // responses, the same way a scrape does.

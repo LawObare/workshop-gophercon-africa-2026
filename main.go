@@ -1,6 +1,6 @@
 package main
 
-import "workshop/internal/cmd"
+import "workshop/pkg/cmd"
 
 //go:generate go tool sqlc generate
 

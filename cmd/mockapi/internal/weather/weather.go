@@ -5,7 +5,7 @@ package weather
 import (
 	"net/http"
 	"time"
-	"workshop/internal/common/httputil"
+	"workshop/pkg/common/httputil"
 )
 
 // Handler serves the mocked Open-Meteo archive endpoint under /weather/v1.
