@@ -83,7 +83,7 @@ func Spot(props SpotProps) templ.Component {
 				var templ_7745c5c3_Var4 string
 				templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(quizPool[0].Country)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 66, Col: 57}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 89, Col: 57}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 				if templ_7745c5c3_Err != nil {
@@ -96,7 +96,7 @@ func Spot(props SpotProps) templ.Component {
 				var templ_7745c5c3_Var5 string
 				templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(quizPool[0].Light)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 70, Col: 53}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 93, Col: 53}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 				if templ_7745c5c3_Err != nil {
@@ -109,7 +109,7 @@ func Spot(props SpotProps) templ.Component {
 				var templ_7745c5c3_Var6 string
 				templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(quizPool[0].Weather)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 74, Col: 57}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 97, Col: 57}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 				if templ_7745c5c3_Err != nil {
@@ -119,10 +119,24 @@ func Spot(props SpotProps) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				var templ_7745c5c3_Var7 templ.SafeURL
-				templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinURLErrs(templ.URL(quizPool[0].URL))
-				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 85, Col: 79}
+				for i := 0; i < 4 && i < len(quizPool); i++ {
+					templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "<button type=\"button\" class=\"silhouette-choice press\">")
+					if templ_7745c5c3_Err != nil {
+						return templ_7745c5c3_Err
+					}
+					var templ_7745c5c3_Var7 string
+					templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(quizPool[i].Animal)
+					if templ_7745c5c3_Err != nil {
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 105, Col: 84}
+					}
+					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
+					if templ_7745c5c3_Err != nil {
+						return templ_7745c5c3_Err
+					}
+					templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "</button>")
+					if templ_7745c5c3_Err != nil {
+						return templ_7745c5c3_Err
+					}
 				}
 				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "</div><div class=\"silhouette-actions\"><button type=\"button\" class=\"editorial-btn\" data-quiz-reveal>Expose Negative</button> <button type=\"button\" class=\"editorial-btn editorial-btn--solid\" data-quiz-next>Next Negative →</button> <a class=\"btn-link\" data-quiz-record href=\"")
 				if templ_7745c5c3_Err != nil {
@@ -131,7 +145,7 @@ func Spot(props SpotProps) templ.Component {
 				var templ_7745c5c3_Var8 templ.SafeURL
 				templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinURLErrs(templ.URL(quizPool[0].URL))
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/views/pages/spot.templ`, Line: 112, Col: 79}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 112, Col: 79}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 				if templ_7745c5c3_Err != nil {
@@ -150,27 +164,14 @@ func Spot(props SpotProps) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "<!-- 2. Real HTML5 Canvas Biome & Light Color Analyzer --><section class=\"spot-scanner\" data-spot-scanner data-spot-dropzone aria-labelledby=\"lab-title\"><header class=\"spot-scanner__head\"><div><span class=\"silhouette-game__kicker\">STATION B // CHROMATIC LIGHT TABLE</span><h2 id=\"lab-title\" class=\"silhouette-game__title\">Biome Pigment &amp; Solar Spectrum Sampler</h2></div></header><div class=\"spot-viewport\" data-spot-viewport><div class=\"spot-reticle spot-reticle--tl\"></div><div class=\"spot-reticle spot-reticle--tr\"></div><div class=\"spot-reticle spot-reticle--bl\"></div><div class=\"spot-reticle spot-reticle--br\"></div><img data-spot-preview alt=\"Uploaded animal preview\" crossorigin=\"anonymous\"><div class=\"spot-drop-prompt\"><p><strong>[ DROP PHOTOGRAPHIC PLATE HERE ]</strong><br>Samples 5 regional biome pigments &amp; computes solar colour temperature</p></div></div><div class=\"spot-palette\" data-spot-palette hidden><div class=\"spot-palette__swatches\" data-spot-swatches></div><div class=\"spot-palette__reading\" data-spot-reading></div></div><div class=\"spot-controls\"><input type=\"file\" accept=\"image/*\" capture=\"environment\" data-spot-file id=\"spot-file-input\" hidden> <label for=\"spot-file-input\" class=\"editorial-btn editorial-btn--solid\" tabindex=\"0\">Mount Local Plate</label> <button type=\"button\" class=\"editorial-btn\" data-spot-sample>Sample Archive Negative</button><p class=\"spot-status-text\" data-spot-status aria-live=\"polite\">Ready. Mount a local image or sample an archive negative.</p></div></section></div><!-- 3. 89-Species Habitat Explorer & Map --><div id=\"results\"><section class=\"spot-index-section\"><div class=\"spot-index-section__head\"><div><p class=\"section-num\">TAXONOMIC REGISTER // 89 WILD SPECIES</p><h2 class=\"display\">")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			var templ_7745c5c3_Var8 string
-			templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(formatAnimal(props.Chosen))
-			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 139, Col: 55}
-			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, " — ")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 12, "<!-- 2. Real HTML5 Canvas Biome & Light Color Analyzer --><section class=\"spot-scanner\" data-spot-scanner data-spot-dropzone aria-labelledby=\"lab-title\"><header class=\"spot-scanner__head\"><div><span class=\"silhouette-game__kicker\">STATION B // CHROMATIC LIGHT TABLE</span><h2 id=\"lab-title\" class=\"silhouette-game__title\">Biome Pigment &amp; Solar Spectrum Sampler</h2></div></header><div class=\"spot-viewport\" data-spot-viewport><div class=\"spot-reticle spot-reticle--tl\"></div><div class=\"spot-reticle spot-reticle--tr\"></div><div class=\"spot-reticle spot-reticle--bl\"></div><div class=\"spot-reticle spot-reticle--br\"></div><img data-spot-preview alt=\"Uploaded animal preview\"><div class=\"spot-drop-prompt\"><p><strong>[ DROP PHOTOGRAPHIC PLATE HERE ]</strong><br>Samples 5 regional biome pigments &amp; computes solar colour temperature</p></div></div><div class=\"spot-palette\" data-spot-palette hidden><div class=\"spot-palette__swatches\" data-spot-swatches></div><div class=\"spot-palette__reading\" data-spot-reading></div></div><div class=\"spot-controls\"><input type=\"file\" accept=\"image/*\" capture=\"environment\" data-spot-file id=\"spot-file-input\" hidden> <label for=\"spot-file-input\" class=\"editorial-btn editorial-btn--solid\" tabindex=\"0\">Mount Local Plate</label> <button type=\"button\" class=\"editorial-btn\" data-spot-sample>Sample Archive Negative</button><p class=\"spot-status-text\" data-spot-status aria-live=\"polite\">Ready. Mount a local image or sample an archive negative.</p></div></section></div><!-- 3. 89-Species Habitat Explorer & Map --><div id=\"results\"><section class=\"spot-index-section\"><div class=\"spot-index-section__head\"><div><p class=\"section-num\">TAXONOMIC REGISTER // 89 WILD SPECIES</p><h2 class=\"display\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var9 string
 			templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(formatAnimal(props.Chosen))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 139, Col: 98}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 166, Col: 55}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
 			if templ_7745c5c3_Err != nil {
@@ -183,7 +184,7 @@ func Spot(props SpotProps) templ.Component {
 			var templ_7745c5c3_Var10 string
 			templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.Itoa(len(props.Sightings)))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/views/pages/spot.templ`, Line: 166, Col: 98}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 166, Col: 98}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
 			if templ_7745c5c3_Err != nil {
@@ -206,33 +207,20 @@ func Spot(props SpotProps) templ.Component {
 				var templ_7745c5c3_Var12 templ.SafeURL
 				templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinURLErrs(templ.URL("/spot?animal=" + string(a) + "#results"))
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 157, Col: 66}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 184, Col: 66}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var12))
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 13, "\" class=\"")
-				if templ_7745c5c3_Err != nil {
-					return templ_7745c5c3_Err
-				}
-				var templ_7745c5c3_Var12 string
-				templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.ResolveAttributeValue(templ.CSSClasses(templ_7745c5c3_Var10).String())
-				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 1, Col: 0}
-				}
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var12)
-				if templ_7745c5c3_Err != nil {
-					return templ_7745c5c3_Err
-				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 14, "\" data-species-chip>")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 16, "\" class=\"")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 				var templ_7745c5c3_Var13 string
 				templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.ResolveAttributeValue(templ.CSSClasses(templ_7745c5c3_Var11).String())
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 161, Col: 25}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 1, Col: 0}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var13)
 				if templ_7745c5c3_Err != nil {
@@ -245,7 +233,7 @@ func Spot(props SpotProps) templ.Component {
 				var templ_7745c5c3_Var14 string
 				templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(formatAnimal(a))
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 171, Col: 97}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 188, Col: 25}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var14))
 				if templ_7745c5c3_Err != nil {
@@ -268,7 +256,7 @@ func Spot(props SpotProps) templ.Component {
 				var templ_7745c5c3_Var15 string
 				templ_7745c5c3_Var15, templ_7745c5c3_Err = templ.JoinStringErrs(strings.ToUpper(formatAnimal(props.Chosen)))
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 172, Col: 98}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 198, Col: 97}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var15))
 				if templ_7745c5c3_Err != nil {
@@ -281,7 +269,7 @@ func Spot(props SpotProps) templ.Component {
 				var templ_7745c5c3_Var16 string
 				templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.JoinStringErrs(formatAnimal(props.Chosen))
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/views/pages/spot.templ`, Line: 199, Col: 98}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 199, Col: 98}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var16))
 				if templ_7745c5c3_Err != nil {
@@ -299,27 +287,14 @@ func Spot(props SpotProps) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 20, "</section><section class=\"spot-sightings-section\" aria-labelledby=\"sightings-grid-title\"><div class=\"section-head\"><div><p class=\"section-num\">SPECIMEN LOG // ")
-				if templ_7745c5c3_Err != nil {
-					return templ_7745c5c3_Err
-				}
-				var templ_7745c5c3_Var16 string
-				templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.JoinStringErrs(strings.ToUpper(formatAnimal(props.Chosen)))
-				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 185, Col: 92}
-				}
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var16))
-				if templ_7745c5c3_Err != nil {
-					return templ_7745c5c3_Err
-				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 21, "</p><h2 id=\"sightings-grid-title\" class=\"display\">Field Plates (")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 23, "</section><section class=\"spot-sightings-section\" aria-labelledby=\"sightings-grid-title\"><div class=\"section-head\"><div><p class=\"section-num\">SPECIMEN LOG // ")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 				var templ_7745c5c3_Var17 string
 				templ_7745c5c3_Var17, templ_7745c5c3_Err = templ.JoinStringErrs(strings.ToUpper(formatAnimal(props.Chosen)))
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 186, Col: 104}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 212, Col: 92}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var17))
 				if templ_7745c5c3_Err != nil {
@@ -332,7 +307,7 @@ func Spot(props SpotProps) templ.Component {
 				var templ_7745c5c3_Var18 string
 				templ_7745c5c3_Var18, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.Itoa(len(props.Sightings)))
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/views/pages/spot.templ`, Line: 213, Col: 104}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 213, Col: 104}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var18))
 				if templ_7745c5c3_Err != nil {
@@ -350,7 +325,7 @@ func Spot(props SpotProps) templ.Component {
 					var templ_7745c5c3_Var19 string
 					templ_7745c5c3_Var19, templ_7745c5c3_Err = templ.ResolveAttributeValue(components.Anchor(s))
 					if templ_7745c5c3_Err != nil {
-						return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 191, Col: 37}
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 218, Col: 37}
 					}
 					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var19)
 					if templ_7745c5c3_Err != nil {
@@ -381,7 +356,7 @@ func Spot(props SpotProps) templ.Component {
 				var templ_7745c5c3_Var20 string
 				templ_7745c5c3_Var20, templ_7745c5c3_Err = templ.JoinStringErrs(formatAnimal(props.Chosen))
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 199, Col: 75}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 226, Col: 75}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var20))
 				if templ_7745c5c3_Err != nil {
