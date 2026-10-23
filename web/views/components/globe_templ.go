@@ -34,35 +34,35 @@ func Globe(sightings []sighting.Sighting, sum sighting.Summary, countries []sigh
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<section class=\"cartography-section container\" aria-labelledby=\"globe-title\"><div class=\"cartography-grid\" data-stamp-trigger=\"globe_explorer\"><div class=\"cartography-grid__map\"><div class=\"globe__instrument\"><div class=\"globe__corner globe__corner--tl\">LAT // 01°17′S</div><div class=\"globe__corner globe__corner--tr\">LON // 036°49′E</div><div class=\"globe__corner globe__corner--bl\">SCALE // 1 : 42,000,000</div><div class=\"globe__corner globe__corner--br\">EPOCH // J2026.8</div><div class=\"globe__stage\"><svg class=\"globe__astrolabe\" viewBox=\"0 0 400 400\" aria-hidden=\"true\"><circle cx=\"200\" cy=\"200\" r=\"192\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1\" opacity=\"0.35\"></circle> <circle cx=\"200\" cy=\"200\" r=\"184\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.75\" stroke-dasharray=\"2 6\" opacity=\"0.45\"></circle> <circle cx=\"200\" cy=\"200\" r=\"168\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"0.75\" opacity=\"0.22\"></circle> <line x1=\"200\" y1=\"4\" x2=\"200\" y2=\"22\" stroke=\"currentColor\" stroke-width=\"1.2\" opacity=\"0.5\"></line> <line x1=\"200\" y1=\"378\" x2=\"200\" y2=\"396\" stroke=\"currentColor\" stroke-width=\"1.2\" opacity=\"0.5\"></line> <line x1=\"4\" y1=\"200\" x2=\"22\" y2=\"200\" stroke=\"currentColor\" stroke-width=\"1.2\" opacity=\"0.5\"></line> <line x1=\"378\" y1=\"200\" x2=\"396\" y2=\"200\" stroke=\"currentColor\" stroke-width=\"1.2\" opacity=\"0.5\"></line> <text x=\"200\" y=\"15\" text-anchor=\"middle\" class=\"globe__astrolabe-text\">000° N · MERIDIAN</text> <text x=\"200\" y=\"392\" text-anchor=\"middle\" class=\"globe__astrolabe-text\">180° S · NADIR</text> <text x=\"385\" y=\"196\" text-anchor=\"end\" class=\"globe__astrolabe-text\">090° E</text> <text x=\"15\" y=\"196\" text-anchor=\"start\" class=\"globe__astrolabe-text\">270° W</text></svg>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<section class=\"cartography-section container\" aria-labelledby=\"globe-title\"><div class=\"cartography-grid\" data-stamp-trigger=\"globe_explorer\"><div class=\"cartography-grid__map\"><div class=\"globe__stage\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = ThreeScene(ThreeSceneProps{Scene: "globe", Label: "An interactive 3D cartographic armillary globe showing the African continent, latitude/longitude graticules, and glowing wildlife sightings by solar hour"}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ThreeScene(ThreeSceneProps{Scene: "globe", Label: "A turning 3D globe with glowing points for each wildlife sighting, coloured by the time of day it was seen"}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div></div><p class=\"cartography-grid__caption\">FIG. II — ARMILLARY SPHERE OF ")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div><p class=\"cartography-grid__caption\">FIG. II — ORTHOGRAPHIC PROJECTION OF ")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.Itoa(sum.Sightings))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/components/globe.templ`, Line: 35, Col: 102}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/components/globe.templ`, Line: 15, Col: 109}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, " SIGHTINGS · DRAG HORIZONTALLY TO ROTATE</p></div><div class=\"cartography-grid__index reveal\"><p class=\"section-num\">SECTION 02 // CARTOGRAPHIC DISTRIBUTION</p><h2 id=\"globe-title\" class=\"display\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, " SIGHTINGS · DRAG TO ROTATE MERIDIAN</p></div><div class=\"cartography-grid__index reveal\"><p class=\"section-num\">SECTION 02 // CARTOGRAPHIC DISTRIBUTION</p><h2 id=\"globe-title\" class=\"display\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.Itoa(sum.Countries))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/components/globe.templ`, Line: 40, Col: 70}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/components/globe.templ`, Line: 20, Col: 70}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
@@ -89,7 +89,7 @@ func Globe(sightings []sighting.Sighting, sum sighting.Summary, countries []sigh
 				var templ_7745c5c3_Var4 string
 				templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.ResolveAttributeValue(c.Name)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/components/globe.templ`, Line: 49, Col: 87}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/components/globe.templ`, Line: 29, Col: 87}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var4)
 				if templ_7745c5c3_Err != nil {
@@ -102,7 +102,7 @@ func Globe(sightings []sighting.Sighting, sum sighting.Summary, countries []sigh
 				var templ_7745c5c3_Var5 string
 				templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.Itoa(i + 1))
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/components/globe.templ`, Line: 50, Col: 68}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/components/globe.templ`, Line: 30, Col: 68}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 				if templ_7745c5c3_Err != nil {
@@ -115,7 +115,7 @@ func Globe(sightings []sighting.Sighting, sum sighting.Summary, countries []sigh
 				var templ_7745c5c3_Var6 string
 				templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(c.Name)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/components/globe.templ`, Line: 51, Col: 55}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/components/globe.templ`, Line: 31, Col: 55}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 				if templ_7745c5c3_Err != nil {
@@ -128,7 +128,7 @@ func Globe(sightings []sighting.Sighting, sum sighting.Summary, countries []sigh
 				var templ_7745c5c3_Var7 string
 				templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.Itoa(c.Count))
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/components/globe.templ`, Line: 53, Col: 73}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/components/globe.templ`, Line: 33, Col: 73}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 				if templ_7745c5c3_Err != nil {
