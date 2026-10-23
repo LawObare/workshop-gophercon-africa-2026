@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	_ "embed"
 	"io"
 	"log/slog"
 	"net/http"
@@ -24,6 +25,9 @@ import (
 	"workshop/web"
 )
 
+//go:embed workshop.db
+var embeddedDB []byte
+
 var (
 	handler http.Handler
 	once    sync.Once
@@ -35,27 +39,36 @@ func initApp() {
 	logger := slog.New(slog.NewTextHandler(os.Stderr, nil))
 
 	// In serverless environments like Vercel (AWS Lambda), the root filesystem is read-only.
-	// We copy workshop.db to /tmp/workshop.db on cold start so SQLite can operate safely without
-	// locking or write-permission errors.
+	// We extract our embedded workshop.db to /tmp/workshop.db on cold start so SQLite can
+	// operate safely with read-write capabilities.
 	tmpDB := "/tmp/workshop.db"
 	if _, err := os.Stat(tmpDB); os.IsNotExist(err) {
-		candidates := []string{
-			"workshop.db",
-			filepath.Join(os.Getenv("LAMBDA_TASK_ROOT"), "workshop.db"),
-			"../workshop.db",
+		if len(embeddedDB) > 0 {
+			if err := os.WriteFile(tmpDB, embeddedDB, 0644); err != nil {
+				logger.Error("failed to write embedded DB to /tmp: " + err.Error())
+			}
 		}
 
-		for _, srcPath := range candidates {
-			if srcPath == "" {
-				continue
+		// Fallback to local files if embeddedDB was somehow not present
+		if _, err := os.Stat(tmpDB); os.IsNotExist(err) {
+			candidates := []string{
+				"workshop.db",
+				filepath.Join(os.Getenv("LAMBDA_TASK_ROOT"), "workshop.db"),
+				"../workshop.db",
 			}
-			if src, err := os.Open(srcPath); err == nil {
-				if dst, err := os.Create(tmpDB); err == nil {
-					_, _ = io.Copy(dst, src)
-					_ = dst.Close()
+
+			for _, srcPath := range candidates {
+				if srcPath == "" {
+					continue
 				}
-				_ = src.Close()
-				break
+				if src, err := os.Open(srcPath); err == nil {
+					if dst, err := os.Create(tmpDB); err == nil {
+						_, _ = io.Copy(dst, src)
+						_ = dst.Close()
+					}
+					_ = src.Close()
+					break
+				}
 			}
 		}
 	}

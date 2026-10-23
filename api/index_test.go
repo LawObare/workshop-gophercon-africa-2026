@@ -8,6 +8,11 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestEmbeddedDB(t *testing.T) {
+	assert.NotEmpty(t, embeddedDB)
+	assert.Greater(t, len(embeddedDB), 100000)
+}
+
 func TestHandler(t *testing.T) {
 	tests := []struct {
 		name         string

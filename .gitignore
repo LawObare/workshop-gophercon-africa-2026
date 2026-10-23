@@ -29,6 +29,7 @@ coverage.*
 *.db-wal
 *.db-shm
 !/workshop.db
+!/api/workshop.db
 
 # Build output
 bin/*

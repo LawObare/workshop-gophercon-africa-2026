@@ -1,11 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
-  "functions": {
-    "api/index.go": {
-      "includeFiles": "workshop.db"
-    }
-  },
   "env": {
     "APP_ENV": "production"
   },
