@@ -61,7 +61,7 @@ func Home(sightings []sighting.Sighting) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, " <!-- Architectural 24-Hour Solar Meridian Ruler (No Boxes/Cards) --> <section class=\"solar-horizon container\" aria-labelledby=\"circadian-title\"><div class=\"solar-horizon__header\"><div><p class=\"section-num\">SECTION 01 // CIRCADIAN SOLAR HORIZON</p><h2 id=\"circadian-title\" class=\"display\">The 24-Hour Savanna Meridian</h2></div><p class=\"solar-horizon__note\">Click any solar quadrant along the transit rule below to shift the monograph’s daylight ink and isolate specimens recorded during that window.</p></div><div class=\"solar-ruler\" role=\"group\" aria-label=\"24-hour solar distribution\">")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, " <!-- Architectural 24-Hour Solar Meridian Ruler (No Boxes/Cards) --> <section class=\"solar-horizon container\" aria-labelledby=\"circadian-title\"><div class=\"solar-horizon__header\"><div><p class=\"section-num\">SECTION 01 // CIRCADIAN SOLAR HORIZON</p><h2 id=\"circadian-title\" class=\"display\">The 24-Hour Savanna Meridian</h2></div><p class=\"solar-horizon__note\">The savanna sky overhead cycles naturally from crimson dawn and sunlit day to fiery dusk and starry night. Select any solar quadrant below to isolate specimens recorded during that window.</p></div><div class=\"solar-ruler\" role=\"group\" aria-label=\"24-hour solar distribution\">")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}

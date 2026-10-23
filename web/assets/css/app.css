@@ -149,6 +149,247 @@ body {
 	color: var(--text);
 	font: 400 1rem/1.6 var(--body);
 	-webkit-font-smoothing: antialiased;
+	transition: color 18s ease-in-out;
+}
+
+main,
+.site-footer {
+	position: relative;
+	z-index: 1;
+}
+
+/* ---------- Living Circadian Savanna Sky Background ---------- */
+
+.savanna-sky {
+	position: fixed;
+	inset: 0;
+	z-index: 0;
+	pointer-events: none;
+	overflow: hidden;
+	contain: strict;
+}
+
+.savanna-sky__layer {
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	transition: opacity 240ms linear;
+}
+
+/* Dawn (Alfajiri): Bright red & crimson savanna sunrise hues (static GPU layer, zero repaint) */
+.savanna-sky__layer--dawn {
+	background:
+		radial-gradient(ellipse 90% 55% at 24% 88%, rgb(255 204 92 / 0.82) 0%, rgb(242 74 22 / 0.68) 38%, rgb(186 18 20 / 0.32) 70%, transparent 100%),
+		radial-gradient(ellipse 115% 48% at 68% 92%, rgb(228 34 22 / 0.66) 0%, transparent 74%),
+		linear-gradient(180deg,
+			#380818 0%,
+			#7e1118 20%,
+			#be1e18 42%,
+			#e23b19 64%,
+			#f26921 82%,
+			#f7a43b 94%,
+			#fbd478 100%
+		);
+}
+
+/* Day (Mchana): Sunlit equatorial savanna azure-cerulean sky to warm horizon dust */
+.savanna-sky__layer--day {
+	background:
+		radial-gradient(circle 48vmax at 62% 18%, rgb(255 252 235 / 0.72) 0%, rgb(255 244 204 / 0.28) 36%, transparent 70%),
+		radial-gradient(ellipse 120% 34% at 50% 100%, rgb(247 232 198 / 0.84) 0%, transparent 76%),
+		linear-gradient(180deg,
+			#4585c7 0%,
+			#64a2dc 26%,
+			#8ec2eb 54%,
+			#badcf5 78%,
+			#dfeef9 91%,
+			#f3e6ce 100%
+		);
+}
+
+/* Dusk (Machweo): Intense bright red, Maasai crimson & molten scarlet savanna sunset */
+.savanna-sky__layer--dusk {
+	background:
+		radial-gradient(ellipse 90% 58% at 76% 88%, rgb(255 168 42 / 0.84) 0%, rgb(238 38 14 / 0.78) 36%, rgb(168 12 20 / 0.42) 68%, transparent 100%),
+		radial-gradient(ellipse 115% 52% at 32% 90%, rgb(218 20 20 / 0.70) 0%, transparent 75%),
+		linear-gradient(180deg,
+			#240615 0%,
+			#6f0b17 18%,
+			#b01314 38%,
+			#db2212 58%,
+			#ee4714 76%,
+			#f5761a 90%,
+			#f9b036 100%
+		);
+}
+
+/* Night (Usiku): Real starry savanna night cosmos (deep celestial indigo-sapphire, never flat gray) */
+.savanna-sky__layer--night {
+	background:
+		radial-gradient(ellipse 115% 30% at 52% 34%, rgb(92 136 216 / 0.24) 0%, rgb(54 88 164 / 0.11) 48%, transparent 80%),
+		radial-gradient(circle 28vmax at 78% 18%, rgb(186 216 255 / 0.16) 0%, rgb(110 156 226 / 0.05) 45%, transparent 75%),
+		radial-gradient(ellipse 130% 38% at 50% 100%, rgb(38 74 128 / 0.48) 0%, transparent 76%),
+		linear-gradient(180deg,
+			#030612 0%,
+			#071128 28%,
+			#0d1e42 58%,
+			#162f5c 84%,
+			#224073 100%
+		);
+}
+
+/* Fallback when JS is disabled */
+html:not(.js)[data-sky="dawn"] .savanna-sky__layer--dawn,
+html:not(.js)[data-sky="day"] .savanna-sky__layer--day,
+html:not(.js)[data-sky="dusk"] .savanna-sky__layer--dusk,
+html:not(.js)[data-sky="night"] .savanna-sky__layer--night {
+	opacity: 1;
+}
+
+/* Celestial Cosmos: Milky Way, CSS Starfield & Interactive Twinkling Canvas */
+.savanna-sky__cosmos {
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	transition: opacity 240ms linear;
+}
+
+html:not(.js)[data-sky="night"] .savanna-sky__cosmos {
+	opacity: 1;
+}
+
+.savanna-sky__milkyway {
+	position: absolute;
+	inset: -10% -20%;
+	transform: rotate(-18deg);
+	background: radial-gradient(ellipse 65% 16% at 50% 42%, rgb(182 208 255 / 0.18) 0%, rgb(126 164 232 / 0.08) 42%, transparent 75%);
+}
+
+.savanna-sky__stars-css {
+	position: absolute;
+	inset: 0;
+	background-image:
+		radial-gradient(1.5px 1.5px at 12% 18%, #fff, transparent),
+		radial-gradient(1px 1px at 24% 8%, #ffe4b5, transparent),
+		radial-gradient(1.8px 1.8px at 37% 26%, #d8ecff, transparent),
+		radial-gradient(1.2px 1.2px at 48% 12%, #fff, transparent),
+		radial-gradient(1.6px 1.6px at 63% 22%, #ffe9c4, transparent),
+		radial-gradient(1px 1px at 74% 9%, #fff, transparent),
+		radial-gradient(2px 2px at 86% 28%, #e2f0ff, transparent),
+		radial-gradient(1.2px 1.2px at 18% 44%, #fff, transparent),
+		radial-gradient(1.5px 1.5px at 54% 38%, #ffdfad, transparent),
+		radial-gradient(1px 1px at 91% 14%, #fff, transparent),
+		radial-gradient(1.4px 1.4px at 8% 62%, #d8ecff, transparent),
+		radial-gradient(1.2px 1.2px at 79% 52%, #fff, transparent);
+	opacity: 0.75;
+}
+
+.savanna-sky__canvas {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+/* Celestial Sun & Crescent Moon (100% composite-only transform + opacity, zero layout/paint) */
+.savanna-sky__celestial {
+	position: absolute;
+	inset: 0;
+}
+
+.savanna-sky__sun {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 340px;
+	height: 340px;
+	margin-left: -170px;
+	margin-top: -170px;
+	border-radius: 50%;
+	transform: translate3d(50vw, 22vh, 0);
+	background: radial-gradient(
+		circle,
+		rgb(255 254 244 / 0.96) 0%,
+		rgb(255 236 175 / 0.72) 12%,
+		rgb(255 186 76 / 0.34) 32%,
+		rgb(255 104 28 / 0.12) 56%,
+		transparent 74%
+	);
+	transition: transform 240ms linear, opacity 240ms linear;
+}
+
+.savanna-sky__moon {
+	position: absolute;
+	left: 0;
+	top: 0;
+	margin-left: -22px;
+	margin-top: -22px;
+	opacity: 0;
+	transform: translate3d(80vw, 18vh, 0);
+	transition: transform 240ms linear, opacity 240ms linear;
+}
+
+/* Slight Hints of Savanna Clouds */
+.savanna-sky__clouds {
+	position: absolute;
+	inset: 0;
+	overflow: hidden;
+}
+
+.savanna-sky__cloud-defs {
+	position: absolute;
+	width: 0;
+	height: 0;
+}
+
+.savanna-sky__cloud-track {
+	position: absolute;
+	left: -15%;
+	width: 130%;
+	pointer-events: none;
+}
+
+.savanna-sky__cloud-track--high {
+	top: 2%;
+	height: 38%;
+	opacity: 0.72;
+	animation: savanna-cloud-drift 110s ease-in-out infinite alternate;
+}
+
+.savanna-sky__cloud-track--mid {
+	top: 16%;
+	height: 44%;
+	opacity: 0.65;
+	animation: savanna-cloud-drift 85s ease-in-out -25s infinite alternate-reverse;
+}
+
+.savanna-sky__cloud-track--low {
+	bottom: 4%;
+	height: 42%;
+	opacity: 0.55;
+	animation: savanna-cloud-drift 130s ease-in-out -50s infinite alternate;
+}
+
+.savanna-sky__cloud-svg {
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+.cloud-fill-top {
+	fill: var(--cloud-top);
+	transition: fill 22s ease-in-out;
+}
+
+.cloud-fill-under {
+	fill: var(--cloud-under);
+	transition: fill 22s ease-in-out;
+}
+
+@keyframes savanna-cloud-drift {
+	0%   { transform: translate3d(-4%, 0, 0); }
+	100% { transform: translate3d(4%, 0, 0); }
 }
 
 /* ==========================================================================
@@ -491,6 +732,8 @@ button {
 }
 
 .meridian-bar {
+	position: relative;
+	z-index: 2;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -596,7 +839,8 @@ button {
 
 .sky-cycle-hud__jump:hover {
 	color: var(--text);
-	border-color: var(--line-strong);
+	font-weight: 700;
+	min-width: 13.5rem;
 }
 
 .sky-cycle-hud__jump.is-active {
@@ -653,7 +897,9 @@ button {
 	gap: 1.5rem;
 	min-height: var(--header);
 	padding-inline: var(--gutter);
-	background: var(--bg);
+	background: var(--header-bg);
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
 	border-bottom: 2px solid var(--rule-heavy);
 }
 
@@ -1191,8 +1437,9 @@ button {
 }
 
 .solar-segment:hover,
-.solar-segment.is-selected {
-	background: var(--surface-2);
+.solar-segment.is-selected,
+.solar-segment.is-current-sky {
+	background: var(--surface);
 }
 
 .solar-segment__axis {
@@ -1684,6 +1931,8 @@ button {
 .journal__list > li {
 	border-right: 1px solid var(--line-strong);
 	border-bottom: 1px solid var(--line-strong);
+	content-visibility: auto;
+	contain-intrinsic-size: auto 340px;
 }
 
 /* Broadsheet Spread Mode: Asymmetric Featured Rows */
@@ -1980,6 +2229,8 @@ button {
 	position: relative;
 	overflow: hidden;
 	background: #14110e;
+	content-visibility: auto;
+	contain-intrinsic-size: auto 220px;
 }
 
 .wall__item--big {
@@ -2028,7 +2279,7 @@ button {
 
 .site-footer {
 	margin-top: 3rem;
-	background: var(--bg-deep);
+	background: transparent;
 	color: var(--text);
 }
 
@@ -2036,13 +2287,13 @@ button {
 	display: block;
 	width: 100%;
 	line-height: 0;
-	color: var(--bg-deep);
-	background: var(--bg);
+	color: var(--rule-heavy);
+	background: transparent;
 }
 
 .savanna-horizon svg {
 	width: 100%;
-	height: clamp(40px, 5vw, 68px);
+	height: clamp(44px, 5.5vw, 72px);
 	display: block;
 }
 
@@ -2052,6 +2303,7 @@ button {
 	max-width: calc(var(--max) + 2 * var(--gutter));
 	margin-inline: auto;
 	padding: 2.25rem var(--gutter);
+	background: var(--header-bg);
 	border-top: 2px solid var(--rule-heavy);
 }
 

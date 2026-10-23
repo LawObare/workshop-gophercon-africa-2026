@@ -4,24 +4,22 @@
 
 ## Design Philosophy & Emotional Direction
 
-- **Circadian Savanna Atmosphere**: Instead of a static dark-mode SaaS dashboard or a flat beige template, Jambo revolves around the **24-Hour Savanna Sun Dial** (*Alfajiri / Dawn*, *Mchana / Daylight*, *Machweo / Golden Hour*, *Usiku / Night Patrol*). Visitors can shift the camp's sky atmosphere at any time, or click a circadian time window to filter sightings recorded during those hours.
+- **Built-In Circadian Savanna Sky**: Instead of a user-toggled dark mode or a flat beige template, Jambo sits beneath a continuous, built-in **24-Hour Savanna Sky** (*Alfajiri / Crimson Dawn*, *Mchana / Savanna Day*, *Machweo / Bright Red Dusk*, *Usiku / Starry Savanna Night*) complete with multi-depth feathered cloud wisps, an arcing equatorial sun and crescent moon, and a 300+ star twinkling night sky canvas.
 - **Tactile Safari Postage & Specimen Dispatches**: Every wildlife sighting is presented as a stamped field dispatch carrying a real country postmark (`KENYA`, `TANZANIA`, `SOUTH AFRICA`), cardinal GPS coordinates, specimen serial (`JMB-xxx`), time-of-day light ribbon, and Open-Meteo weather badge.
 - **Playful Bushcraft with Real Purpose**:
-  - **Jambo Field Passport**: Visitors earn 6 rubber ink stamps as they explore the sky dial, test camouflage, play the silhouette challenge, and analyze field plates.
-  - **Web Audio Bush Radio**: A zero-dependency Web Audio API synthesizer generates gentle savanna breeze, weaver-bird calls, and nocturnal crickets matched to the active sky mode.
+  - **Jambo Field Passport**: Visitors earn 6 rubber ink stamps as they witness the circadian savanna sky, test camouflage, play the silhouette challenge, and analyze field plates.
+  - **Web Audio Bush Radio**: A zero-dependency Web Audio API synthesizer generates gentle savanna breeze, weaver-bird calls, and nocturnal crickets matched to the active sky phase.
   - **"Whose Silhouette in the Tall Grass?"**: An interactive wildlife identification game on `/spot` powered by real GBIF sighting photographs and field clues.
   - **HTML5 Canvas Biome Palette & Light Lab**: Extracts 5 real HEX colour swatches and estimates time-of-day light warmth from any wildlife photograph.
 
 ## Core Tokens (`web/assets/css/app.css`)
 
-| Token | Daylight (`day`) | Night Patrol (`night`) | Role |
+| Phase | Sky Dome Atmosphere | Primary Ink (`--text`) | Accent (`--accent`) |
 |---|---|---|---|
-| `--bg` | `#F6EFE0` | `#10161F` | Sun-bleached papyrus canvas / Starlight indigo |
-| `--surface` | `#FFFDF8` | `#18212E` | Field specimen cardstock / Nocturnal slate |
-| `--text` | `#1B1611` | `#F4EFE6` | Roasted acacia charcoal / Moonlight bone |
-| `--accent` | `#C85219` | `#E89923` | Tsavo red-earth terracotta / Headlamp amber |
-| `--accent-acacia` | `#234E33` | `#3D7A52` | Fever-tree acacia canopy green |
-| `--accent-gold` | `#D99316` | `#F6C453` | Mara sun gold |
+| `dawn` (*Alfajiri*) | Deep ruby `#380818` → Maasai crimson `#be1e18` → scarlet-gold `#f7a43b` | `#FFF7ED` | `#FFCB57` |
+| `day` (*Mchana*) | Equatorial cerulean `#4585c7` → azure `#8ec2eb` → warm dust `#f3e6ce` | `#121820` | `#B83C10` |
+| `dusk` (*Machweo*) | Twilight garnet `#240615` → blazing red `#db2212` → ember `#f9b036` | `#FFF6EB` | `#FFC247` |
+| `night` (*Usiku*) | Starlight cosmos `#030612` → nocturnal sapphire `#162f5c` + 300+ stars | `#F5F2EA` | `#FFBE4F` |
 
 ## Typography
 

@@ -53,7 +53,30 @@ templ Spot(props SpotProps) {
 
 						<div class="silhouette-game__stage">
 							<div class="silhouette-frame is-masked" data-quiz-frame>
-								<img data-quiz-img src={ quizPool[0].PhotoURL } alt="Mystery wildlife silhouette" crossorigin="anonymous"/>
+								<img data-quiz-img src={ quizPool[0].PhotoURL } alt="Mystery wildlife silhouette" decoding="async"/>
+								<svg class="silhouette-stage" data-quiz-silhouette viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+									<defs>
+										<linearGradient id="savanna-sky-grad" x1="0" y1="0" x2="0" y2="1">
+											<stop offset="0%" stop-color="#b83b14"/>
+											<stop offset="52%" stop-color="#e38b1c"/>
+											<stop offset="82%" stop-color="#f2be49"/>
+											<stop offset="100%" stop-color="#23160c"/>
+										</linearGradient>
+									</defs>
+									<!-- Savanna Golden Horizon & Sun Disc -->
+									<rect class="silhouette-stage__sky" width="400" height="300" fill="url(#savanna-sky-grad)"/>
+									<circle class="silhouette-stage__sun" cx="290" cy="110" r="56" fill="#fae078" opacity="0.55"/>
+									<!-- Distant Acacia Ridge -->
+									<path class="silhouette-stage__ridge" d="M0 232 Q90 218 190 228 T400 222 L400 300 L0 300 Z" fill="#2c1a0e" opacity="0.65"/>
+									<!-- Mystery Animal Outline in the Grass -->
+									<g class="silhouette-stage__animal" data-quiz-outline fill="#120b06" stroke="#fae078" stroke-width="1.5" stroke-opacity="0.45"></g>
+									<!-- Foreground Tall Savanna Grass Blades -->
+									<g class="silhouette-stage__grass" fill="#140c07">
+										<path d="M0 246 L400 246 L400 300 L0 300 Z"/>
+										<path d="M-8 300 L6 168 L16 300 M12 300 L30 152 L36 300 M32 300 L44 176 L54 300 M50 300 L68 144 L76 300 M70 300 L84 182 L94 300 M90 300 L110 158 L116 300 M112 300 L126 172 L136 300 M132 300 L152 146 L160 300 M154 300 L168 184 L178 300 M174 300 L194 154 L202 300 M198 300 L212 174 L222 300 M218 300 L238 148 L246 300 M242 300 L256 180 L266 300 M262 300 L282 150 L290 300 M286 300 L302 172 L312 300 M308 300 L328 156 L336 300 M332 300 L348 178 L358 300 M354 300 L374 148 L382 300 M378 300 L394 168 L406 300"/>
+										<path opacity="0.78" fill="#24150b" d="M2 300 L20 185 L28 300 M40 300 L58 170 L66 300 M82 300 L100 188 L108 300 M124 300 L142 168 L150 300 M164 300 L182 190 L190 300 M206 300 L226 165 L234 300 M248 300 L268 186 L276 300 M292 300 L312 166 L320 300 M338 300 L358 184 L366 300 M370 300 L388 174 L398 300"/>
+									</g>
+								</svg>
 								<div class="silhouette-frame__overlay">
 									<span class="silhouette-frame__badge" data-quiz-badge>UNCLASSIFIED NEGATIVE</span>
 								</div>
@@ -77,7 +100,11 @@ templ Spot(props SpotProps) {
 
 								<p class="silhouette-prompt" data-quiz-prompt>Cross-reference the contour and telemetry above to classify this specimen:</p>
 
-								<div class="silhouette-choices" data-quiz-choices role="group" aria-label="Species choices"></div>
+								<div class="silhouette-choices" data-quiz-choices role="group" aria-label="Species choices">
+									for i := 0; i < 4 && i < len(quizPool); i++ {
+										<button type="button" class="silhouette-choice press">{ quizPool[i].Animal }</button>
+									}
+								</div>
 
 								<div class="silhouette-actions">
 									<button type="button" class="editorial-btn" data-quiz-reveal>Expose Negative</button>
@@ -105,7 +132,7 @@ templ Spot(props SpotProps) {
 						<div class="spot-reticle spot-reticle--bl"></div>
 						<div class="spot-reticle spot-reticle--br"></div>
 
-						<img data-spot-preview alt="Uploaded animal preview" crossorigin="anonymous"/>
+						<img data-spot-preview alt="Uploaded animal preview"/>
 
 						<div class="spot-drop-prompt">
 							<p><strong>[ DROP PHOTOGRAPHIC PLATE HERE ]</strong><br/>Samples 5 regional biome pigments &amp; computes solar colour temperature</p>

@@ -76,7 +76,7 @@ func Spot(props SpotProps) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\" alt=\"Mystery wildlife silhouette\" crossorigin=\"anonymous\"><div class=\"silhouette-frame__overlay\"><span class=\"silhouette-frame__badge\" data-quiz-badge>UNCLASSIFIED NEGATIVE</span></div></div><div class=\"silhouette-game__panel\"><div class=\"silhouette-clues\" aria-label=\"Field clues\"><div class=\"silhouette-clue\"><small>TERRITORY</small> <strong data-quiz-country>")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\" alt=\"Mystery wildlife silhouette\" decoding=\"async\"> <svg class=\"silhouette-stage\" data-quiz-silhouette viewBox=\"0 0 400 300\" preserveAspectRatio=\"xMidYMid slice\" aria-hidden=\"true\"><defs><linearGradient id=\"savanna-sky-grad\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0%\" stop-color=\"#b83b14\"></stop> <stop offset=\"52%\" stop-color=\"#e38b1c\"></stop> <stop offset=\"82%\" stop-color=\"#f2be49\"></stop> <stop offset=\"100%\" stop-color=\"#23160c\"></stop></linearGradient></defs><!-- Savanna Golden Horizon & Sun Disc --><rect class=\"silhouette-stage__sky\" width=\"400\" height=\"300\" fill=\"url(#savanna-sky-grad)\"></rect> <circle class=\"silhouette-stage__sun\" cx=\"290\" cy=\"110\" r=\"56\" fill=\"#fae078\" opacity=\"0.55\"></circle><!-- Distant Acacia Ridge --><path class=\"silhouette-stage__ridge\" d=\"M0 232 Q90 218 190 228 T400 222 L400 300 L0 300 Z\" fill=\"#2c1a0e\" opacity=\"0.65\"></path><!-- Mystery Animal Outline in the Grass --><g class=\"silhouette-stage__animal\" data-quiz-outline fill=\"#120b06\" stroke=\"#fae078\" stroke-width=\"1.5\" stroke-opacity=\"0.45\"></g><!-- Foreground Tall Savanna Grass Blades --><g class=\"silhouette-stage__grass\" fill=\"#140c07\"><path d=\"M0 246 L400 246 L400 300 L0 300 Z\"></path> <path d=\"M-8 300 L6 168 L16 300 M12 300 L30 152 L36 300 M32 300 L44 176 L54 300 M50 300 L68 144 L76 300 M70 300 L84 182 L94 300 M90 300 L110 158 L116 300 M112 300 L126 172 L136 300 M132 300 L152 146 L160 300 M154 300 L168 184 L178 300 M174 300 L194 154 L202 300 M198 300 L212 174 L222 300 M218 300 L238 148 L246 300 M242 300 L256 180 L266 300 M262 300 L282 150 L290 300 M286 300 L302 172 L312 300 M308 300 L328 156 L336 300 M332 300 L348 178 L358 300 M354 300 L374 148 L382 300 M378 300 L394 168 L406 300\"></path> <path opacity=\"0.78\" fill=\"#24150b\" d=\"M2 300 L20 185 L28 300 M40 300 L58 170 L66 300 M82 300 L100 188 L108 300 M124 300 L142 168 L150 300 M164 300 L182 190 L190 300 M206 300 L226 165 L234 300 M248 300 L268 186 L276 300 M292 300 L312 166 L320 300 M338 300 L358 184 L366 300 M370 300 L388 174 L398 300\"></path></g></svg><div class=\"silhouette-frame__overlay\"><span class=\"silhouette-frame__badge\" data-quiz-badge>UNCLASSIFIED NEGATIVE</span></div></div><div class=\"silhouette-game__panel\"><div class=\"silhouette-clues\" aria-label=\"Field clues\"><div class=\"silhouette-clue\"><small>TERRITORY</small> <strong data-quiz-country>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -115,7 +115,7 @@ func Spot(props SpotProps) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</strong></div></div><p class=\"silhouette-prompt\" data-quiz-prompt>Cross-reference the contour and telemetry above to classify this specimen:</p><div class=\"silhouette-choices\" data-quiz-choices role=\"group\" aria-label=\"Species choices\"></div><div class=\"silhouette-actions\"><button type=\"button\" class=\"editorial-btn\" data-quiz-reveal>Expose Negative</button> <button type=\"button\" class=\"editorial-btn editorial-btn--solid\" data-quiz-next>Next Negative →</button> <a class=\"btn-link\" data-quiz-record href=\"")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</strong></div></div><p class=\"silhouette-prompt\" data-quiz-prompt>Cross-reference the contour and telemetry above to classify this specimen:</p><div class=\"silhouette-choices\" data-quiz-choices role=\"group\" aria-label=\"Species choices\">")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -124,11 +124,20 @@ func Spot(props SpotProps) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 85, Col: 79}
 				}
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "</div><div class=\"silhouette-actions\"><button type=\"button\" class=\"editorial-btn\" data-quiz-reveal>Expose Negative</button> <button type=\"button\" class=\"editorial-btn editorial-btn--solid\" data-quiz-next>Next Negative →</button> <a class=\"btn-link\" data-quiz-record href=\"")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "\" hidden>Open Dossier [↗]</a></div></div></div>")
+				var templ_7745c5c3_Var8 templ.SafeURL
+				templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinURLErrs(templ.URL(quizPool[0].URL))
+				if templ_7745c5c3_Err != nil {
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/views/pages/spot.templ`, Line: 112, Col: 79}
+				}
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "\" hidden>Open Dossier [↗]</a></div></div></div>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -136,7 +145,7 @@ func Spot(props SpotProps) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "</section>")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, "</section>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -159,7 +168,7 @@ func Spot(props SpotProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var9 string
-			templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.Itoa(len(props.Sightings)))
+			templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(formatAnimal(props.Chosen))
 			if templ_7745c5c3_Err != nil {
 				return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 139, Col: 98}
 			}
@@ -167,26 +176,39 @@ func Spot(props SpotProps) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, " Occurrences</h2></div><div class=\"spot-search-wrap\"><label for=\"species-search\" class=\"visually-hidden\">Filter species</label> <input id=\"species-search\" type=\"search\" class=\"spot-search-input\" placeholder=\"Type taxon name (e.g. Lion, Cheetah, Pangolin)…\" data-spot-search autocomplete=\"off\"></div></div><div class=\"spot-species-cloud\" role=\"navigation\" aria-label=\"Species register\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 13, " — ")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var10 string
+			templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.Itoa(len(props.Sightings)))
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/views/pages/spot.templ`, Line: 166, Col: 98}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 14, " Occurrences</h2></div><div class=\"spot-search-wrap\"><label for=\"species-search\" class=\"visually-hidden\">Filter species</label> <input id=\"species-search\" type=\"search\" class=\"spot-search-input\" placeholder=\"Type taxon name (e.g. Lion, Cheetah, Pangolin)…\" data-spot-search autocomplete=\"off\"></div></div><div class=\"spot-species-cloud\" role=\"navigation\" aria-label=\"Species register\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			for _, a := range props.All {
-				var templ_7745c5c3_Var10 = []any{"spot-chip", templ.KV("is-active", a == props.Chosen)}
-				templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var10...)
+				var templ_7745c5c3_Var11 = []any{"spot-chip", templ.KV("is-active", a == props.Chosen)}
+				templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var11...)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 12, "<a href=\"")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 15, "<a href=\"")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				var templ_7745c5c3_Var11 templ.SafeURL
-				templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinURLErrs(templ.URL("/spot?animal=" + string(a) + "#results"))
+				var templ_7745c5c3_Var12 templ.SafeURL
+				templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinURLErrs(templ.URL("/spot?animal=" + string(a) + "#results"))
 				if templ_7745c5c3_Err != nil {
 					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 157, Col: 66}
 				}
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var12))
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -208,30 +230,20 @@ func Spot(props SpotProps) templ.Component {
 					return templ_7745c5c3_Err
 				}
 				var templ_7745c5c3_Var13 string
-				templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.JoinStringErrs(formatAnimal(a))
+				templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.ResolveAttributeValue(templ.CSSClasses(templ_7745c5c3_Var11).String())
 				if templ_7745c5c3_Err != nil {
 					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 161, Col: 25}
 				}
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var13))
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var13)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 15, "</a>")
-				if templ_7745c5c3_Err != nil {
-					return templ_7745c5c3_Err
-				}
-			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 16, "</div></section>")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			if len(props.Sightings) > 0 {
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 17, "<section class=\"spot-map-section\" aria-labelledby=\"spot-map-title\"><div class=\"section-head\"><div><p class=\"section-num\">CARTOGRAPHIC PLOT // ")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 17, "\" data-species-chip>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 				var templ_7745c5c3_Var14 string
-				templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(strings.ToUpper(formatAnimal(props.Chosen)))
+				templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(formatAnimal(a))
 				if templ_7745c5c3_Err != nil {
 					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 171, Col: 97}
 				}
@@ -239,12 +251,22 @@ func Spot(props SpotProps) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 18, "</p><h2 id=\"spot-map-title\" class=\"display\">Recorded Range of the ")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 18, "</a>")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 19, "</div></section>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			if len(props.Sightings) > 0 {
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 20, "<section class=\"spot-map-section\" aria-labelledby=\"spot-map-title\"><div class=\"section-head\"><div><p class=\"section-num\">CARTOGRAPHIC PLOT // ")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 				var templ_7745c5c3_Var15 string
-				templ_7745c5c3_Var15, templ_7745c5c3_Err = templ.JoinStringErrs(formatAnimal(props.Chosen))
+				templ_7745c5c3_Var15, templ_7745c5c3_Err = templ.JoinStringErrs(strings.ToUpper(formatAnimal(props.Chosen)))
 				if templ_7745c5c3_Err != nil {
 					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 172, Col: 98}
 				}
@@ -252,7 +274,20 @@ func Spot(props SpotProps) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 19, "</h2></div></div>")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 21, "</p><h2 id=\"spot-map-title\" class=\"display\">Recorded Range of the ")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				var templ_7745c5c3_Var16 string
+				templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.JoinStringErrs(formatAnimal(props.Chosen))
+				if templ_7745c5c3_Err != nil {
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/views/pages/spot.templ`, Line: 199, Col: 98}
+				}
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var16))
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 22, "</h2></div></div>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -282,7 +317,7 @@ func Spot(props SpotProps) templ.Component {
 					return templ_7745c5c3_Err
 				}
 				var templ_7745c5c3_Var17 string
-				templ_7745c5c3_Var17, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.Itoa(len(props.Sightings)))
+				templ_7745c5c3_Var17, templ_7745c5c3_Err = templ.JoinStringErrs(strings.ToUpper(formatAnimal(props.Chosen)))
 				if templ_7745c5c3_Err != nil {
 					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 186, Col: 104}
 				}
@@ -290,25 +325,38 @@ func Spot(props SpotProps) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 22, ")</h2></div></div><ul class=\"journal__list\">")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 24, "</p><h2 id=\"sightings-grid-title\" class=\"display\">Field Plates (")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				var templ_7745c5c3_Var18 string
+				templ_7745c5c3_Var18, templ_7745c5c3_Err = templ.JoinStringErrs(strconv.Itoa(len(props.Sightings)))
+				if templ_7745c5c3_Err != nil {
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/views/pages/spot.templ`, Line: 213, Col: 104}
+				}
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var18))
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 25, ")</h2></div></div><ul class=\"journal__list\">")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 				for _, s := range props.Sightings {
-					templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 23, "<li id=\"")
+					templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 26, "<li id=\"")
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
-					var templ_7745c5c3_Var18 string
-					templ_7745c5c3_Var18, templ_7745c5c3_Err = templ.ResolveAttributeValue(components.Anchor(s))
+					var templ_7745c5c3_Var19 string
+					templ_7745c5c3_Var19, templ_7745c5c3_Err = templ.ResolveAttributeValue(components.Anchor(s))
 					if templ_7745c5c3_Err != nil {
 						return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 191, Col: 37}
 					}
-					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var18)
+					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var19)
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
-					templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 24, "\">")
+					templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 27, "\">")
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
@@ -316,35 +364,35 @@ func Spot(props SpotProps) templ.Component {
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
-					templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 25, "</li>")
+					templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 28, "</li>")
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
 				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 26, "</ul></section>")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 29, "</ul></section>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 			} else {
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 27, "<div class=\"panel\"><p class=\"lede\">No sightings for <strong>")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 30, "<div class=\"panel\"><p class=\"lede\">No sightings for <strong>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				var templ_7745c5c3_Var19 string
-				templ_7745c5c3_Var19, templ_7745c5c3_Err = templ.JoinStringErrs(formatAnimal(props.Chosen))
+				var templ_7745c5c3_Var20 string
+				templ_7745c5c3_Var20, templ_7745c5c3_Err = templ.JoinStringErrs(formatAnimal(props.Chosen))
 				if templ_7745c5c3_Err != nil {
 					return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/pages/spot.templ`, Line: 199, Col: 75}
 				}
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var19))
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var20))
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 28, "</strong> are in your local SQLite database yet. Pick another species from the register above.</p></div>")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 31, "</strong> are in your local SQLite database yet. Pick another species from the register above.</p></div>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 29, "</div></div>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 32, "</div></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
