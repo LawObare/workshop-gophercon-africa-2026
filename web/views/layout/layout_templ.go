@@ -77,7 +77,7 @@ func Base(props BaseProps) templ.Component {
 			}
 		}
 		if props.Three {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<script type=\"importmap\">\n\t\t\t\t\t{\n\t\t\t\t\t\t\"imports\": {\n\t\t\t\t\t\t\t\"three\": \"https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js\",\n\t\t\t\t\t\t\t\"three/addons/\": \"https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/\"\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t</script> <link rel=\"stylesheet\" href=\"/assets/css/threejs.css\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<script type=\"importmap\">\n\t\t\t\t\t{\n\t\t\t\t\t\t\"imports\": {\n\t\t\t\t\t\t\t\"three\": \"https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js\",\n\t\t\t\t\t\t\t\"three/addons/\": \"https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/\"\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t</script> <link rel=\"stylesheet\" href=\"/assets/css/threejs.css\"><link rel=\"preload\" as=\"image\" href=\"/assets/images/earth-blue-marble.jpg\"><link rel=\"preload\" as=\"image\" href=\"/assets/images/earth-topology.png\"><link rel=\"preload\" as=\"image\" href=\"/assets/images/earth-water.png\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

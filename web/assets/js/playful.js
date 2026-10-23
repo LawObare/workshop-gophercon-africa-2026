@@ -1135,4 +1135,18 @@
 			});
 		});
 	}
+
+	// Pre-cache key 3D assets in browser cache storage on idle
+	if ('caches' in window) {
+		window.addEventListener('load', function () {
+			caches.open('jambo-safari-v1').then(function (cache) {
+				cache.addAll([
+					'/assets/images/earth-blue-marble.jpg',
+					'/assets/images/earth-topology.png',
+					'/assets/images/earth-water.png',
+					'/assets/images/logo.svg'
+				]).catch(function () {});
+			}).catch(function () {});
+		});
+	}
 })();

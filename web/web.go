@@ -23,7 +23,11 @@ var assets embed.FS
 func New(logger *slog.Logger, config config.Config, sightingsSvc *sighting.Service) *http.ServeMux {
 	mux := http.NewServeMux()
 
-	mux.Handle("GET /assets/", http.FileServerFS(assetsFs(config.IsProduction())))
+	fileServer := http.FileServerFS(assetsFs(config.IsProduction()))
+	mux.Handle("GET /assets/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Cache-Control", "public, max-age=31536000, immutable")
+		fileServer.ServeHTTP(w, r)
+	}))
 	mux.Handle("GET /{$}", handlers.Home(logger, sightingsSvc))
 	mux.Handle("GET /sightings/{id}", handlers.Sighting(logger, sightingsSvc))
 	mux.Handle("GET /gallery", handlers.Gallery(logger, sightingsSvc))
